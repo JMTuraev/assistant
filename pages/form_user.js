@@ -17,15 +17,12 @@ export default function App() {
 
   const onSubmit = async (data) =>{
 
-    const res = await fetch('api/hello', {
-        method: 'POST',
-        body: JSON.stringify({data}),
-      });
+    const res = await fetch('http://localhost:800/api/client');
 
-     const {data1}=await res.json()
-    console.log(data1);
-    debugger
-    setLists(data1)
+    //  const {data1}=await res.body
+    console.log(res.body);
+    
+    // setLists(data1)
     
   } 
 

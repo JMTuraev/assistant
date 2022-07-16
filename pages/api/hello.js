@@ -26,7 +26,9 @@ const handler = async (req, res) => {
     // });
     // return res.status(200).json(playlist);
 
-    return res.status(200).json(data);
+    // return res.status(200).json(data);
+
+    return res.status(200).json({ message: 'Hello hhj Next.js!' });
 
   } else if (req.method === 'GET') {
 
