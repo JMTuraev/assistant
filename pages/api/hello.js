@@ -5,31 +5,14 @@ const prisma = new PrismaClient();
 const handler = async (req, res) => {
 
   if (req.method === 'POST') {
-    const { body } = req;
-    const {data} =  JSON.parse( body )
-    console.log( body );
+    const { body } = await req;
+    const {data} =  await JSON.parse( body )
+    console.log( body + 'body+++++++' );
 
-    const newUser = await prisma.user.create({data} )
-    // const {
-    //   name,
-    //   images: { 0: { url } = {} },
-    //   uri,
-    // } = JSON.parse(body);
-    // const playlistItem = {
-    //   title: name,
-    //   image: url,
-    //   uri: uri,
-    //   addedBy: email,
-    // };
-    // const playlist = await prisma.playlist.create({
-    //   data: playlistItem,
-    // });
-    // return res.status(200).json(playlist);
+    const newUser = await prisma.user.create(data )
 
-    // return res.status(200).json(data);
-
-    return res.status(200).json({ message: 'Hello hhj Next.js!' });
-
+    const users = await prisma.user.findMany()
+    res.json(newUser)
   } else if (req.method === 'GET') {
 
     const users = await prisma.user.findMany()

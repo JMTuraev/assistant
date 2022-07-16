@@ -3,22 +3,119 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mongodb"
+  url      = "mongodb+srv://jafar:102030@cluster0.ksnra.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
 
 model User {
-  id    Int     @id @unique @default(autoincrement())
+
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
+  login String
+  password String 
+  userLevel String 
+  firstName String 
+  surName String 
+  fatherName String
   email String  @unique
-  name  String?
-  first  String?
-  phone  String
+  phone  String @unique
+  location  String
+
+}
+
+model Company {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  category String // Вид деятельности
+  location  String
+  lawAddress String @unique // Юридечкиский адресс
+  inn String
+  bankAccount String // рассчетный счет
+  mfoBank String @unique
+  owner String
+
+}
+
+model Market {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  location  String
+  lawAddress String @unique
+  company String
+}
+
+model Warehouse {
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  location  String
+  quantity Int
+  editPrice Int
+  product String 
+
+}
+
+model ComingWarehouse{
+
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  quantity Int
+  price Int
+  supplier String
+  unit String // Ед. измерения
+  date DateTime
+  product String 
+}
+
+model Supplier { // поставщик
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  agentName String?
+  agentPhone String?
+
+}
+
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  model String
+  category String
+
 }
 
 model Role {
 
-  id    Int     @id @unique @default(autoincrement())
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
   name String
   level Int
+
+}
+
+model Client {
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String 
+  surName String 
+  fatherName String
+  passportSeries String
+  registeredByWhom String // кем выдан пасспорт
+  dateOfPassport String // дата выдачи пасспорта
+  placeOfWork String // место работы
+  phoneOfWork  String @unique
+  phone  String @unique
+  comment String
+  email String  @unique
+  location  String
+}
+
+model Money { // Истончик от магазина
+
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
+  amount Int 
+  typeAmount Int
+  date DateTime // начало
+  period DateTime? // конец
+  percent Int?
+  credit String?
+  client String
 
 }
