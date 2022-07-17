@@ -101,7 +101,7 @@ export default function OwnerPersonalForm() {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                Номе телефона
+                Номер телефона
               </label>
               <input
                 {...register("phone")}
