@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
+import {useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
 
+import * as yup from 'yup';
+
+const schema=yup.object({
+  firstName:yup.string().required()
+})
 export default function OwnerPersonalForm() {
+  const {register, handleSubmit, watch, formState:{errors}} =useForm()
   const [showPassBlock, setShowPassBlock] = useState(false);
+
+  const onSubmit=(data)=>{
+    console.log(data);
+  }
   return (
-    <form action="#" method="POST" className="m-4 ">
+    <form  onSubmit={handleSubmit(onSubmit)} className="m-4 ">
       <div className="shadow sm:rounded-md sm:overflow-hidden">
         <div className="bg-white py-6 px-4 space-y-4 sm:p-6">
           <div>
@@ -21,9 +33,10 @@ export default function OwnerPersonalForm() {
                 htmlFor="firstName"
                 className="block text-sm font-medium text-gray-700"
               >
-                Имя
+                Имя <p>{errors.firstName?.message}</p>
               </label>
               <input
+                {...register("firstName", {required:true, maxLength:15})}
                 type="text"
                 name="firstName"
                 id="firstName"
@@ -40,6 +53,7 @@ export default function OwnerPersonalForm() {
                 Фамилия
               </label>
               <input
+                {...register("surName")}
                 type="text"
                 name="surName"
                 id="surName"
@@ -56,6 +70,7 @@ export default function OwnerPersonalForm() {
                 Отчество
               </label>
               <input
+                {...register("fatherName")}
                 type="text"
                 name="fatherName"
                 id="fatherName"
@@ -72,6 +87,7 @@ export default function OwnerPersonalForm() {
                 Почта
               </label>
               <input
+                {...register('email')}
                 type="text"
                 name="email"
                 id="email"
@@ -88,6 +104,7 @@ export default function OwnerPersonalForm() {
                 Номе телефона
               </label>
               <input
+                {...register("phone")}
                 type="text"
                 name="phone"
                 id="phone"
@@ -104,24 +121,25 @@ export default function OwnerPersonalForm() {
                 Регион
               </label>
               <select
+                {...register('location')}
                 id="location"
                 name="location"
                 autoComplete="location"
                 className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
-                <option>Андижон</option>
-                <option>Бухоро</option>
-                <option>Фаргона</option>
-                <option>Жиззах</option>
-                <option>Хоразим</option>
-                <option>Наманган</option>
-                <option>Навоий</option>
-                <option>Қашқадарё</option>
-                <option>Самарқанд</option>
-                <option>Сирдарё</option>
-                <option>Сурхандарё</option>
-                <option>Тошкент</option>
-                <option>Қорақалпоғистон Республикаси</option>
+                <option value='Andijon'>Андижон</option>
+                <option value='Buxoro'>Бухоро</option>
+                <option value='Fargona'>Фаргона</option>
+                <option value='Jizzax'>Жиззах</option>
+                <option value='Xorazm'>Хоразм</option>
+                <option value='Namangan'>Наманган</option>
+                <option value='Navoiy'>Навоий</option>
+                <option value='Qashqadaryo'>Қашқадарё</option>
+                <option value='Samarqand'>Самарқанд</option>
+                <option value='Sirdaryo'>Сирдарё</option>
+                <option value='Surxandaryo'>Сурхандарё</option>
+                <option value='Toshkent'>Тошкент</option>
+                <option value='Qoraqolpogiston'>Қорақалпоғистон Республикаси</option>
               </select>
             </div>
           </div>
@@ -212,12 +230,12 @@ export default function OwnerPersonalForm() {
           >
             изменить пароль
           </div>
-          <button
+          <input
             type="submit"
             className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-1.5 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             сохранить
-          </button>
+          </input>
         </div>
       </div>
     </form>
