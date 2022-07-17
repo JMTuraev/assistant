@@ -6,6 +6,7 @@ import {useState } from 'react'
 import SideBar from '../../components/owner/Sidebar'
 import OpenSidebar from '../../components/owner/OpenSidebar'
 import OwnerPersonalForm from '../../components/owner/forms/OwnerPersonalForm'
+import Companies from '../../components/owner/company/Companies'
 
 
 export default function Example() {
@@ -34,6 +35,7 @@ export default function Example() {
           
                 <div className="h-full border-2 border-gray-200 border-dashed rounded-lg" > 
                   <OwnerPersonalForm/>
+                  <Companies/>
                 </div>
                   
               </div>
