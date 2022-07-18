@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import CompanyTable from './CompanyTable'
 import CreateCompany from './CreateCompany'
 
-export default function Companies() {
+export default function Companies() {  
+  
   return (
     <div>
-      <div>
-        company lists
-      </div>
-      
-      <CreateCompany/>
+    
+      <CompanyTable /> 
+      <CreateCompany   />
     </div>
   )
 }
