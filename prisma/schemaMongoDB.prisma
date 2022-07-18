@@ -3,39 +3,39 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./main.db"
+  provider = "mongodb"
+  url      = "mongodb+srv://jafar:102030@cluster0.ksnra.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 }
 
 model Account {
-  id                 Int      @id @unique @default(autoincrement())
-  userId             Int
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String
   type               String
   provider           String
   providerAccountId  String
-  refresh_token      String?
-  access_token       String?
+  refresh_token      String?  @db.String
+  access_token       String?  @db.String
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?
+  id_token           String?  @db.String
   session_state      String?
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           Int @id @unique @default(autoincrement())
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
-  userId       Int
+  userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
-
-  identifier Int @id @unique @default(autoincrement())
+  identifier String @id @default(auto()) @map("_id") @db.ObjectId
   token      String   @unique
   expires    DateTime
 
@@ -43,7 +43,7 @@ model VerificationToken {
 }
 model User {
 
-  id    Int @id @unique @default(autoincrement())
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
   login String
   password String 
   userLevel String 
@@ -55,11 +55,13 @@ model User {
   location  String
   accounts      Account[]
   sessions      Session[]
+
+  @@map("users")
 }
 
 model Company {
 
-  id Int @id @unique @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   category String // Вид деятельности
   location  String
@@ -73,7 +75,7 @@ model Company {
 
 model Market {
 
-  id Int @id @unique @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   location  String
   lawAddress String @unique
@@ -82,7 +84,7 @@ model Market {
 
 model Warehouse {
 
-  id Int @id @unique @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   location  String
   quantity Int
@@ -93,7 +95,7 @@ model Warehouse {
 
 model ComingWarehouse{
 
-  id Int @id @unique @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   quantity Int
   price Int
   supplier String
@@ -103,7 +105,7 @@ model ComingWarehouse{
 }
 
 model Supplier { // поставщик
-  id Int @id @unique @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   agentName String?
   agentPhone String?
@@ -111,7 +113,7 @@ model Supplier { // поставщик
 }
 
 model Product {
-  id Int @id @unique @default(autoincrement())
+  id String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   model String
   category String
@@ -120,14 +122,14 @@ model Product {
 
 model Role {
 
-  id    Int @id @unique @default(autoincrement())
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
   name String
   level Int
 
 }
 
 model Client {
-  id    Int @id @unique @default(autoincrement())
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
   firstName String 
   surName String 
   fatherName String
@@ -144,7 +146,7 @@ model Client {
 
 model Money { // Истончик от магазина
 
-  id    Int @id @unique @default(autoincrement())
+  id    String     @id @default(auto()) @map("_id") @db.ObjectId
   amount Int 
   typeAmount Int
   date DateTime // начало
