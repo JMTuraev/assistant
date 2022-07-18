@@ -8,8 +8,6 @@ export default async function handler(req, res) {
 
     let u ;
 
-    console.log( req.body );
-
     if (req.method === 'POST') {
 
         const user = await prisma.user.findFirst({
@@ -25,6 +23,8 @@ export default async function handler(req, res) {
             ],
           },
         });
+
+        console.log(prisma.user.findMany());
         res.status(200).json( { ok : true, user : user } );
     }
 

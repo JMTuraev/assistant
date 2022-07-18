@@ -31,6 +31,8 @@ export default NextAuth({
                 if (result.ok) {
 
                   user = result.user
+
+                  console.log(user);
                   
                   return user;
                 }
