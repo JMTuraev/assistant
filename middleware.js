@@ -14,7 +14,6 @@ import { getToken } from "next-auth/jwt"
 export async  function middleware(req) {
   if (req.nextUrl.pathname.startsWith('/owner/')) {
     const session = await getToken({ req, secret: process.env.SECRET })
-    console.log( session );
 
     if (!session) return req.redirect("/api/auth/signin")
 

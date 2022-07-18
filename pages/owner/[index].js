@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import {useState } from 'react'
+import {useState , useEffect} from 'react'
 
 
 
@@ -12,6 +12,7 @@ import Markets from '../../components/owner/market/Markets'
 
 
 export default function Example() {
+
   
 
   return (
@@ -61,3 +62,4 @@ export default function Example() {
     </>
   )
 }
+
