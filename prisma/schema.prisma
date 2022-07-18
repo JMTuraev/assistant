@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = "file:./main.db"
 }
 
 model Account {
@@ -55,8 +55,6 @@ model User {
   location  String
   accounts      Account[]
   sessions      Session[]
-
-  @@map("users")
 }
 
 model Company {
