@@ -12,7 +12,7 @@ export default NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        email: { label: "Email", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -29,7 +29,6 @@ export default NextAuth({
             .then(
               (result) => {
                 if (result.ok) {
-                  console.log(result);
 
                   user = result.user
                   
@@ -61,8 +60,6 @@ export default NextAuth({
 
   callbacks: {
     jwt: async ({ token, user }) => {
-      console.log('==dddsss==');
-      console.log(token);
       user && (token.user = user)
       return token
     },

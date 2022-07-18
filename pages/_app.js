@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import TemplateContext from "../context/TemplateContext";
 import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [sidebarOpen, setSidebarOpen] = useState(false); // for template. не работает openSideBar
   const [showNewCompanyBlock, setShowNewCompanyBlock] = useState(false);
 
