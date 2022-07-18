@@ -8,7 +8,9 @@ datasource db {
 }
 
 model Account {
+
   id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
   userId             Int
   type               String
   provider           String
@@ -26,131 +28,153 @@ model Account {
 }
 
 model Session {
-  id           Int @id @unique @default(autoincrement())
-  sessionToken String   @unique
-  userId       Int
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  sessionToken       String   @unique
+  userId             Int
+  expires            DateTime
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
 }
 
 model VerificationToken {
 
-  identifier Int @id @unique @default(autoincrement())
-  token      String   @unique
-  expires    DateTime
+  identifier         Int      @id @unique @default(autoincrement())
+  token              String   @unique
+  expires            DateTime
 
   @@unique([identifier, token])
+
 }
+
 model User {
 
-  id    Int @id @unique @default(autoincrement())
-  login String
-  password String 
-  userLevel String 
-  firstName String 
-  surName String 
-  fatherName String
-  email String  @unique
-  phone  String @unique
-  location  String
-  accounts      Account[]
-  sessions      Session[]
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  login              String
+  password           String 
+  userLevel          String 
+  firstName          String 
+  surName            String 
+  fatherName         String
+  email              String   @unique
+  phone              String   @unique
+  location           String
+  accounts           Account[]
+  sessions           Session[]
+
 }
 
 model Company {
 
-  id Int @id @unique @default(autoincrement())
-  name String
-  category String // Вид деятельности
-  location  String
-  lawAddress String @unique // Юридечкиский адресс
-  inn String
-  bankAccount String // рассчетный счет
-  mfoBank String @unique
-  owner String
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  category           String // Вид деятельности
+  location           String
+  lawAddress         String @unique // Юридечкиский адресс
+  inn                String
+  bankAccount        String // рассчетный счет
+  mfoBank            String @unique
+  owner              String
 
 }
 
 model Market {
 
-  id Int @id @unique @default(autoincrement())
-  name String
-  location  String
-  lawAddress String @unique
-  company String
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  location           String
+  lawAddress         String @unique
+  company            String
+
 }
 
 model Warehouse {
 
-  id Int @id @unique @default(autoincrement())
-  name String
-  location  String
-  quantity Int
-  editPrice Int
-  product String 
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  location           String
+  quantity           Int
+  editPrice          Int
+  product            String 
 
 }
 
 model ComingWarehouse{
 
-  id Int @id @unique @default(autoincrement())
-  quantity Int
-  price Int
-  supplier String
-  unit String // Ед. измерения
-  date DateTime
-  product String 
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  quantity           Int
+  price              Int
+  supplier           String
+  unit               String // Ед. измерения
+  date               DateTime
+  product            String 
+
 }
 
 model Supplier { // поставщик
-  id Int @id @unique @default(autoincrement())
-  name String
-  agentName String?
-  agentPhone String?
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  agentName          String?
+  agentPhone         String?
 
 }
 
 model Product {
-  id Int @id @unique @default(autoincrement())
-  name String
-  model String
-  category String
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  model              String
+  category           String
 
 }
 
 model Role {
 
-  id    Int @id @unique @default(autoincrement())
-  name String
-  level Int
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  level              Int
 
 }
 
 model Client {
-  id    Int @id @unique @default(autoincrement())
-  firstName String 
-  surName String 
-  fatherName String
-  passportSeries String
-  registeredByWhom String // кем выдан пасспорт
-  dateOfPassport String // дата выдачи пасспорта
-  placeOfWork String // место работы
-  phoneOfWork  String @unique
-  phone  String @unique
-  comment String
-  email String  @unique
-  location  String
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  firstName          String 
+  surName            String 
+  fatherName         String
+  passportSeries     String
+  registeredByWhom   String // кем выдан пасспорт
+  dateOfPassport     String // дата выдачи пасспорта
+  placeOfWork        String // место работы
+  phoneOfWork        String @unique
+  phone              String @unique
+  comment            String
+  email              String @unique
+  location           String
+  
 }
 
 model Money { // Истончик от магазина
 
-  id    Int @id @unique @default(autoincrement())
-  amount Int 
-  typeAmount Int
-  date DateTime // начало
-  period DateTime? // конец
-  percent Int?
-  credit String?
-  client String
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  amount             Int 
+  typeAmount         Int
+  date               DateTime // начало
+  period             DateTime? // конец
+  percent            Int?
+  credit             String?
+  client             String
 
 }

@@ -7,9 +7,6 @@ export default async function handler(req, res) {
     const {email, password} = req.body
 
     let u ;
-
-    
-
     if (req.method === 'POST') {
         
         const user = await prisma.user.findFirst({
