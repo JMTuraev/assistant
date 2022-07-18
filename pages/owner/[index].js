@@ -5,8 +5,10 @@ import {useState } from 'react'
 
 import SideBar from '../../components/owner/Sidebar'
 import OpenSidebar from '../../components/owner/OpenSidebar'
-import OwnerPersonalForm from '../../components/owner/forms/OwnerPersonalForm'
+import OwnerPersonalForm from '../../components/owner/OwnerPersonalForm'
 import Companies from '../../components/owner/company/Companies'
+import Markets from '../../components/owner/market/Markets'
+
 
 
 export default function Example() {
@@ -33,23 +35,26 @@ export default function Example() {
               {/* Start main area*/}
               <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
           
-                <div className="h-full border-2 border-gray-200 border-dashed rounded-lg" > 
+                <div className="h-max min-h-max pb-4 border-2 border-gray-200 border-dashed rounded-lg" > 
                   <OwnerPersonalForm/>
                   <Companies/>
+                  <Markets/>
+                 
                 </div>
                   
               </div>
               {/* End main area */}
             </main>
-            <aside className="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 overflow-y-auto">
+            <main  className="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 overflow-y-auto">
               {/* Start secondary column (hidden on smaller screens) */}
-              <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-                <div className="h-full border-2 border-gray-200 border-dashed rounded-lg" >
-                  1
+              <div className="absolute  py-6  sm:px-3 lg:px-3">
+                <div className="h-full " >
+              4
+               
                 </div>
               </div>
               
-            </aside>
+            </main>
           </div>
         </div>
       </div>

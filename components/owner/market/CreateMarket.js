@@ -6,26 +6,49 @@ import * as yup from 'yup';
 import TemplateContext from "../../../context/TemplateContext";
 
 
-export default function CreateCompany() {
-  const {newCompany, setNewCompany}=useState()
-  const {showNewCompanyBlock}=useContext(TemplateContext)
+export default function CreateMarket() {
+  const {newMarket, setNewMarket}=useState()
+
   const {register, handleSubmit, watch, formState:{errors}} =useForm()
 
  
   const onSubmit=(data)=>{
-    setNewCompany({...newCompany, data})
+    setNewMarket({...newMarket, data})
   }
     return (
-    <form  className={showNewCompanyBlock ? 'visible' : 'hidden'} onSubmit={handleSubmit(onSubmit)} >
+    <form   onSubmit={handleSubmit(onSubmit)} >
       <div className="shadow m-4  sm:rounded-md sm:overflow-hidden">
         <div className="bg-white py-6 px-4 space-y-4 sm:p-6">
           <div>
             <h3 className="text-lg leading-6 font-medium text-gray-900">
-                Добавить новая организация
+                Добавить новый магазин
             </h3>
           </div>
+    
 
           <div className="grid grid-cols-6 gap-y-2 gap-x-6">
+
+          <div className="col-span-6  lg:col-span-2 sm:col-span-3">
+              <label
+                htmlFor="company"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Выберите организации
+              </label>
+              <select
+                {...register('company')}
+                id="company"
+                name="company"
+                autoComplete="company"
+                className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              >
+                <option value='Texnolike-Savdo'>Texnolike-Savdo</option>
+                <option value='Shoxona-Savdo'>Shoxona-Savdo</option>
+              
+              </select>
+            </div>
+
+            
             <div className="col-span-6  lg:col-span-2 sm:col-span-3">
               <label
                 htmlFor="name"
@@ -41,28 +64,6 @@ export default function CreateCompany() {
                 autoComplete="name"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
-            </div>
-
-            <div className="col-span-6  lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="category"
-                className="block text-sm font-medium text-gray-700"
-              >
-                категория
-              </label>
-              <select
-                {...register('caetgory')}
-                id="category"
-                name="category"
-                autoComplete="category"
-                className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                <option value={'clothes'}>Одежды</option>
-                <option value={'appliances'}>Бытовая техника</option>
-                <option value={'movableProperty'}> Движимое имущество</option>
-                <option value={'immovableProperty'}>Недвижимое имущество</option>
-                <option value={'others'}>Другие</option>
-              </select>
             </div>
 
             <div className="col-span-6  lg:col-span-2 sm:col-span-3">
@@ -112,57 +113,7 @@ export default function CreateCompany() {
               />
             </div>
 
-            <div className="col-span-6  lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="inn"
-                className="block text-sm font-medium text-gray-700"
-              >
-                ИНН
-              </label>
-              <input
-              {...register("inn")}
-                type="text"
-                name="inn"
-                id="inn"
-                autoComplete="inn"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-
-            <div className="col-span-6 lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="bankAccount"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Банковский счет
-              </label>
-              <input
-              {...register("bankAccount")}
-                type="text"
-                name="bankAccount"
-                id="bankAccount"
-                autoComplete="bankAccount"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-
-            <div className="col-span-6 lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="mfo"
-                className="block text-sm font-medium text-gray-700"
-              >
-                MFO
-              </label>
-              <input
-                {...register("mfo")}
-              
-                type="text"
-                name="mfo"
-                id="mfo"
-                autoComplete="mfo"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
+            
 
           </div>
         </div>

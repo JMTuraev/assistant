@@ -4,11 +4,21 @@ import {yupResolver} from '@hookform/resolvers/yup'
 
 import * as yup from 'yup';
 
+yup.setLocale({
+  string:{
+
+    required:'Заполните'
+  }
+})
 const schema=yup.object({
   firstName:yup.string().required()
-})
+
+}).required()
+
 export default function OwnerPersonalForm() {
-  const {register, handleSubmit, watch, formState:{errors}} =useForm()
+  const {register, handleSubmit, watch, formState:{errors}} =useForm({
+    resolver:yupResolver(schema)
+  })
   const [showPassBlock, setShowPassBlock] = useState(false);
 
   const onSubmit=(data)=>{
@@ -33,16 +43,17 @@ export default function OwnerPersonalForm() {
                 htmlFor="firstName"
                 className="block text-sm font-medium text-gray-700"
               >
-                Имя <p>{errors.firstName?.message}</p>
+                Имя 
               </label>
               <input
-                {...register("firstName", {required:true, maxLength:15})}
+                {...register("firstName", {required:true, maxLength:20, pattern: /^[A-Za-z]+$/i  })}
                 type="text"
                 name="firstName"
                 id="firstName"
                 autoComplete="name"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
+              <p>{errors.firstName?.message}</p>
             </div>
 
             <div className="col-span-6 lg:col-span-2 sm:col-span-3">
@@ -53,7 +64,7 @@ export default function OwnerPersonalForm() {
                 Фамилия
               </label>
               <input
-                {...register("surName")}
+                {...register("surName", {required:true, maxLength:20, pattern: /^[A-Za-z]+$/i   })}
                 type="text"
                 name="surName"
                 id="surName"
@@ -70,7 +81,7 @@ export default function OwnerPersonalForm() {
                 Отчество
               </label>
               <input
-                {...register("fatherName")}
+                {...register("fatherName", { required:true, maxLength:20, pattern: /^[A-Za-z]+$/i})}
                 type="text"
                 name="fatherName"
                 id="fatherName"
@@ -87,7 +98,7 @@ export default function OwnerPersonalForm() {
                 Почта
               </label>
               <input
-                {...register('email')}
+                {...register('email', {required:true, maxLength:50, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/})}
                 type="text"
                 name="email"
                 id="email"
@@ -104,7 +115,7 @@ export default function OwnerPersonalForm() {
                 Номер телефона
               </label>
               <input
-                {...register("phone")}
+                {...register("phone", {required:true, maxLength:15, pattern:[0-9] })}
                 type="text"
                 name="phone"
                 id="phone"
@@ -144,7 +155,7 @@ export default function OwnerPersonalForm() {
             </div>
           </div>
           {/*  Блок изминения пароля */}
-          <div className={showPassBlock ? "hidden" : "visible"}>
+          <div className={showPassBlock ?  "visible" :"hidden" }>
             <div className="grid grid-cols-6 gap-x-6 gap-y-2 border items-end  rounded-lg border-indigo-600 py-6 px-3">
               <div className="col-span-6 sm:col-span-2">
                 <label
@@ -233,9 +244,10 @@ export default function OwnerPersonalForm() {
           <input
             type="submit"
             className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-1.5 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            сохранить
-          </input>
+            value='сохранить'
+          />
+            
+          
         </div>
       </div>
     </form>

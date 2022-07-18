@@ -4,8 +4,10 @@ import TemplateContext from '../context/TemplateContext'
 
 function MyApp({ Component, pageProps }) {
   const [sidebarOpen, setSidebarOpen] = useState(false) // for template. не работает openSideBar
+  const [showNewCompanyBlock, setShowNewCompanyBlock ]=useState(false)
+  
   return (
-  <TemplateContext.Provider value={{sidebarOpen, setSidebarOpen}}>
+  <TemplateContext.Provider value={{showNewCompanyBlock, setShowNewCompanyBlock, sidebarOpen}}>
     <Component {...pageProps} />
   </TemplateContext.Provider>
   )
