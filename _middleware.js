@@ -29,7 +29,11 @@ export async  function middleware(req) {
     
   }
 
-  if (req.nextUrl.pathname.startsWith('/dashboard')) {
-    // This logic is only applied to /dashboard
+  if (req.nextUrl.pathname.startsWith('/auth')) {
+    if (session) {
+      const url = req.nextUrl.clone()
+      url.pathname = '/owner/1'
+      return NextResponse.rewrite(url)
+    }
   }
 }
