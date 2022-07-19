@@ -15,7 +15,11 @@ export async  function middleware(req) {
   if (req.nextUrl.pathname.startsWith('/owner/')) {
     const session = await getToken({ req, secret: process.env.SECRET })
 
-    if (!session) return req.redirect("/api/auth/signin")
+    if (!session) {
+      const url = req.nextUrl.clone()
+      url.pathname = '/auth/login'
+      return NextResponse.rewrite(url)
+    }
 
     if (session.user.userLevel !== 'role-hcvd7ol5qnpscw') {
       const url = req.nextUrl.clone()
