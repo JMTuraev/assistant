@@ -10,12 +10,18 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const [showNewCompanyBlock, setShowNewCompanyBlock] = useState(false);
 
+  try {
     const apiUrl = 'http://localhost:3000/api/auth/session';
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) =>{ 
         setUser(data.user)
       });
+  } catch (error) {
+    setUser({})
+    
+  }
+
 
 
   return (
