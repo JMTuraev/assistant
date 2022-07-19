@@ -1,23 +1,13 @@
+import React, {useState} from 'react';
+
+import Registration from "../../components/AuthorizationPage/Resgistration";
 import Services from "../../components/AuthorizationPage/Services";
 
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 export default function Example() {
-    return (
+
+  const [open, setOpen] = useState(false)  
+  return (
       <>
         {/*
           This example requires updating your template:
@@ -42,7 +32,7 @@ export default function Example() {
               <form className="space-y-6" action="#" method="POST">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Email address
+                    Электронная почта
                   </label>
                   <div className="mt-1">
                     <input
@@ -58,7 +48,7 @@ export default function Example() {
   
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    Password
+                    Пароль
                   </label>
                   <div className="mt-1">
                     <input
@@ -81,13 +71,13 @@ export default function Example() {
                       className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                     />
                     <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                      Remember me
+                      Запомнить меня
                     </label>
                   </div>
   
                   <div className="text-sm">
                     <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Forgot your password?
+                      забыли пароль?
                     </a>
                   </div>
                 </div>
@@ -113,6 +103,7 @@ export default function Example() {
                 </div>
                 <div className="flex flex-row space-x-6 justify-center items-center">
                 <button
+                    onClick={()=>setOpen(true)}
                     type="submit"
                     className=" flex justify-center items-center font-bold py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                   >
@@ -120,7 +111,7 @@ export default function Example() {
                   </button>
                 <span className="whitespace-nowrap  underline underline-offset-4 cursor-pointer hover:text-indigo-600"> праила регистрации</span>
                 </div>
-                
+                <Registration open={open} setOpen={setOpen}/>
               </div>
             </div>
           </div>
