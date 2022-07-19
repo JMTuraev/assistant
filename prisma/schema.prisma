@@ -55,12 +55,12 @@ model User {
   login              String
   password           String 
   userLevel          String 
-  firstName          String 
-  surName            String 
-  fatherName         String
-  email              String   @unique
-  phone              String   @unique
-  location           String
+  firstName          String? 
+  surName            String?
+  fatherName         String?
+  email              String?  @unique
+  phone              String?  @unique
+  location           String?
   accounts           Account[]
   sessions           Session[]
   company            Company[]
