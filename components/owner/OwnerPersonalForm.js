@@ -15,7 +15,7 @@ const schema=yup.object({
 
 }).required()
 
-export default function OwnerPersonalForm() {
+export default function OwnerPersonalForm(props) {
   const {register, handleSubmit, watch, formState:{errors}} =useForm({
     resolver:yupResolver(schema)
   })
@@ -52,6 +52,7 @@ export default function OwnerPersonalForm() {
                 id="firstName"
                 autoComplete="name"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={ props.user.firstName }
               />
               <p>{errors.firstName?.message}</p>
             </div>
@@ -70,6 +71,7 @@ export default function OwnerPersonalForm() {
                 id="surName"
                 autoComplete="surName"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={ props.user.surName }
               />
             </div>
 
@@ -87,6 +89,7 @@ export default function OwnerPersonalForm() {
                 id="fatherName"
                 autoComplete="fatherName"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={ props.user.fatherName }
               />
             </div>
 
@@ -104,6 +107,7 @@ export default function OwnerPersonalForm() {
                 id="email"
                 autoComplete="email"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={ props.user.email }
               />
             </div>
 
@@ -121,6 +125,7 @@ export default function OwnerPersonalForm() {
                 id="phone"
                 autoComplete="phone"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={ props.user.phone }
               />
             </div>
 

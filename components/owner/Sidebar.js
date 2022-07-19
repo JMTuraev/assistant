@@ -14,22 +14,9 @@ import TransitionPage from './TransitionPage'
 import Link from 'next/link'
 
   
-export default function SideBar({data}) {
+export default function SideBar(props) {
 
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    const apiUrl = 'http://localhost:3000/api/auth/session';
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) =>{ 
-        console.log('This is your data', data.user) 
-        setUser(data.user)
-      });
-  }, [])
-
-  console.log(user);
-      
+  
 
     const navigation = [
         { name: 'Dashboard', href: '#', count:2, icon: HomeIcon, current: true },
@@ -100,8 +87,8 @@ export default function SideBar({data}) {
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ user.firstName }</p>
-                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ user.surName }</p>
+                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ props.user.firstName }</p>
+                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ props.user.surName }</p>
                 </div>
               </div>
             </a>

@@ -7,13 +7,17 @@ import TemplateContext from "../../../context/TemplateContext";
 
 
 export default function CreateCompany() {
-  const {newCompany, setNewCompany}=useState()
   const {showNewCompanyBlock}=useContext(TemplateContext)
   const {register, handleSubmit, watch, formState:{errors}} =useForm()
 
+
  
   const onSubmit=(data)=>{
-    setNewCompany({...newCompany, data})
+
+    // setNewCompany({...newCompany, data});
+
+    console.log(data);
+    
   }
     return (
     <form  className={showNewCompanyBlock ? 'visible' : 'hidden'} onSubmit={handleSubmit(onSubmit)} >
@@ -48,7 +52,7 @@ export default function CreateCompany() {
                 htmlFor="category"
                 className="block text-sm font-medium text-gray-700"
               >
-                категория
+                Категория
               </label>
               <select
                 {...register('caetgory')}

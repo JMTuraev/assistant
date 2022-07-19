@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import {useState , useEffect} from 'react'
+import TemplateContext from '../../context/TemplateContext'
 
 
 
@@ -9,11 +10,13 @@ import OwnerPersonalForm from '../../components/owner/OwnerPersonalForm'
 import Companies from '../../components/owner/company/Companies'
 import Markets from '../../components/owner/market/Markets'
 
+import { useContext} from "react";
 
 
 export default function Example() {
 
-  
+  const {sidebarOpen, user }=useContext(TemplateContext)
+
 
   return (
     <>
@@ -28,7 +31,7 @@ export default function Example() {
       <div className="h-screen flex">
      
         {/* Static sidebar for desktop */}
-        <SideBar />
+        <SideBar user={user}/>
         <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
        <OpenSidebar/>
           <div className="flex-1 relative z-0 flex overflow-hidden">
@@ -37,8 +40,8 @@ export default function Example() {
               <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
           
                 <div className="h-max min-h-max pb-4 border-2 border-gray-200 border-dashed rounded-lg" > 
-                  <OwnerPersonalForm/>
-                  <Companies/>
+                  <OwnerPersonalForm user={user}/>
+                  <Companies user={user}/>
                   <Markets/>
                  
                 </div>
@@ -50,7 +53,7 @@ export default function Example() {
               {/* Start secondary column (hidden on smaller screens) */}
               <div className="absolute  py-6  sm:px-3 lg:px-3">
                 <div className="h-full " >
-              4
+                  4
                
                 </div>
               </div>

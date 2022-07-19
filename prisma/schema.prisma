@@ -63,6 +63,8 @@ model User {
   location           String
   accounts           Account[]
   sessions           Session[]
+  company            Company[]
+  
 
 }
 
@@ -73,10 +75,11 @@ model Company {
   name               String
   category           String // Вид деятельности
   location           String
-  lawAddress         String @unique // Юридечкиский адресс
+  lawAddress         String   @unique // Юридечкиский адресс
   inn                String
   bankAccount        String // рассчетный счет
-  mfoBank            String @unique
+  mfoBank            String   @unique
+  ownerRelation      User     @relation(fields: [owner], references: [id_u])
   owner              String
 
 }

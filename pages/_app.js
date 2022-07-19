@@ -5,12 +5,23 @@ import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [sidebarOpen, setSidebarOpen] = useState(false); // for template. не работает openSideBar
+
+  const [user, setUser] = useState([]);
+
   const [showNewCompanyBlock, setShowNewCompanyBlock] = useState(false);
+
+    const apiUrl = 'http://localhost:3000/api/auth/session';
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) =>{ 
+        setUser(data.user)
+      });
+
 
   return (
     <SessionProvider session={session}>
       <TemplateContext.Provider
-        value={{ showNewCompanyBlock, setShowNewCompanyBlock, sidebarOpen }}
+        value={{ showNewCompanyBlock, setShowNewCompanyBlock, sidebarOpen, user }}
       >
         <Component {...pageProps} />
       </TemplateContext.Provider>
