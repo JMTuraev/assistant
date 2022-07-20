@@ -17,7 +17,7 @@ export async  function middleware(req) {
 
     if (!session) {
       const url = req.nextUrl.clone()
-      url.pathname = '/auth/login'
+      url.pathname = '/api/auth/signin'
       return NextResponse.rewrite(url)
     }
 
@@ -29,10 +29,13 @@ export async  function middleware(req) {
     
   }
 
-  if (req.nextUrl.pathname.startsWith('/auth')) {
+  if (req.nextUrl.pathname.startsWith('/auth/')) {
+
+    const session = await getToken({ req, secret: process.env.SECRET })
+
     if (session) {
       const url = req.nextUrl.clone()
-      url.pathname = '/owner/1'
+      url.pathname = '/owner'
       return NextResponse.rewrite(url)
     }
   }

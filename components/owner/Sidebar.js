@@ -1,5 +1,5 @@
 import React , {useEffect,useState }from 'react'
-
+import Link from 'next/link'
 import { useSession } from "next-auth/react"
 
 import {
@@ -11,7 +11,7 @@ import {
     UserGroupIcon,
   } from '@heroicons/react/outline'
 import TransitionPage from './TransitionPage'
-import Link from 'next/link'
+
 
   
 export default function SideBar(props) {
@@ -77,7 +77,7 @@ export default function SideBar(props) {
         
         <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
           
-            <a href="#" className="flex-shrink-0 w-full group block">
+           
               <div className="flex items-center">
                 <div>
                   <img
@@ -87,16 +87,22 @@ export default function SideBar(props) {
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ props.user.firstName }</p>
-                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ props.user.surName }</p>
+                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ props.user.email }</p>
+                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ props.user.login }</p>
+                  
+                  <Link href='/api/auth/signout'>
+                    <a>Выйти</a>
+                  </Link>
+     
                 </div>
               </div>
-            </a>
+                  
           
         </div>
       </div>
     </div>
   </div>
+
   
   </>
   )

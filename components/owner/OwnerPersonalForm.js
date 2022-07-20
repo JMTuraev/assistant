@@ -15,7 +15,7 @@ const schema=yup.object({
 
 }).required()
 
-export default function OwnerPersonalForm(props) {
+export default function OwnerPersonalForm({user}) {
   const {register, handleSubmit, watch, formState:{errors}} =useForm({
     resolver:yupResolver(schema)
   })
@@ -52,7 +52,7 @@ export default function OwnerPersonalForm(props) {
                 id="firstName"
                 autoComplete="name"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={ props.user.firstName }
+                value={ user.firstName }
               />
               <p>{errors.firstName?.message}</p>
             </div>
@@ -71,7 +71,7 @@ export default function OwnerPersonalForm(props) {
                 id="surName"
                 autoComplete="surName"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={ props.user.surName }
+                value={ user.surName }
               />
             </div>
 
@@ -89,7 +89,7 @@ export default function OwnerPersonalForm(props) {
                 id="fatherName"
                 autoComplete="fatherName"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={ props.user.fatherName }
+                value={ user.fatherName }
               />
             </div>
 
@@ -107,7 +107,7 @@ export default function OwnerPersonalForm(props) {
                 id="email"
                 autoComplete="email"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={ props.user.email }
+                value={ user.email }
               />
             </div>
 
@@ -125,7 +125,7 @@ export default function OwnerPersonalForm(props) {
                 id="phone"
                 autoComplete="phone"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={ props.user.phone }
+                value={ user.phone }
               />
             </div>
 

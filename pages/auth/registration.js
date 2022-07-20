@@ -14,29 +14,36 @@
   }
   ```
 */
+import { useForm,  } from "react-hook-form";
 
 
 export default function Example() {
 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     const onSubmit = async (data) =>{
 
-        // const res = await fetch('http://localhost:800/api/hello',{
-        //   method : 'POST',
-        //   body : JSON.stringify(data)
-        // }).then(res => res.json())
-        // .then(
-        //   (result) => {
-    
-        //     setItems(result.users);
-    
-        //     console.log(items);
-        //   },
-        //   // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-        //   // чтобы не перехватывать исключения из ошибок в самих компонентах.
-        //   (error) => {
-    
-        //   }
-        // )
+      const res = await fetch(`http://localhost:3000/api/auth/registration`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            if (result.ok) {
+            
+
+              window.location.href = '/auth/login';
+ 
+            }
+            // Return null if user data could not be retrieved
+            return null;
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
         
         console.log(data);
 
@@ -66,63 +73,8 @@ export default function Example() {
 
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
             <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <form onSubmit={onSubmit}>
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Имя
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="firstName"
-                      name="firstName"
-                      type="firstName"
-                      autoComplete="firstName"
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="surName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Фамилия
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="surName"
-                      name="surName"
-                      type="surName"
-                      autoComplete="surName"
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="fatherName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Отчество
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="fatherName"
-                      name="fatherName"
-                      type="fatherName"
-                      autoComplete="fatherName"
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
+              <form onSubmit={handleSubmit(onSubmit)}>
+              
 
                 <div>
                   <label
@@ -138,30 +90,32 @@ export default function Example() {
                       type="login"
                       autoComplete="login"
                       required
+                      {...register("login")}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
-
 
                 <div>
                   <label
-                    htmlFor="phone"
+                    htmlFor="email"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Телефон
+                    Емаил
                   </label>
                   <div className="mt-1">
                     <input
-                      id="phone"
-                      name="phone"
-                      type="phone"
-                      autoComplete="phone"
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
                       required
+                      {...register("email")}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
+
 
                 <div>
                   <label
@@ -177,6 +131,7 @@ export default function Example() {
                       type="password"
                       autoComplete="current-password"
                       required
+                      {...register("password")}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
@@ -184,14 +139,13 @@ export default function Example() {
 
                 <div>
                   <button
-                    type="button"
+                    type="submit"
                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Зарегистрироваться
                   </button>
                 </div>
               </form>
-
             </div>
           </div>
         </div>
