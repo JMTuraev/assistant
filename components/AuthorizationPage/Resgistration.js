@@ -34,8 +34,6 @@ export default function Registration({open, setOpen}) {
           console.log(err);
         }
       );
-      
-      console.log(data);
 
     }
   

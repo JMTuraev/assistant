@@ -73,7 +73,6 @@ export default function SideBar(props) {
                         aria-hidden="true"
                       />
                       {item.name}
-                      {item.count}
                     </a>
                   ))}
                 </div>

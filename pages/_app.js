@@ -16,18 +16,20 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   if (sessio) {
     
+  //   useEffect(() => {
+      const apiUrl = "http://localhost:3000/api/user";
+      fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setUser(data.user);
+        });
+  //   });
     
-  }
+  setSessiona(false);
+  } 
 
-  useEffect(() => {  
-    const apiUrl = "http://localhost:3000/api/user";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setUser(data.user);
-      });; 
-       });
+
 
   return (
     <SessionProvider session={session}>
@@ -38,6 +40,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           sidebarOpen,
           user,
           setSessiona,
+          setUser
         }}
       >
           <Head>

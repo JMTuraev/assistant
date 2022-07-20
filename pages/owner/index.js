@@ -16,8 +16,7 @@ import { useContext} from "react";
 
 export default function Example() {
 
-  const {sidebarOpen, user, setSessiona }=useContext(TemplateContext)
-  setSessiona(false)
+  const {sidebarOpen, user, setSessiona, setUser }=useContext(TemplateContext)
 
 
   return (
@@ -46,7 +45,7 @@ export default function Example() {
               {/* Start main area*/}
               <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
                 <div className="h-max min-h-max pb-4 border-2 border-gray-200 border-dashed rounded-lg">
-                  <OwnerPersonalForm user={user} />
+                  <OwnerPersonalForm user={user} setUser={setUser} />
                   <Companies user={user} />
                   <Markets />
                 </div>
