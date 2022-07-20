@@ -15,7 +15,7 @@ const schema=yup.object({
 
 }).required()
 
-export default function OwnerPersonalForm(props) {
+export default function ProfileForm(props) {
   const {register, handleSubmit, watch, formState:{errors}} =useForm({
     resolver:yupResolver(schema)
   })

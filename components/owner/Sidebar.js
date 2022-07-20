@@ -2,31 +2,13 @@ import React , {useEffect,useState }from 'react'
 
 import { useSession } from "next-auth/react"
 
-import {
-    CalendarIcon,
-    HomeIcon,
-    MapIcon,
-    SearchCircleIcon,
-    SpeakerphoneIcon,
-    UserGroupIcon,
-  } from '@heroicons/react/outline'
 import TransitionPage from './TransitionPage'
 import Link from 'next/link'
 
   
-export default function SideBar(props) {
+export default function SideBar({navigation, user, active}) {
 
   
-
-    const navigation = [
-        { name: 'Dashboard', href: '#', count:2, icon: HomeIcon, current: true },
-        { name: 'Calendar', href: '#', count:2, icon: CalendarIcon, current: false },
-        { name: 'Teams', href: '#', count:2, icon: UserGroupIcon, current: false },
-        { name: 'Directory', href: '#', count:2,  icon: SearchCircleIcon, current: false },
-        { name: 'Announcements', href: '#', count:2, icon: SpeakerphoneIcon, current: false },
-        { name: 'Office Map', href: '#', count:2, icon: MapIcon, current: false },
-      ]
-    
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
@@ -50,14 +32,15 @@ export default function SideBar(props) {
           <nav className="mt-5 flex-1" aria-label="Sidebar">
             <div className="px-2 space-y-1">
               {navigation.map((item) => (
-                <a
+                <div
+                  onClick={()=>active(item.name)}
                   key={item.name}
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? 'bg-gray-200 text-gray-900'
+                      ? 'bg-gray-200 text-gray-900 '
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                    'group flex items-center px-2 py-2 text-sm font-medium rounded-md cursor-pointer'
                   ) }
                 >
                   <item.icon
@@ -69,7 +52,7 @@ export default function SideBar(props) {
                   />
                   {item.name}
                   {item.count}
-                </a>
+                </div>
               ))}
             </div>
           </nav>
@@ -77,8 +60,8 @@ export default function SideBar(props) {
         
         <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
           
-            <a href="#" className="flex-shrink-0 w-full group block">
-              <div className="flex items-center">
+            
+              <div className="flex items-center" onClick={()=>setActiveMenu('ProfileForm')}>
                 <div>
                   <img
                     className="inline-block h-9 w-9 rounded-full"
@@ -87,11 +70,11 @@ export default function SideBar(props) {
                   />
                 </div>
                 <div className="ml-3">
-                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ props.user.firstName }</p>
-                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ props.user.surName }</p>
+                  <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ user.firstName }</p>
+                  <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ user.surName }</p>
                 </div>
               </div>
-            </a>
+            
           
         </div>
       </div>
