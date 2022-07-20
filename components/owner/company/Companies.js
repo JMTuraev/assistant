@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import CompanyTable from './CompanyTable'
 import CreateCompany from './CreateCompany'
 
-export default function Companies(props) {  
+export default function Companies({companys, setCompany}) {  
   
   return (
     <div>
     
-      <CompanyTable /> 
-      <CreateCompany   />
+      <CompanyTable  companys={companys}  setCompany={setCompany} /> 
+      <CreateCompany companys={companys}  setCompany={setCompany} />
     </div>
   )
 }

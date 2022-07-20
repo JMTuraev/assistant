@@ -1,9 +1,11 @@
 import React , {useEffect,useState }from 'react'
-
+import useSWR from "swr";
+import Link from 'next/link'
 import { useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 import TransitionPage from './TransitionPage'
-import Link from 'next/link'
+
 
   
 export default function SideBar({navigation, user, active}) {
@@ -12,6 +14,7 @@ export default function SideBar({navigation, user, active}) {
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
+
 
       
   return (
@@ -72,17 +75,16 @@ export default function SideBar({navigation, user, active}) {
                 <div className="ml-3">
                   <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">{ user.firstName }</p>
                   <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">{ user.surName }</p>
+                  <a onClick={signOut}>Выйти</a>
+                  
                 </div>
               </div>
             
           
         </div>
       </div>
-    </div>
-  </div>
-  
-  </>
-  )
+    </>
+  );
   
 }
 

@@ -3,7 +3,39 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/outline'
 
+import { useForm,  } from "react-hook-form";
+
 export default function Registration({open, setOpen}) {
+
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+  const onSubmit = async (data) =>{
+
+    const res = await fetch(`http://localhost:3000/api/auth/registration`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.ok) {
+          
+
+            setOpen(false)
+
+            alert('Пользователь создан')
+
+          }
+          // Return null if user data could not be retrieved
+          return null;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+    }
   
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -32,10 +64,35 @@ export default function Registration({open, setOpen}) {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-sm sm:w-full sm:p-6">
-              <form className="space-y-6" action="#" method="POST">
+              <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+              
+
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Электронная почта
+                  <label
+                    htmlFor="login"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Логин
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="login"
+                      name="login"
+                      type="login"
+                      autoComplete="login"
+                      required
+                      {...register("login")}
+                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Емаил
                   </label>
                   <div className="mt-1">
                     <input
@@ -44,13 +101,18 @@ export default function Registration({open, setOpen}) {
                       type="email"
                       autoComplete="email"
                       required
+                      {...register("email")}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
-  
+
+
                 <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Пароль
                   </label>
                   <div className="mt-1">
@@ -60,27 +122,12 @@ export default function Registration({open, setOpen}) {
                       type="password"
                       autoComplete="current-password"
                       required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                   Повтор пароля
-                  </label>
-                  <div className="mt-1">
-                    <input
-                        type="text"
-                        name="checkPassword"
-                        id="checkPassword"
-                        autoComplete="checkPassword"
-                      required
+                      {...register("password")}
                       className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
                 </div>
 
-  
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <input
@@ -94,13 +141,13 @@ export default function Registration({open, setOpen}) {
                     </label>
                   </div>
                 </div>
-  
+
                 <div>
                   <button
                     type="submit"
                     className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
-                    Регистрация
+                    Зарегистрироваться
                   </button>
                 </div>
               </form>

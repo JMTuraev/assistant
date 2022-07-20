@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import {useState , useEffect} from 'react'
+import Link from 'next/link'
 import TemplateContext from '../../context/TemplateContext'
 
 
@@ -37,7 +38,7 @@ export default function Example() {
   ]
 
   const [show, setShow]=useState()
-  const {sidebarOpen, user }=useContext(TemplateContext)
+  const {sidebarOpen, setSessiona, user, setUser, companys, setCompany}=useContext(TemplateContext)
 
   const onActive=(menu)=>{
     return setShow(menu)
@@ -46,11 +47,16 @@ export default function Example() {
     <>
  
       <div className="h-screen flex">
-     
+        {/* <div>
+          <Link href={"/api/auth/signout"}>
+            <a>Выйти</a>
+          </Link>
+        </div> */}
+
         {/* Static sidebar for desktop */}
         <SideBar user={user} navigation={navigation} active={onActive} />
         <div className="flex flex-col min-w-0 flex-1 overflow-hidden">
-       <OpenSidebar/>
+          <OpenSidebar />
           <div className="flex-1 relative z-0 flex overflow-hidden">
             <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
               {/* Start main area*/}
@@ -60,36 +66,25 @@ export default function Example() {
 
                 
                 <div className={show === 'Teams' ? 'invisble': 'visible'}>
-                    <ProfileForm  user={user} />  
+                    <ProfileForm  user={user} setUser={setUser}/>  
                 </div>
                 
                 
                 <div className={show === 'Организация' ? 'invisble': 'invisible'}>
-                  <Companies user={user}/>  
+                  <Companies user={user} companys={companys}  setCompany={setCompany}/>  
                 </div>
                   
                         
                   <Markets/>
                  
                 </div>
-                  
               </div>
               {/* End main area */}
-            </main>
-            <main  className="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 overflow-y-auto">
-              {/* Start secondary column (hidden on smaller screens) */}
-              <div className="absolute  py-6  sm:px-3 lg:px-3">
-                <div className="h-full " >
-                  4
-               
-                </div>
-              </div>
-              
             </main>
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 

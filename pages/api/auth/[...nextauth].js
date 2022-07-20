@@ -31,8 +31,6 @@ export default NextAuth({
                 if (result.ok) {
 
                   user = result.user
-
-                  console.log(user);
                   
                   return user;
                 }
@@ -69,5 +67,10 @@ export default NextAuth({
       session.user = token.user // Setting token in session
       return session
     },
+  },
+
+  pages: {
+    signIn: '/auth/login',
+    // signOut: '/api/auth/signout',
   }
 })
