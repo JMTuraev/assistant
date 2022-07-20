@@ -6,21 +6,44 @@ import * as yup from 'yup';
 import TemplateContext from "../../../context/TemplateContext";
 
 
-export default function CreateCompany() {
+export default function CreateCompany({companys, setCompany}) {
   const {showNewCompanyBlock}=useContext(TemplateContext)
   const {register, handleSubmit, watch, formState:{errors}} =useForm()
 
 
  
-  const onSubmit=(data)=>{
+  const onSubmit= async (data)=>{
 
-    // setNewCompany({...newCompany, data});
+    const res = await fetch(`http://localhost:3000/api/company/create`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.ok) {
+            alert("Компания добавлена");
+            console.log(result);
+            console.log('-------------==========');
+            setCompany([...companys, result.data]);
+
+          }
+
+
+          return null;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
 
     console.log(data);
-    
+
   }
+
     return (
-    <form  className={showNewCompanyBlock ? 'visible' : 'hidden'} onSubmit={handleSubmit(onSubmit)} >
+    <form onSubmit={handleSubmit(onSubmit)} className={showNewCompanyBlock ? 'visible' : 'hidden'}>
       <div className="shadow m-4  sm:rounded-md sm:overflow-hidden">
         <div className="bg-white py-6 px-4 space-y-4 sm:p-6">
           <div>
@@ -55,7 +78,7 @@ export default function CreateCompany() {
                 Категория
               </label>
               <select
-                {...register('caetgory')}
+                {...register('category')}
                 id="category"
                 name="category"
                 autoComplete="category"
@@ -101,17 +124,17 @@ export default function CreateCompany() {
 
             <div className="col-span-6 lg:col-span-6 sm:col-span-6">
               <label
-                htmlFor="lawAdress"
+                htmlFor="lawAddress"
                 className="block text-sm font-medium text-gray-700"
               >
                 Юридический адрес
               </label>
               <input
-                {...register("lawAdress")}  // паттерн надо поставить
+                {...register("lawAddress")}  // паттерн надо поставить
                 type="text"
-                name="lawAdress"
-                id="lawAdress"
-                autoComplete="lawAdress"
+                name="lawAddress"
+                id="lawAddress"
+                autoComplete="lawAddress"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>

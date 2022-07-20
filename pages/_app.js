@@ -8,6 +8,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [sidebarOpen, setSidebarOpen] = useState(false); // for template. не работает openSideBar
 
   const [user, setUser] = useState([]);
+  
+  const [companys, setCompany] = useState([]);
 
   const [sessio, setSessiona] = useState(true);
 
@@ -17,18 +19,27 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   if (sessio) {
     
   //   useEffect(() => {
-      const apiUrl = "http://localhost:3000/api/user";
+      let apiUrl = "http://localhost:3000/api/user";
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
           setUser(data.user);
         });
+      
+        apiUrl = "http://localhost:3000/api/company";
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            setCompany(data.data.company);
+          });
   //   });
     
   setSessiona(false);
   } 
 
+  console.log(companys);
 
 
   return (
@@ -39,8 +50,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           setShowNewCompanyBlock,
           sidebarOpen,
           user,
+          companys,
           setSessiona,
-          setUser
+          setUser,
+          setCompany
         }}
       >
           <Head>

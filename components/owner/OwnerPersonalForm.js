@@ -28,7 +28,7 @@ export default function OwnerPersonalForm({user, setUser}) {
 
   const onSubmit= async (data)=>{
 
-    const res = await fetch(`http://localhost:3000/api/user/updateUserInfo`, {
+    const res = await fetch(`http://localhost:3000/api/user/updateInfo`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -38,10 +38,9 @@ export default function OwnerPersonalForm({user, setUser}) {
         (result) => {
           if (result.ok) {
             alert("Данные обновлены");
+            setUser(result.user);
           }
-          // Return null if user data could not be retrieved
 
-          setUser(result.user);
 
           return null;
         },

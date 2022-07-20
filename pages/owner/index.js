@@ -16,7 +16,7 @@ import { useContext} from "react";
 
 export default function Example() {
 
-  const {sidebarOpen, user, setSessiona, setUser }=useContext(TemplateContext)
+  const {sidebarOpen, setSessiona, user, setUser, companys, setCompany}=useContext(TemplateContext)
 
 
   return (
@@ -46,7 +46,7 @@ export default function Example() {
               <div className="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
                 <div className="h-max min-h-max pb-4 border-2 border-gray-200 border-dashed rounded-lg">
                   <OwnerPersonalForm user={user} setUser={setUser} />
-                  <Companies user={user} />
+                  <Companies user={user} companys={companys}  setCompany={setCompany}/>
                   <Markets />
                 </div>
               </div>
@@ -55,7 +55,7 @@ export default function Example() {
             <main className="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 overflow-y-auto">
               {/* Start secondary column (hidden on smaller screens) */}
               <div className="absolute  py-6  sm:px-3 lg:px-3">
-                <div className="h-full ">4</div>
+                <div className="h-full "></div>
               </div>
             </main>
           </div>

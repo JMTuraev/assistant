@@ -78,7 +78,7 @@ model Company {
   lawAddress         String   @unique // Юридечкиский адресс
   inn                String
   bankAccount        String // рассчетный счет
-  mfoBank            String   @unique
+  mfo                String   @unique
   ownerRelation      User     @relation(fields: [owner], references: [id_u])
   owner              String
 
