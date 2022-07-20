@@ -69,5 +69,10 @@ export default NextAuth({
       session.user = token.user // Setting token in session
       return session
     },
+  },
+
+  pages: {
+    signIn: '/auth/log',
+    // signOut: '/api/auth/signout',
   }
 })

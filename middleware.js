@@ -17,13 +17,13 @@ export async  function middleware(req) {
 
     if (!session) {
       const url = req.nextUrl.clone()
-      url.pathname = '/api/auth/signin'
+      url.pathname = '/auth/login'
       return NextResponse.rewrite(url)
     }
 
     if (session.user.userLevel !== 'role-hcvd7ol5qnpscw') {
       const url = req.nextUrl.clone()
-      url.pathname = '/'
+      url.pathname = '/auth/login'
       return NextResponse.rewrite(url)
     }
     
