@@ -53,12 +53,6 @@ export default function Example() {
               </div>
               {/* End main area */}
             </main>
-            <main className="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200 overflow-y-auto">
-              {/* Start secondary column (hidden on smaller screens) */}
-              <div className="absolute  py-6  sm:px-3 lg:px-3">
-                <div className="h-full "></div>
-              </div>
-            </main>
           </div>
         </div>
       </div>

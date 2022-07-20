@@ -15,18 +15,12 @@ export async  function middleware(req) {
   if (req.nextUrl.pathname.startsWith('/owner/')) {
     const session = await getToken({ req, secret: process.env.SECRET })
 
-    if (!session) {
+    if (!session  || session.user.userLevel !== 'role-hcvd7ol5qnpscw') {
       const url = req.nextUrl.clone()
       url.pathname = '/auth/login'
       return NextResponse.rewrite(url)
     }
 
-    if (session.user.userLevel !== 'role-hcvd7ol5qnpscw') {
-      const url = req.nextUrl.clone()
-      url.pathname = '/auth/login'
-      return NextResponse.rewrite(url)
-    }
-    
   }
 
   if (req.nextUrl.pathname.startsWith('/api/user')) {
