@@ -64,25 +64,29 @@ const company = [
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {companys.map((company) => (
-                      <tr
-                        key={company.id_u}
-                        className="divide-x divide-gray-200"
-                      >
-                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
-                          {company.name}
-                        </td>
-                        <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                          {company.location}
-                        </td>
-                        <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                          {company.lawAddress}
-                        </td>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
-                          {company.inn}
-                        </td>
-                      </tr>
-                    ))}
+                    {companys && (
+                      <>
+                        {companys.map((company) => (
+                          <tr
+                            key={company.id_u}
+                            className="divide-x divide-gray-200"
+                          >
+                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                              {company.name}
+                            </td>
+                            <td className="whitespace-nowrap p-4 text-sm text-gray-500">
+                              {company.location}
+                            </td>
+                            <td className="whitespace-nowrap p-4 text-sm text-gray-500">
+                              {company.lawAddress}
+                            </td>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                              {company.inn}
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </table>
               </div>

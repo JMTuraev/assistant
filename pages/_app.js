@@ -15,33 +15,33 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const [showNewCompanyBlock, setShowNewCompanyBlock] = useState(false);
 
+  const {laoadins, SetLoading} = useState(true)
 
-  if (sessio) {
+  useEffect(() => {
     
-  //   useEffect(() => {
-      let apiUrl = "http://localhost:3000/api/user";
+    let apiUrl = "http://localhost:3000/api/user";
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUser(data.user);
+        console.log(user);
+      });
+    
+      apiUrl = "http://localhost:3000/api/company";
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          setUser(data.user);
+          setCompany(data.company);
+        }).then((err) => {
+          //d 
         });
+
+      setSessiona(false);
       
-        apiUrl = "http://localhost:3000/api/company";
-        fetch(apiUrl)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            setCompany(data.data.company);
-          });
-  //   });
-    
-  setSessiona(false);
-  } 
-
-  console.log(companys);
-
-
+      
+    })
+  
   return (
     <SessionProvider session={session}>
       <TemplateContext.Provider
@@ -56,10 +56,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           setCompany
         }}
       >
-          <Head>
-            <title> Assistant </title>
-          </Head>
-            <Component {...pageProps} />
+        <Head>
+          <title> Assistant </title>
+        </Head>
+        <Component {...pageProps} />
       </TemplateContext.Provider>
     </SessionProvider>
   );

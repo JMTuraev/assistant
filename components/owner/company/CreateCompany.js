@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import TemplateContext from "../../../context/TemplateContext";
 
 
-export default function CreateCompany({companys, setCompany}) {
+export default function CreateCompany({companys}) {
   const {showNewCompanyBlock}=useContext(TemplateContext)
   const {register, handleSubmit, watch, formState:{errors}} =useForm()
 
@@ -24,21 +24,13 @@ export default function CreateCompany({companys, setCompany}) {
         (result) => {
           if (result.ok) {
             alert("Компания добавлена");
-            console.log(result);
-            console.log('-------------==========');
-            setCompany([...companys, result.data]);
-
           }
-
-
           return null;
         },
         (err) => {
           console.log(err);
         }
       );
-
-    console.log(data);
 
   }
 
@@ -201,7 +193,6 @@ export default function CreateCompany({companys, setCompany}) {
             value='сохранить'
           />
            
-          
         </div>
       </div>
     </form>

@@ -18,6 +18,7 @@ export default function Example() {
 
   const {sidebarOpen, setSessiona, user, setUser, companys, setCompany}=useContext(TemplateContext)
 
+  
 
   return (
     <>

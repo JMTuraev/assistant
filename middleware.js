@@ -29,6 +29,36 @@ export async  function middleware(req) {
     
   }
 
+  if (req.nextUrl.pathname.startsWith('/api/user')) {
+    const session = await getToken({ req, secret: process.env.SECRET })
+
+    if (!session) {
+      
+      const url = req.nextUrl.clone()
+
+      url.pathname = '/api/'
+
+      return NextResponse.rewrite(url)
+
+    }
+    
+  }
+
+  if (req.nextUrl.pathname.startsWith('/api/company')) {
+    const session = await getToken({ req, secret: process.env.SECRET })
+
+    if (!session) {
+      
+      const url = req.nextUrl.clone()
+
+      url.pathname = '/api/'
+
+      return NextResponse.rewrite(url)
+
+    }
+    
+  }
+
   if (req.nextUrl.pathname.startsWith('/auth/')) {
 
     const session = await getToken({ req, secret: process.env.SECRET })
@@ -39,4 +69,5 @@ export async  function middleware(req) {
       return NextResponse.rewrite(url)
     }
   }
+  
 }
