@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const data = req.body
 
     console.log(data);
-
+    
     if (req.method === 'POST') {
 
         const user = await prisma.user.update({

@@ -3,7 +3,7 @@ import React from 'react'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-export default function LeftMenu({navigation, communities, onActive }) {
+export default function LeftMenu({navigation, communities, onActive, show }) {
   
   return (
     <div className="hidden lg:block lg:col-span-3 xl:col-span-2">
@@ -15,14 +15,14 @@ export default function LeftMenu({navigation, communities, onActive }) {
             href={item.href}
             onClick={()=>onActive(item.name)}
             className={classNames(
-              item.current ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-50',
+              show===item.name ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-50',
               'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
             )}
             aria-current={item.current ? 'page' : undefined}
           >
             <item.icon
               className={classNames(
-                item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                show===item.name ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
                 'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
               )}
               

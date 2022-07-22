@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import ProfileForm from '../new/ProfileForm'
 import CreateCompany from './CreateCompany'
+import CreateMarket from './CreateMarket'
 
 export default function CenterBlock({icons, tabs, questions, classNames, user, setUser, show}) {
     const {ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, ShareIcon, StarIcon, ThumbUpIcon}=icons
@@ -56,18 +57,25 @@ export default function CenterBlock({icons, tabs, questions, classNames, user, s
                 <ul role="list" className="space-y-4">
                 
                 <div  className={  show === 'Настройки' ? 'visible' : 'hidden' }>
-                  <div className='bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg'>  
+                  <div className='bg-white px-2 py-2 shadow sm:p-2 '>  
                     <ProfileForm  user={user} setUser={setUser}  />
                     </div>
                   </div>
 
                   <div  className={  show === 'Организация' ? 'visible' : 'hidden' }>
-                  <div className='bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg'>  
+                  <div className='bg-white px-2 py-2 shadow sm:p-2 '> 
                     <CreateCompany    user={user} setUser={setUser}  />
                     </div>
                   </div>
-                  <CreateCompany/>
-                            
+
+
+                  <div  className={  show === 'Магазин' ? 'visible' : 'hidden' }>
+                  <div className='bg-white px-2 py-2 shadow sm:p-2 '> 
+                    <CreateMarket user={user} setUser={setUser}  />
+                    </div>
+                  </div>
+        
+
 
 
 
