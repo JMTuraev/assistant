@@ -17,15 +17,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const {laoadins, SetLoading} = useState(true)
 
+  
+
   useEffect(() => {
     
     let apiUrl = "http://localhost:3000/api/user";
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUser(data.user);
-        console.log(user);
       });
     
       apiUrl = "http://localhost:3000/api/company";
@@ -34,12 +34,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         .then((data) => {
           setCompany(data.company);
         }).then((err) => {
-          //d 
         });
-
       setSessiona(false);
-      
-      
     })
   
   return (

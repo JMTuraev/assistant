@@ -154,5 +154,10 @@ model Money { // Истончик от магазина
   percent Int?
   credit String?
   client String
+}
 
+model MenuOWner {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  icom String
 }
