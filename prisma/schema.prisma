@@ -54,6 +54,7 @@ model User {
   id_u               String   @unique
   login              String
   password           String 
+  userLevelRelation  Role     @relation(fields: [userLevel], references: [id_u])
   userLevel          String 
   firstName          String? 
   surName            String?
@@ -146,6 +147,7 @@ model Role {
   id_u               String   @unique
   name               String
   level              Int
+  user               User[]
 
 }
 

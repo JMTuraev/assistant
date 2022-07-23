@@ -12,10 +12,10 @@ import { getToken } from "next-auth/jwt"
 
 
 export async  function middleware(req) {
-  if (req.nextUrl.pathname.startsWith('/owner/')) {
+  if (req.nextUrl.pathname.startsWith('/owner')) {
     const session = await getToken({ req, secret: process.env.SECRET })
 
-    if (!session  || session.user.userLevel !== 'role-hcvd7ol5qnpscw') {
+    if (!session ) {
       const url = req.nextUrl.clone()
       url.pathname = '/auth/login'
       return NextResponse.rewrite(url)
@@ -25,6 +25,7 @@ export async  function middleware(req) {
 
   if (req.nextUrl.pathname.startsWith('/api/user')) {
     const session = await getToken({ req, secret: process.env.SECRET })
+    
 
     if (!session) {
       
@@ -41,6 +42,7 @@ export async  function middleware(req) {
   if (req.nextUrl.pathname.startsWith('/api/company')) {
     const session = await getToken({ req, secret: process.env.SECRET })
 
+
     if (!session) {
       
       const url = req.nextUrl.clone()
@@ -53,10 +55,11 @@ export async  function middleware(req) {
     
   }
 
-  if (req.nextUrl.pathname.startsWith('/auth/')) {
+  if (req.nextUrl.pathname.startsWith('/auth')) {
 
     const session = await getToken({ req, secret: process.env.SECRET })
 
+    
     if (session) {
       const url = req.nextUrl.clone()
       url.pathname = '/owner'
