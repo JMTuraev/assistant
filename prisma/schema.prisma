@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./main.db"
+  provider = "mysql"
+  url      = "mysql://root:102030@localhost:3306/main"
 }
 
 model Account {
@@ -54,7 +54,7 @@ model User {
   id_u               String   @unique
   login              String
   password           String 
-  userLevelRelation  Role     @relation(fields: [userLevel], references: [id_u])
+  userLevelRelation  Role     @relation(fields: [userLevel], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   userLevel          String 
   firstName          String? 
   surName            String?
@@ -65,7 +65,21 @@ model User {
   accounts           Account[]
   sessions           Session[]
   company            Company[]
-  
+  companyRelation    CompanyRelation[]
+  parrentRelation    UserRelation[] @relation("parrentRelation")
+  childRelation      UserRelation[] @relation("childRelation")
+
+
+}
+
+model UserRelation {
+
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  parrentRelation    User     @relation("parrentRelation", fields: [parrent], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  parrent            String
+  childRelation      User     @relation("childRelation",     fields: [child], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  child              String
 
 }
 
@@ -80,8 +94,20 @@ model Company {
   inn                String
   bankAccount        String // рассчетный счет
   mfo                String   @unique
-  ownerRelation      User     @relation(fields: [owner], references: [id_u])
+  ownerRelation      User     @relation(fields: [owner], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   owner              String
+  companyRelation    CompanyRelation[]
+
+}
+
+model CompanyRelation {
+
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  userRelation       User     @relation(fields: [user], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  user               String
+  companyRelation    Company  @relation(fields: [company], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  company            String
 
 }
 
