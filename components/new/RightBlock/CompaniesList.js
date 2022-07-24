@@ -1,7 +1,8 @@
 import { PlusSmIcon } from '@heroicons/react/solid'
 import React from 'react'
 
-function CompaniesList({whoToFollow, show}) {
+function CompaniesList({whoToFollow, show, company}) {
+console.log(company);
   return (
     <div className={  show === 'Организация' ? 'visible' : 'hidden' }>
     <div className="bg-white rounded-lg shadow">
@@ -65,3 +66,16 @@ function CompaniesList({whoToFollow, show}) {
 }
 
 export default CompaniesList
+
+
+export const getServerSideProps = async ({ req }) => {
+    console.log(req.body)
+    const company = await prisma.company.findMany({
+      where: {
+        owner: session.user.id
+      },
+    })
+    console.log(company)
+   
+    return { props: {company}  }
+  }

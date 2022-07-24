@@ -20,7 +20,7 @@ function test() {
 	
 	for (let index = 0; index < 2; index++) {
 		
-		console.log('------------');
+		
 	
 		create({
       id_u: uniqid("user-"),
@@ -142,7 +142,7 @@ async function create_relation_user_company() {
 	  for(a of users){
 		  
 		  for(b of a.childRelation[0].parrentRelation.company){
-			  console.log( b );
+			
 
 				const users = await prisma.companyRelation.create({
 					data : {

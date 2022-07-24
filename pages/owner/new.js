@@ -7,6 +7,7 @@ import RightBlock from '../../components/new/RightBlock/RightBlock'
 import TemplateContext from '../../context/TemplateContext'
 import { ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, PlusSmIcon, SearchIcon, ShareIcon, StarIcon, ThumbUpIcon, UserGroupIcon, } from '@heroicons/react/solid'
 import { BellIcon, LibraryIcon, PresentationChartBarIcon, MenuIcon, TrendingUpIcon, ShoppingBagIcon, XIcon, LogoutIcon  } from '@heroicons/react/outline'
+import { prisma, PrismaClient } from '@prisma/client'
 
 // const user = {
 //   name: 'Chelsea Hagon',
@@ -93,14 +94,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 export default function Example({company}) {
-  const {user, setUser}=useContext(TemplateContext)
-  
 
+  const {user, setUser, session}=useContext(TemplateContext)
   
   const [show, setShow]=useState()
   const onActive=(active)=>{
     setShow(active)
   }
+
+  
+
+  
   return (
     
     <>
@@ -149,14 +153,12 @@ export default function Example({company}) {
   )
 }
 
-
-export const getServerSideProps = async ({ req }) => {
-  const token = req.headers.AUTHORIZATION
-  const userId = await getUserId(token)
-  const company = await prisma.post.findMany({
-    where: {
-      user: { id: userId },
-    },
-  })
-  return { props: { company } }
-}
+// Fetch posts from authenticated user 
+// (in /pages/index.tsx)
+// export const getServerSideProps = async ({ req }) => {
+// const company=await prisma.company.findMany({
+//   where:{
+//     owner:session.user.id_u}
+// })
+// return {props:{company}}
+// }
