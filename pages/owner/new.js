@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Header from '../../components/new/Header'
 import LeftMenu from '../../components/new/LeftMenu'
 import CenterBlock from '../../components/new/CenterBlock'
-import RightBlock from '../../components/new/RightBlock'
+import RightBlock from '../../components/new/RightBlock/RightBlock'
 import TemplateContext from '../../context/TemplateContext'
 import { ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, PlusSmIcon, SearchIcon, ShareIcon, StarIcon, ThumbUpIcon, UserGroupIcon, } from '@heroicons/react/solid'
 import { BellIcon, LibraryIcon, PresentationChartBarIcon, MenuIcon, TrendingUpIcon, ShoppingBagIcon, XIcon, LogoutIcon  } from '@heroicons/react/outline'
@@ -20,6 +20,7 @@ const navigation = [
   { name: 'Магазин', href: '#', icon: ShoppingBagIcon, current: false },
   { name: 'Моя команда', href: '#', icon: UserGroupIcon, current: false },
   { name: 'Trending', href: '#', icon: TrendingUpIcon, current: false },
+  { name: 'Конструктор', href: '#', icon: TrendingUpIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Настройки', href: '#' },
@@ -71,7 +72,7 @@ const whoToFollow = [
     imageUrl:
       'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
-  // More people...
+
 ]
 const trendingPosts = [
   {
@@ -87,11 +88,14 @@ const trendingPosts = [
   // More posts...
 ]
 
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-export default function Example() {
+export default function Example({company}) {
   const {user, setUser}=useContext(TemplateContext)
+  
+
   
   const [show, setShow]=useState()
   const onActive=(active)=>{
@@ -135,6 +139,7 @@ export default function Example() {
             icons={{ChatAltIcon, PlusSmIcon}}
             whoToFollow={whoToFollow}
             trendingPosts={trendingPosts}
+            show={show}
           />
           
           </div>
@@ -142,4 +147,16 @@ export default function Example() {
       </div>
     </>
   )
+}
+
+
+export const getServerSideProps = async ({ req }) => {
+  const token = req.headers.AUTHORIZATION
+  const userId = await getUserId(token)
+  const company = await prisma.post.findMany({
+    where: {
+      user: { id: userId },
+    },
+  })
+  return { props: { company } }
 }

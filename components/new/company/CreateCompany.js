@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 
 import * as yup from 'yup';
-import TemplateContext from "../../context/TemplateContext";
+import TemplateContext from "../../../context/TemplateContext";
 import { PlusIcon } from "@heroicons/react/solid";
 
 export default function CreateCompany({companys}) {
@@ -14,23 +14,23 @@ export default function CreateCompany({companys}) {
  
   const onSubmit= async (data)=>{
 
-  //   const res = await fetch(`http://localhost:3000/api/company/create`, {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     headers: { "Content-Type": "application/json" },
-  //   })
-  //     .then((res) => res.json())
-  //     .then(
-  //       (result) => {
-  //         if (result.ok) {
-  //           alert("Компания добавлена");
-  //         }
-  //         return null;
-  //       },
-  //       (err) => {
-  //         console.log(err);
-  //       }
-  //     );
+    const res = await fetch(`http://localhost:3000/api/company/create`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          if (result.ok) {
+            alert("Компания добавлена");
+          }
+          return null;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
 
   }
 

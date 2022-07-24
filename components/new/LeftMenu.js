@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import TemplateContext from '../../context/TemplateContext'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
+
 export default function LeftMenu({navigation, communities, onActive, show }) {
   
   return (

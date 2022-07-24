@@ -185,8 +185,8 @@ async function tes() {
 
 }
 
-// test()
-// create_company()
+test()
+create_company()
 create_relation_user_company()
 
 tes()
