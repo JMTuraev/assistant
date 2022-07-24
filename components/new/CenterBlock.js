@@ -17,7 +17,7 @@ export default function CenterBlock({icons, tabs, questions, classNames, user, s
                   </div>
  
                 <div  className={  show === 'Настройки' ? 'visible' : 'hidden' }>
-                  <div className='bg-white px-2 pb-2 shadow sm:pb-2 '>  
+                  <div >  
                     <ProfileForm  user={user} setUser={setUser}  />
                     </div>
                   </div>

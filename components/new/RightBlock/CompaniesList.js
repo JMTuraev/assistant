@@ -2,48 +2,9 @@ import { PlusIcon, PlusSmIcon } from '@heroicons/react/solid'
 import React, { useEffect, useState } from 'react'
 import CreateCompany from '../company/CreateCompany'
 
-function CompaniesList({whoToFollow, show,  company}) {
+function CompaniesList({ companies}) {
 
-const defaultCompanies=[
-  {
-    id: 2,
-    id_u: "company-50g6hexsl5xv17hw",
-    name: "Reynolds, Lueilwitz and Gutkowski",
-    category: "Games",
-    location: "20385 Runte Village",
-    lawAddress: "06400 Krystel Ridge",
-    inn: "00001425",
-    bankAccount: "18495011",
-    mfo: "60547706",
-    owner: "user-50g6huol5xv0nu9"
-  },
-  {
-    id: 3,
-    id_u: "company-50g6hexsl5xv17i6",
-    name: "Haag, Keebler and Schaefer",
-    category: "Baby",
-    location: "885 Ephraim Glen",
-    lawAddress: "3077 Forrest Key",
-    inn: "50260683",
-    bankAccount: "44951352",
-    mfo: "06125900",
-    owner: "user-50g6huol5xv0nu9"
-  },
-  {
-    id: 4,
-    id_u: "company-50g6hexsl5xv17ih",
-    name: "Swift, Raynor and Cruickshank",
-    category: "Health",
-    location: "3527 Grady Course",
-    lawAddress: "09746 Bernhard Highway",
-    inn: "49104929",
-    bankAccount: "55025965",
-    mfo: "78556052",
-    owner: "user-50g6huol5xv0nu9"
-  },
-  
-]
-const [companies, setCompanies]=useState(defaultCompanies)
+
 
 
 // const getCompanies=async()=>{

@@ -89,6 +89,46 @@ const trendingPosts = [
   // More posts...
 ]
 
+const companies=[
+  {
+    id: 2,
+    id_u: "company-50g6hexsl5xv17hw",
+    name: "Reynolds, Lueilwitz and Gutkowski",
+    category: "Games",
+    location: "20385 Runte Village",
+    lawAddress: "06400 Krystel Ridge",
+    inn: "00001425",
+    bankAccount: "18495011",
+    mfo: "60547706",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  {
+    id: 3,
+    id_u: "company-50g6hexsl5xv17i6",
+    name: "Haag, Keebler and Schaefer",
+    category: "Baby",
+    location: "885 Ephraim Glen",
+    lawAddress: "3077 Forrest Key",
+    inn: "50260683",
+    bankAccount: "44951352",
+    mfo: "06125900",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  {
+    id: 4,
+    id_u: "company-50g6hexsl5xv17ih",
+    name: "Swift, Raynor and Cruickshank",
+    category: "Health",
+    location: "3527 Grady Course",
+    lawAddress: "09746 Bernhard Highway",
+    inn: "49104929",
+    bankAccount: "55025965",
+    mfo: "78556052",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  
+]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -98,7 +138,7 @@ export default function Example({company}) {
   const {user, setUser, session}=useContext(TemplateContext)
   
   const [show, setShow]=useState()
-  const [showCreateCompany, setShowCreateCompany]=useState(false)
+  const [showCreateCompany, setShowCreateCompany]=useState(true)
 
   const onActive=(active)=>{
     setShow(active)
@@ -148,6 +188,7 @@ export default function Example({company}) {
             show={show}
             setShowCreateCompany={setShowCreateCompany}
             showCreateCompany={showCreateCompany}
+            companies={companies}
 
           />
           
