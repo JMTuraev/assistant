@@ -1,10 +1,13 @@
 import React from 'react'
 import CreateCompany from './CreateCompany'
 import company  from 'faker'
-function Companies({user, setUser}) {
+function Companies({user, setUser, showCreateCompany, setShowCreateCompany}) {
   return (
     <div>
-        <CreateCompany/>
+      <div className={showCreateCompany ? 'hidden' : 'visible'}>
+        <CreateCompany setShowCreateCompany={setShowCreateCompany}/>
+      </div>
+        
     </div>
   )
 }

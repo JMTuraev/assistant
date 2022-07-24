@@ -6,10 +6,10 @@ import * as yup from 'yup';
 import TemplateContext from "../../../context/TemplateContext";
 import { PlusIcon } from "@heroicons/react/solid";
 
-export default function CreateCompany({companys}) {
+export default function CreateCompany({setShowCreateCompany}) {
   
   const {register, handleSubmit, watch, formState:{errors}} =useForm()
-  const [show, setShow]=useState(false)
+  
 
  
   const onSubmit= async (data)=>{
@@ -40,20 +40,12 @@ export default function CreateCompany({companys}) {
  
     return (
 <>
-      <div className="flex justify-center mb-4">
+      
 
-        <button
-            type="button"
-            className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          onClick={()=>setShow(true)}
-          >
-            <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-            Добавить новая организация
-          </button>
-      </div>
+      
       
         
-  <form onSubmit={handleSubmit(onSubmit)} className={show ? 'visible' : 'hidden'} >
+  <form onSubmit={handleSubmit(onSubmit)} >
   <div className='bg-white px-2 pb-2 shadow sm:pb-2 '>
 <div className="grid grid-cols-6 gap-x-4 gap-y-2 px-2">
 <h3 className="text-lg col-start-2 col-span-4  font-medium text-slate-900 text-center">
@@ -196,7 +188,7 @@ export default function CreateCompany({companys}) {
       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
     />
   </div>
-  <input type='submit' onClick={()=>setShow(false)} className=" col-end-6   text-indigo-500 text-base font-bold  bg-white p-2 w-44 rounded-lg  hover: text-indigo-700 hover:bg-gray-100" value={'Сохранить'}/>
+  <input type='submit' onClick={()=>setShowCreateCompany(true)} className=" col-end-6   text-indigo-500 text-base font-bold  bg-white p-2 w-44 rounded-lg  hover: text-indigo-700 hover:bg-gray-100" value={'Сохранить'}/>
 
 </div>
 </div>

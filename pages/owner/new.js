@@ -98,6 +98,8 @@ export default function Example({company}) {
   const {user, setUser, session}=useContext(TemplateContext)
   
   const [show, setShow]=useState()
+  const [showCreateCompany, setShowCreateCompany]=useState(false)
+
   const onActive=(active)=>{
     setShow(active)
   }
@@ -131,19 +133,22 @@ export default function Example({company}) {
             
           />
           <CenterBlock
-            icons={{ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, ShareIcon, StarIcon, ThumbUpIcon}}
             tabs={tabs}
             questions={questions}
             classNames={classNames}
             setUser={setUser}
             user={user}
             show={show}
+            showCreateCompany={showCreateCompany}
+            setShowCreateCompany={setShowCreateCompany}
           />
           <RightBlock
-            icons={{ChatAltIcon, PlusSmIcon}}
             whoToFollow={whoToFollow}
             trendingPosts={trendingPosts}
             show={show}
+            setShowCreateCompany={setShowCreateCompany}
+            showCreateCompany={showCreateCompany}
+
           />
           
           </div>

@@ -1,81 +1,97 @@
-import { PlusSmIcon } from '@heroicons/react/solid'
-import React from 'react'
+import { PlusIcon, PlusSmIcon } from '@heroicons/react/solid'
+import React, { useEffect, useState } from 'react'
+import CreateCompany from '../company/CreateCompany'
 
-function CompaniesList({whoToFollow, show, company}) {
-console.log(company);
+function CompaniesList({whoToFollow, show,  company}) {
+
+const defaultCompanies=[
+  {
+    id: 2,
+    id_u: "company-50g6hexsl5xv17hw",
+    name: "Reynolds, Lueilwitz and Gutkowski",
+    category: "Games",
+    location: "20385 Runte Village",
+    lawAddress: "06400 Krystel Ridge",
+    inn: "00001425",
+    bankAccount: "18495011",
+    mfo: "60547706",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  {
+    id: 3,
+    id_u: "company-50g6hexsl5xv17i6",
+    name: "Haag, Keebler and Schaefer",
+    category: "Baby",
+    location: "885 Ephraim Glen",
+    lawAddress: "3077 Forrest Key",
+    inn: "50260683",
+    bankAccount: "44951352",
+    mfo: "06125900",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  {
+    id: 4,
+    id_u: "company-50g6hexsl5xv17ih",
+    name: "Swift, Raynor and Cruickshank",
+    category: "Health",
+    location: "3527 Grady Course",
+    lawAddress: "09746 Bernhard Highway",
+    inn: "49104929",
+    bankAccount: "55025965",
+    mfo: "78556052",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  
+]
+const [companies, setCompanies]=useState(defaultCompanies)
+
+
+// const getCompanies=async()=>{
+//     const req=await fetch('http://localhost:3000/api/company')
+//     const data=await req.json()
+
+//     setCompanies(data)
+// }
+
+// useEffect(()=>{
+//     getCompanies()
+// }),[companies]
+// console.log(companies);
+
   return (
-    <div className={  show === 'Организация' ? 'visible' : 'hidden' }>
+    
+        
     <div className="bg-white rounded-lg shadow">
+    
             <div className="p-6">
+            
+          
+    
               <h2
                 id="who-to-follow-heading"
                 className="text-base font-medium text-gray-900"
               >
-                Who to follow
+                Ваши организации
               </h2>
-              <div className="mt-6 flow-root">
-                <ul role="list" className="-my-4 divide-y divide-gray-200">
-                  {whoToFollow.map((user) => (
-                    <li
-                      key={user.handle}
-                      className="flex items-center py-4 space-x-3"
-                    >
-                      <div className="flex-shrink-0">
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src={user.imageUrl}
-                          alt=""
-                        />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-gray-900">
-                          <a href={user.href}>{user.name}</a>
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          <a href={user.href}>{"@" + user.handle}</a>
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0">
-                        <button
-                          type="button"
-                          className="inline-flex items-center px-3 py-0.5 rounded-full bg-indigo-50 text-sm font-medium text-indigo-700 hover:bg-indigo-100"
-                        >
-                          <PlusSmIcon
-                            className="-ml-1 mr-0.5 h-5 w-5 text-indigo-400"
-                            aria-hidden="true"
-                          />
-                          <span>Follow</span>
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+              <div className="mt-2 flow-root">
+              <ul role="list" className="divide-y divide-gray-100">
+      {companies.map((company) => (
+        <li key={company.location} className="py-4 flex hover:bg-slate-200 hover:rounded-lg">
+          <div className="ml-3 cursor-pointer ">
+            <p className="text-sm font-medium text-gray-900">{company.name}</p>
+            <p className="text-sm text-gray-500">{company.category}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
               </div>
-              <div className="mt-6">
-                <a
-                  href="#"
-                  className="w-full block text-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                >
-                  View all
-                </a>
-              </div>
+      
             </div>
           </div>
-        </div>
+
   )
 }
 
 export default CompaniesList
 
 
-export const getServerSideProps = async ({ req }) => {
-    console.log(req.body)
-    const company = await prisma.company.findMany({
-      where: {
-        owner: session.user.id
-      },
-    })
-    console.log(company)
-   
-    return { props: {company}  }
-  }
