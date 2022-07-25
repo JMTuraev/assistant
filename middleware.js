@@ -62,7 +62,7 @@ export async  function middleware(req) {
     
     if (session) {
       const url = req.nextUrl.clone()
-      url.pathname = '/owner'
+      url.pathname = '/owner/new'
       return NextResponse.rewrite(url)
     }
   }

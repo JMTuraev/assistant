@@ -9,7 +9,6 @@ export default function CreateCompany({companys}) {
   
   const {register, handleSubmit, watch, formState:{errors}} =useForm()
 
-
  
   const onSubmit= async (data)=>{
 
@@ -34,6 +33,9 @@ export default function CreateCompany({companys}) {
   }
 
     return (
+
+      <>
+      
 
     <form onSubmit={handleSubmit(onSubmit)} >
 
@@ -182,6 +184,8 @@ export default function CreateCompany({companys}) {
  
           </div>
     </form>
+
+    </>
  
   );
 }
