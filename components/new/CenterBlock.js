@@ -7,7 +7,7 @@ import RoadMap from './roadMap'
 import Static from './Static'
 
 
-export default function CenterBlock({icons, tabs, questions, classNames, user, setUser, show, showCreateCompany, setShowCreateCompany}) {
+export default function CenterBlock({icons, tabs, questions, classNames, user, setUser, show, showCreateCompany, setShowCreateCompany, showCompany, selectCompany, companies }) {
      return (
     <main className="lg:col-span-9 xl:col-span-6">
 
@@ -23,8 +23,8 @@ export default function CenterBlock({icons, tabs, questions, classNames, user, s
                   </div>
 
                   <div  className={  show === 'Организация' ? 'visible' : 'hidden' }>
-                   <Companies user={user} setUser={setUser} showCreateCompany={showCreateCompany} setShowCreateCompany={setShowCreateCompany}/>
-          
+                   <Companies  showCreateCompany={showCreateCompany} showCompany={showCompany} setShowCreateCompany={setShowCreateCompany}  companies={companies}/>
+                  
                   </div>
 
 

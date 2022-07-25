@@ -138,19 +138,26 @@ export default function Example({company}) {
   const {user, setUser, session}=useContext(TemplateContext)
   
   const [show, setShow]=useState()
+  const [showCompany, setShowCompany]=useState()
   const [showCreateCompany, setShowCreateCompany]=useState(true)
 
-  const onActive=(active)=>{
-    setShow(active)
+  
+  
+  const onActive=(active, companyId)=>{
+    active===null?show:setShow(active)
+    setShowCompany(companyId)
+  
   }
 
-  
 
+    
   
   return (
     
     <>
 
+  
+    
       <div className="min-h-full">
        
        <Header 
@@ -181,6 +188,8 @@ export default function Example({company}) {
             show={show}
             showCreateCompany={showCreateCompany}
             setShowCreateCompany={setShowCreateCompany}
+            showCompany={showCompany}
+            companies={companies}
           />
           <RightBlock
             whoToFollow={whoToFollow}
@@ -189,7 +198,8 @@ export default function Example({company}) {
             setShowCreateCompany={setShowCreateCompany}
             showCreateCompany={showCreateCompany}
             companies={companies}
-
+            onActive={onActive}
+            
           />
           
           </div>
