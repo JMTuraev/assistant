@@ -145,7 +145,7 @@ async function create_relation_user_company() {
 	  for(a of users){
 		  
 		  for(b of a.childRelation[0].parrentRelation.company){
-			  console.log( b );
+			
 
 				const users = await prisma.companyRelation.create({
 					data : {

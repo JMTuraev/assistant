@@ -1,25 +1,27 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import Header from '../../components/new/Header'
 import LeftMenu from '../../components/new/LeftMenu'
 import CenterBlock from '../../components/new/CenterBlock'
-import RightBlock from '../../components/new/RightBlock'
+import RightBlock from '../../components/new/RightBlock/RightBlock'
 import TemplateContext from '../../context/TemplateContext'
 import { ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, PlusSmIcon, SearchIcon, ShareIcon, StarIcon, ThumbUpIcon, UserGroupIcon, } from '@heroicons/react/solid'
 import { BellIcon, LibraryIcon, PresentationChartBarIcon, MenuIcon, TrendingUpIcon, ShoppingBagIcon, XIcon, LogoutIcon  } from '@heroicons/react/outline'
+import { prisma, PrismaClient } from '@prisma/client'
 
-const user = {
-  name: 'Chelsea Hagon',
-  email: 'chelsea.hagon@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+// const user = {
+//   name: 'Chelsea Hagon',
+//   email: 'chelsea.hagon@example.com',
+//   imageUrl:
+//     'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+// }
 const navigation = [
   { name: 'Статистика', href: '#', icon: PresentationChartBarIcon, current: true },
   { name: 'Организация', href: '#', icon: LibraryIcon, current: false },
   { name: 'Магазин', href: '#', icon: ShoppingBagIcon, current: false },
   { name: 'Моя команда', href: '#', icon: UserGroupIcon, current: false },
   { name: 'Trending', href: '#', icon: TrendingUpIcon, current: false },
+  { name: 'Конструктор', href: '#', icon: TrendingUpIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Настройки', href: '#' },
@@ -71,7 +73,7 @@ const whoToFollow = [
     imageUrl:
       'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
-  // More people...
+
 ]
 const trendingPosts = [
   {
@@ -87,16 +89,64 @@ const trendingPosts = [
   // More posts...
 ]
 
+const companies=[
+  {
+    id: 2,
+    id_u: "company-50g6hexsl5xv17hw",
+    name: "Reynolds, Lueilwitz and Gutkowski",
+    category: "Games",
+    location: "20385 Runte Village",
+    lawAddress: "06400 Krystel Ridge",
+    inn: "00001425",
+    bankAccount: "18495011",
+    mfo: "60547706",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  {
+    id: 3,
+    id_u: "company-50g6hexsl5xv17i6",
+    name: "Haag, Keebler and Schaefer",
+    category: "Baby",
+    location: "885 Ephraim Glen",
+    lawAddress: "3077 Forrest Key",
+    inn: "50260683",
+    bankAccount: "44951352",
+    mfo: "06125900",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  {
+    id: 4,
+    id_u: "company-50g6hexsl5xv17ih",
+    name: "Swift, Raynor and Cruickshank",
+    category: "Health",
+    location: "3527 Grady Course",
+    lawAddress: "09746 Bernhard Highway",
+    inn: "49104929",
+    bankAccount: "55025965",
+    mfo: "78556052",
+    owner: "user-50g6huol5xv0nu9"
+  },
+  
+]
+
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-export default function Example() {
-  const {user, setUser}=useContext(TemplateContext)
+export default function Example({company}) {
+
+  const {user, setUser, session}=useContext(TemplateContext)
   
   const [show, setShow]=useState()
+  const [showCreateCompany, setShowCreateCompany]=useState(true)
+
   const onActive=(active)=>{
     setShow(active)
   }
+
+  
+
+  
   return (
     
     <>
@@ -123,18 +173,23 @@ export default function Example() {
             
           />
           <CenterBlock
-            icons={{ChatAltIcon, CodeIcon, DotsVerticalIcon, EyeIcon, FlagIcon, ShareIcon, StarIcon, ThumbUpIcon}}
             tabs={tabs}
             questions={questions}
             classNames={classNames}
             setUser={setUser}
             user={user}
             show={show}
+            showCreateCompany={showCreateCompany}
+            setShowCreateCompany={setShowCreateCompany}
           />
           <RightBlock
-            icons={{ChatAltIcon, PlusSmIcon}}
             whoToFollow={whoToFollow}
             trendingPosts={trendingPosts}
+            show={show}
+            setShowCreateCompany={setShowCreateCompany}
+            showCreateCompany={showCreateCompany}
+            companies={companies}
+
           />
           
           </div>
@@ -143,3 +198,13 @@ export default function Example() {
     </>
   )
 }
+
+// Fetch posts from authenticated user 
+// (in /pages/index.tsx)
+// export const getServerSideProps = async ({ req }) => {
+// const company=await prisma.company.findMany({
+//   where:{
+//     owner:session.user.id_u}
+// })
+// return {props:{company}}
+// }
