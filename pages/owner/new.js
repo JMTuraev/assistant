@@ -151,13 +151,8 @@ export default function Example({post, company}) {
   
   }
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> ad8af3ea364311157d2b02192f39a2ff26e14b48
-
-    
+      
   
   return (
     
