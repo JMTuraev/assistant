@@ -133,7 +133,9 @@ const companies=[
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-export default function Example({company}) {
+export default function Example({post, company}) {
+
+  console.log(post);
 
   const {user, setUser, session}=useContext(TemplateContext)
   
@@ -149,6 +151,11 @@ export default function Example({company}) {
   
   }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ad8af3ea364311157d2b02192f39a2ff26e14b48
 
     
   
@@ -208,6 +215,7 @@ export default function Example({company}) {
     </>
   )
 }
+
 
 // Fetch posts from authenticated user 
 // (in /pages/index.tsx)
