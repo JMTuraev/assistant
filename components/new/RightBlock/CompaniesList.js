@@ -1,13 +1,26 @@
 import { PlusIcon, PlusSmIcon } from '@heroicons/react/solid'
 import React, { useEffect, useState } from 'react'
 import CreateCompany from '../company/CreateCompany'
+import TemplateContext from "../../../context/TemplateContext";
+import { useContext } from 'react'
 
-function CompaniesList({ companies}) {
+export default function CompaniesList({ companies}) {
 
+const {companys, setCompany}=useContext(TemplateContext)
 
+async function getCom(params) {
+    
+  let apiUrl = "http://localhost:3000/api/company";
+  await fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setCompany(data.company);
+      });
+}
 
+  getCom()
 
-// const getCompanies=async()=>{
+  // const getCompanies=async()=>{
 //     const req=await fetch('http://localhost:3000/api/company')
 //     const data=await req.json()
 
@@ -36,7 +49,7 @@ function CompaniesList({ companies}) {
               </h2>
               <div className="mt-2 flow-root">
               <ul role="list" className="divide-y divide-gray-100">
-      {companies.map((company) => (
+      {companys.map((company) => (
         <li key={company.location} className="py-4 flex hover:bg-slate-200 hover:rounded-lg">
           <div className="ml-3 cursor-pointer ">
             <p className="text-sm font-medium text-gray-900">{company.name}</p>
@@ -52,7 +65,4 @@ function CompaniesList({ companies}) {
 
   )
 }
-
-export default CompaniesList
-
 

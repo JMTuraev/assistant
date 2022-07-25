@@ -1,10 +1,14 @@
 import { PrismaClient } from '@prisma/client';
 import { getToken } from "next-auth/jwt"
+import { getSession } from "next-auth/react"
 const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
 
-    const session = await getToken({ req, secret: process.env.SECRET })
+    // const session = await (getToken({ req, secret: process.env.SECRET }))
+
+    const session = await getSession({ req });
+
 
     if (req.method === 'GET') {
 
@@ -20,8 +24,11 @@ export default async function handler(req, res) {
         
 
         res.status(200).json( { ok : true, company : user.company} );
+            
+        
     }
-
+    
+    const disconnect = await prisma.$disconnect()
 
     res.end()
 }

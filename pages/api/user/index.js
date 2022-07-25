@@ -14,6 +14,8 @@ export default async function handler(req, res) {
             }
         }) 
 
+        const disconnect = await prisma.$disconnect()
+
         res.status(200).json( { ok : true, user : user, session : session.user.id } );
     }
 

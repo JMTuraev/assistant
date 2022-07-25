@@ -39,21 +39,23 @@ export async  function middleware(req) {
     
   }
 
-  if (req.nextUrl.pathname.startsWith('/api/company')) {
-    const session = await getToken({ req, secret: process.env.SECRET })
+  // if (req.nextUrl.pathname.startsWith('/api/company')) {
+  //   const session = await getToken({ req, secret: process.env.SECRET })
 
 
-    if (!session) {
+  //   if (!session) {
+
+  //   console.log(session);
       
-      const url = req.nextUrl.clone()
+  //     const url = req.nextUrl.clone()
 
-      url.pathname = '/api/'
+  //     url.pathname = '/api/'
 
-      return NextResponse.rewrite(url)
+  //     return NextResponse.rewrite(url)
 
-    }
+  //   }
     
-  }
+  // }
 
   if (req.nextUrl.pathname.startsWith('/auth')) {
 
