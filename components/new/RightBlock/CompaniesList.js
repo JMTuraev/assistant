@@ -30,20 +30,26 @@ function CompaniesList({ companies, onActive}) {
         </h2>
         <div className="mt-2 flow-root">
           <ul role="list" className="divide-y divide-gray-100">
-            {companies.map((company) => (
-              <li
-                onClick={() => onActive(null, company.id)}
-                key={company.id}
-                className="py-4 flex hover:bg-slate-200 hover:rounded-lg"
-              >
-                <div className="ml-3 cursor-pointer ">
-                  <p className="text-sm font-medium text-gray-900">
-                    {company.name}
-                  </p>
-                  <p className="text-sm text-gray-500">{company.category}</p>
-                </div>
-              </li>
-            ))}
+            {companies && (
+              <>
+                {companies.map((company) => (
+                  <li
+                    onClick={() => onActive(null, company.id)}
+                    key={company.id}
+                    className="py-4 flex hover:bg-slate-200 hover:rounded-lg"
+                  >
+                    <div className="ml-3 cursor-pointer ">
+                      <p className="text-sm font-medium text-gray-900">
+                        {company.name}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {company.category}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </>
+            )}
           </ul>
         </div>
       </div>

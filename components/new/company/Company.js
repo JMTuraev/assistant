@@ -6,10 +6,15 @@ import {  MailIcon, PhoneIcon, ShoppingBagIcon, UserGroupIcon, UserIcon, UsersIc
 
 
 export default function Company({companies, showCompany}) {
-const company=companies.filter(company=>company.id===showCompany)
+// const company=companies.filter(company=>company.id===showCompany)
+
+const company = [];
 
 return (
-      company.map(item=>(
+  <>
+  {company && (
+    <>
+      {company.map(item=>(
         <ul role="list" className=" ">
 
         <li key={company.name} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
@@ -68,11 +73,9 @@ return (
         </li>
       
     </ul>
-    )
-      )
-
-      
-       
-    
-  )
-}
+    ))}
+    </>
+    )}
+      </>
+)
+      }

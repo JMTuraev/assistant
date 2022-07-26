@@ -25,7 +25,7 @@ export default function CenterBlock({icons, tabs, questions, classNames, user, s
 
                   <div  className={  show === 'Организация' ? 'visible' : 'hidden' }>
                    <Companies  showCreateCompany={showCreateCompany} showCompany={showCompany} setShowCreateCompany={setShowCreateCompany}  companies={companies}/>
-                    <CompnayList/>  
+                    <CompnayList companies={companies} />  
                   </div>
 
 

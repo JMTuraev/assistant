@@ -19,9 +19,17 @@ export default async function handler(req, res) {
             include: {
                 company : {
                     select: {
-                        name: true,
-                        location: true,
-                        category: true,
+                        
+                        id: true,
+                        id_u: true ,
+                        name: true ,
+                        category: true ,
+                        location: true ,
+                        lawAddress: true ,
+                        inn: true ,
+                        bankAccount: true ,
+                        mfo: true ,
+                        owner: true ,
                         
                         _count: {
                               select: { companyRelation: true },
