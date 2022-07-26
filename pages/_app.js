@@ -19,24 +19,24 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    let apiUrl = "http://localhost:3000/api/user";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setUser(data.user);
-      });
+  //   let apiUrl = "http://localhost:3000/api/user";
+  //   fetch(apiUrl)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setUser(data.user);
+  //     });
     
-      apiUrl = "http://localhost:3000/api/company";
-      fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          setCompany(data.company);
-        }).then((err) => {
-        });
-      setSessiona(false);
-    })
+  //     apiUrl = "http://localhost:3000/api/company";
+  //     fetch(apiUrl)
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setCompany(data.company);
+  //       }).then((err) => {
+  //       });
+  //     setSessiona(false);
+  //   })
   
   return (
     <SessionProvider session={session}>

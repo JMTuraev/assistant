@@ -20,7 +20,7 @@ function test() {
 	
 	for (let index = 0; index < 2; index++) {
 		
-		
+		console.log('------------1');
 	
 		create({
       id_u: uniqid("user-"),
@@ -55,6 +55,8 @@ async function create_company() {
 	  });
 
 	  let element;
+
+		console.log('------------2');
 
 	  for (let user of users) {
 
@@ -138,6 +140,7 @@ async function create_relation_user_company() {
 		  },
 	  });
 
+		console.log('------------3');
 	  
 	  for(a of users){
 		  
@@ -189,4 +192,4 @@ test()
 create_company()
 create_relation_user_company()
 
-tes()
+// tes()

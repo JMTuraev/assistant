@@ -145,14 +145,14 @@ export default function Example({post, company}) {
 
   
   
-  const onActive=(active, companyId)=>{
+  const onActive=(active, companyId=2)=>{ // in default value send id of trend company  
     active===null?show:setShow(active)
     setShowCompany(companyId)
   
   }
 
 
-      
+
   
   return (
     

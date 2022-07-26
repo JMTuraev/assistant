@@ -11,12 +11,17 @@ export default async function handler(req, res) {
         const user = await prisma.user.findFirst({
             where : {
                 id : session.user.id 
-            }
+            },
+            include: {
+                _count: {
+                    select: { company: true },
+                  }
+              },
         }) 
 
-        const disconnect = await prisma.$disconnect()
+        console.log(user);
 
-        res.status(200).json( { ok : true, user : user, session : session.user.id } );
+        res.status(200).json( { ok : true, company : user._count} );
     }
 
 
