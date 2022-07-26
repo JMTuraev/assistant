@@ -4,18 +4,17 @@ const people = [
     // More people...
   ]
   
-  export default function CompnayList({companies={companies}}) {
+  export default function CompnayList({companies}) {
     return (
       <div className=" ">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">
-                Список организации 
-                <span className="ml-4 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-        {companies.length}
-      </span>
+              Список организации
+              <span className="ml-4 inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                {/* {companies.length} */}
+              </span>
             </h1>
-            
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button
@@ -60,16 +59,29 @@ const people = [
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {companies.map((company) => (
-                      <tr key={company.id} className="divide-x divide-gray-200">
-                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
-                          {company.name}
-                        </td>
-                        <td className="whitespace-nowrap p-4 text-sm text-gray-500">{company.category}</td>
-                        <td className="whitespace-nowrap p-4 text-sm text-gray-500">{company.location}</td>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">{company.bankAccount}</td>
-                      </tr>
-                    ))}
+                    {companies && (
+                      <>
+                        {companies.map((company) => (
+                          <tr
+                            key={company.id}
+                            className="divide-x divide-gray-200"
+                          >
+                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                              {company.name}
+                            </td>
+                            <td className="whitespace-nowrap p-4 text-sm text-gray-500">
+                              {company.category}
+                            </td>
+                            <td className="whitespace-nowrap p-4 text-sm text-gray-500">
+                              {company.location}
+                            </td>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                              {company.bankAccount}
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    )}
                   </tbody>
                 </table>
               </div>
