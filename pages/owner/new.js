@@ -110,8 +110,10 @@ export default function Example({post, company}) {
     setShowCompany(companyId);
   };
 
+  const getCompanies=async()=>{
   const apiUrl = "http://localhost:3000/api/company";
-  fetch(apiUrl)
+  try {
+    await fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
       // setCompany(data.company);
@@ -119,6 +121,15 @@ export default function Example({post, company}) {
    
     })
     .then((err) => {});
+  
+  } catch (error) {
+   
+  } 
+}
+  
+
+useEffect(()=>{getCompanies()}),[companies]
+
 
   return (
     <>
