@@ -8,6 +8,10 @@ import {  MailIcon, PhoneIcon, ShoppingBagIcon, UserGroupIcon, UserIcon, UsersIc
 export default function Company({companies, showCompany}) {
 // const company=companies.filter(company=>company.id===showCompany)
 
+console.log('---------');
+
+// console.log(companies);
+
 const company = [];
 
 return (

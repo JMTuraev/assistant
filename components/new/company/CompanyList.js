@@ -8,7 +8,7 @@ const people = [
     // More people...
   ]
   
-  export default function CompnayList({companies}) {
+  export default function CompnayList({companies, setCompanies}) {
     const [active, setActive]=useState()
     const onActive=(id, )=>{
 
@@ -109,7 +109,7 @@ const people = [
                     )}
                   </tbody>
                 </table>
-                <FooterCompanyList/>
+                <FooterCompanyList companies={companies} setCompanies={setCompanies}/>
               </div>
             </div>
           </div>

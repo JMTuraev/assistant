@@ -5,7 +5,7 @@ import Company from './Company'
 
 
 import CompnayList from './CompanyList'
-function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  companies}) {
+function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  companies, setCompanies}) {
 
   return (
     <div className='space-y-4 '>
@@ -16,7 +16,7 @@ function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  comp
       <div >
       <Company showCompany={showCompany} companies={companies}/>
       </div>  
-      <CompnayList companies={companies}/>  
+      <CompnayList companies={companies} setCompanies={setCompanies}/>  
     </div>
   )
 }

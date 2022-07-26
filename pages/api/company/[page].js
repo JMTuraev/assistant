@@ -9,6 +9,7 @@ export default async function handler(req, res) {
 
     const session = await getSession({ req });
 
+    const { page } = req.query
 
     if (req.method === 'GET') {
 
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
             include: {
                 company : {
                     take: 5,
-                    skip: 0,
+                    skip: Number(page),
                     select: {
                         
                         id: true,
@@ -42,9 +43,21 @@ export default async function handler(req, res) {
               },
         }) 
 
+        const count = await prisma.user.findFirst({
+           
+            where : {
+                id : session.user.id 
+            },
+            include: {
+                _count: {
+                  select: { company: true },
+                },
+              },
+        }) 
+
         
 
-        res.status(200).json( { ok : true, company : user.company} );
+        res.status(200).json( { ok : true, company : user.company, count : count._count.company} );
             
         
     }

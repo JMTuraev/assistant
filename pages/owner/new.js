@@ -94,7 +94,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 export default function Example({post, company}) {
-  console.log(post);
 
   const { user, setUser, session } = useContext(TemplateContext);
 
@@ -110,27 +109,18 @@ export default function Example({post, company}) {
     setShowCompany(companyId);
   };
 
-  const getCompanies=async()=>{
-  const apiUrl = "http://localhost:3000/api/company";
-  try {
-    await fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      // setCompany(data.company);
-      setCompanies(data.company)
-   
-    })
-    .then((err) => {});
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    fetch('http://localhost:3000/api/company/1')
+      .then((res) => res.json())
+      .then((data) => {
+        setCompanies(data.company)
+        setLoading(false)
+      })
+  }, [])
   
-  } catch (error) {
-   
-  } 
-}
-  
-
-useEffect(()=>{getCompanies()}),[companies]
-
-
   return (
     <>
       <div className="min-h-full">
@@ -164,6 +154,7 @@ useEffect(()=>{getCompanies()}),[companies]
             setShowCreateCompany={setShowCreateCompany}
             showCompany={showCompany}
             companies={companies}
+            setCompanies={setCompanies}
           />
           <RightBlock
             whoToFollow={whoToFollow}
@@ -182,14 +173,3 @@ useEffect(()=>{getCompanies()}),[companies]
     </>
   );
 }
-
-
-// Fetch posts from authenticated user 
-// (in /pages/index.tsx)
-// export const getServerSideProps = async ({ req }) => {
-// const company=await prisma.company.findMany({
-//   where:{
-//     owner:session.user.id_u}
-// })
-// return {props:{company}}
-// }

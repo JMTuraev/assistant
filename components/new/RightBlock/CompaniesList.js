@@ -4,21 +4,6 @@ import CreateCompany from '../company/CreateCompany'
 
 function CompaniesList({ companies, onActive}) {
 
-
-
-
-// const getCompanies=async()=>{
-//     const req=await fetch('http://localhost:3000/api/company')
-//     const data=await req.json()
-
-//     setCompanies(data)
-// }
-
-// useEffect(()=>{
-//     getCompanies()
-// }),[companies]
-// console.log(companies);
-
   return (
     <div className="bg-white rounded-lg shadow">
       <div className="p-6">
