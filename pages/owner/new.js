@@ -140,12 +140,16 @@ export default function Example({post, company}) {
   const {user, setUser, session}=useContext(TemplateContext)
   
   const [show, setShow]=useState()
+  const [showCompany, setShowCompany]=useState()
   const [showCreateCompany, setShowCreateCompany]=useState(true)
 
-  const onActive=(active)=>{
-    setShow(active)
+  
+  
+  const onActive=(active, companyId=2)=>{ // in default value send id of trend company  
+    active===null?show:setShow(active)
+    setShowCompany(companyId)
+  
   }
-
 
 
 
@@ -154,6 +158,8 @@ export default function Example({post, company}) {
     
     <>
 
+  
+    
       <div className="min-h-full">
        
        <Header 
@@ -184,6 +190,8 @@ export default function Example({post, company}) {
             show={show}
             showCreateCompany={showCreateCompany}
             setShowCreateCompany={setShowCreateCompany}
+            showCompany={showCompany}
+            companies={companies}
           />
           <RightBlock
             whoToFollow={whoToFollow}
@@ -192,7 +200,8 @@ export default function Example({post, company}) {
             setShowCreateCompany={setShowCreateCompany}
             showCreateCompany={showCreateCompany}
             companies={companies}
-
+            onActive={onActive}
+            
           />
           
           </div>

@@ -2,12 +2,10 @@ import { PlusIcon } from "@heroicons/react/solid";
 import React from "react";
 import CompaniesList from "./CompaniesList";
 
-export default function RightBlock({  whoToFollow,  show, setShowCreateCompany, showCreateCompany, companies }) {
+export default function RightBlock({  whoToFollow,  show, setShowCreateCompany, showCreateCompany, companies, onActive }) {
   return (
     <aside className="hidden xl:block xl:col-span-4">
       <div className="sticky top-4 space-y-4">
-     
-     
       <div className={  show === 'Организация' ? 'visible' : 'hidden' }>
       <section>
         <button
@@ -21,7 +19,7 @@ export default function RightBlock({  whoToFollow,  show, setShowCreateCompany, 
         </section>
 
         <section aria-labelledby="who-to-follow-heading">
-          <CompaniesList show={show}  whoToFollow={whoToFollow} companies={companies}/>
+          <CompaniesList show={show}  whoToFollow={whoToFollow} companies={companies} onActive={onActive} />
         </section>
         </div>
 

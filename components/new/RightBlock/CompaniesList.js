@@ -1,26 +1,13 @@
 import { PlusIcon, PlusSmIcon } from '@heroicons/react/solid'
 import React, { useEffect, useState } from 'react'
 import CreateCompany from '../company/CreateCompany'
-import TemplateContext from "../../../context/TemplateContext";
-import { useContext } from 'react'
 
-export default function CompaniesList({ companies}) {
+function CompaniesList({ companies, onActive}) {
 
-const {companys, setCompany}=useContext(TemplateContext)
 
-async function getCom(params) {
-    
-  let apiUrl = "http://localhost:3000/api/company";
-  await fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setCompany(data.company);
-      });
-}
 
-  getCom()
 
-  // const getCompanies=async()=>{
+// const getCompanies=async()=>{
 //     const req=await fetch('http://localhost:3000/api/company')
 //     const data=await req.json()
 
@@ -43,9 +30,10 @@ async function getCom(params) {
         </h2>
         <div className="mt-2 flow-root">
           <ul role="list" className="divide-y divide-gray-100">
-            {companys.map((company) => (
+            {companies.map((company) => (
               <li
-                key={company.location}
+                onClick={() => onActive(null, company.id)}
+                key={company.id}
                 className="py-4 flex hover:bg-slate-200 hover:rounded-lg"
               >
                 <div className="ml-3 cursor-pointer ">
@@ -53,7 +41,6 @@ async function getCom(params) {
                     {company.name}
                   </p>
                   <p className="text-sm text-gray-500">{company.category}</p>
-                  <p className="text-sm text-gray-500">Количество директоров : {company._count.companyRelation }</p>
                 </div>
               </li>
             ))}
@@ -63,4 +50,7 @@ async function getCom(params) {
     </div>
   );
 }
+
+export default CompaniesList
+
 

@@ -25,7 +25,7 @@ export default function LeftMenu({navigation, communities, onActive, show }) {
           >
             <item.icon
               className={classNames(
-                show===item.name ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                show===item.name ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 
                 'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
               )}
               
