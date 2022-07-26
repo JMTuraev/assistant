@@ -4,7 +4,7 @@ import CompaniesList from "./CompaniesList";
 
 export default function RightBlock({  whoToFollow,  show, setShowCreateCompany, showCreateCompany, companies, onActive }) {
   return (
-    <aside className="hidden xl:block xl:col-span-4">
+    <aside className="hidden xl:block xl:col-span-2">
       <div className="sticky top-4 space-y-4">
       <div className={  show === 'Организация' ? 'visible' : 'hidden' }>
       <section>

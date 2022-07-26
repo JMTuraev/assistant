@@ -10,7 +10,7 @@ import CompnayList from './company/CompanyList'
 
 export default function CenterBlock({icons, tabs, questions, classNames, user, setUser, show, showCreateCompany, setShowCreateCompany, showCompany, selectCompany, companies }) {
      return (
-    <main className="lg:col-span-9 xl:col-span-6">
+    <main className="lg:col-span-9 xl:col-span-7">
 
                 <ul role="list" >
                   <div  className={  show === 'Статистика' ? 'visible' : 'hidden' }>  
@@ -25,7 +25,7 @@ export default function CenterBlock({icons, tabs, questions, classNames, user, s
 
                   <div  className={  show === 'Организация' ? 'visible' : 'hidden' }>
                    <Companies  showCreateCompany={showCreateCompany} showCompany={showCompany} setShowCreateCompany={setShowCreateCompany}  companies={companies}/>
-                    <CompnayList/>  
+                    
                   </div>
 
 
