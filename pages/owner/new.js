@@ -116,7 +116,7 @@ export default function Example({post, company}) {
     .then((data) => {
       // setCompany(data.company);
       setCompanies(data.company)
-      console.log(companies);
+   
     })
     .then((err) => {});
 
