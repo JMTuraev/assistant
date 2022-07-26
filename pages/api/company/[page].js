@@ -9,6 +9,7 @@ export default async function handler(req, res) {
 
     const session = await getSession({ req });
 
+    const { page } = req.query
 
     if (req.method === 'GET') {
 
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
             include: {
                 company : {
                     take: 5,
-                    skip: 0,
+                    skip: Number(page),
                     select: {
                         
                         id: true,

@@ -94,7 +94,6 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 export default function Example({post, company}) {
-  console.log(post);
 
   const { user, setUser, session } = useContext(TemplateContext);
 
@@ -111,7 +110,7 @@ export default function Example({post, company}) {
   };
 
   const getCompanies=async()=>{
-  const apiUrl = "http://localhost:3000/api/company";
+  const apiUrl = "http://localhost:3000/api/company/1";
   try {
     await fetch(apiUrl)
     .then((response) => response.json())
@@ -182,14 +181,3 @@ useEffect(()=>{getCompanies()}),[companies]
     </>
   );
 }
-
-
-// Fetch posts from authenticated user 
-// (in /pages/index.tsx)
-// export const getServerSideProps = async ({ req }) => {
-// const company=await prisma.company.findMany({
-//   where:{
-//     owner:session.user.id_u}
-// })
-// return {props:{company}}
-// }
