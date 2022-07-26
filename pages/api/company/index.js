@@ -13,11 +13,14 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
 
         const user = await prisma.user.findFirst({
+           
             where : {
                 id : session.user.id 
             },
             include: {
                 company : {
+                    take: 5,
+                    skip: 0,
                     select: {
                         
                         id: true,
