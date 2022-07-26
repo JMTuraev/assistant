@@ -1,4 +1,6 @@
 import FooterCompanyList from "./FooterCompnayList";
+import React, {useState} from 'react';
+import CreateCompany from "./CreateCompany";
 
 /* This example requires Tailwind CSS v2.0+ */
 const people = [
@@ -7,6 +9,10 @@ const people = [
   ]
   
   export default function CompnayList({companies}) {
+    const [active, setActive]=useState()
+    const onActive=(id, )=>{
+
+    }
     return (
       <div className=" ">
         <div className="sm:flex sm:items-center">
@@ -21,7 +27,7 @@ const people = [
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white  hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               Add user
             </button>
@@ -38,25 +44,31 @@ const people = [
                         scope="col"
                         className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                       >
-                        Названия
+                        Название 
                       </th>
                       <th
                         scope="col"
                         className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Категория
+                        Персонал
                       </th>
                       <th
                         scope="col"
                         className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
                       >
-                        Расположение
+                        Прибыль
                       </th>
                       <th
                         scope="col"
                         className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
                       >
-                        ИНН
+                        Магазины
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
+                      >
+                        Склады
                       </th>
                     </tr>
                   </thead>
@@ -64,23 +76,34 @@ const people = [
                     {companies && (
                       <>
                         {companies.map((company) => (
+                            <>
                           <tr
                             key={company.id}
-                            className="divide-x divide-gray-200"
+                         
+                            className={active===company.id ? "divide-x bg-indigo-200 " : "divide-x hover:bg-indigo-100  "   }
+
                           >
-                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6">
+                            <td 
+                              className={active===company.id ? "bg-indigo-500 whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-white sm:pl-6 cursor-pointer  " : "whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 cursor-pointer "   }
+                              onClick={()=>setActive(company.id)}
+                            >
                               {company.name}
                             </td>
                             <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                              {company.category}
+                              
                             </td>
                             <td className="whitespace-nowrap p-4 text-sm text-gray-500">
-                              {company.location}
+                              
                             </td>
                             <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
-                              {company.bankAccount}
+                              
+                            </td>
+                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6">
+                              
                             </td>
                           </tr>
+                          {active===company.id && <DropList companyId={company.id}  />}
+                          </>
                         ))}
                       </>
                     )}
@@ -95,3 +118,12 @@ const people = [
     );
   }
   
+
+  export const DropList=({companyId})=>{
+    return(
+        <td colSpan={5} className="h-24 bg-gray-100 " >
+            <CreateCompany/>
+        </td>
+    )
+   
+  }
