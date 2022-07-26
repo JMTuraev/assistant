@@ -4,7 +4,7 @@ const people = [
     // More people...
   ]
   
-  export default function CompnayList({companies={companies}}) {
+  export default function CompnayList({companies}) {
     return (
       <div className=" ">
         <div className="sm:flex sm:items-center">
