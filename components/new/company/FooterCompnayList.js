@@ -1,18 +1,26 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function FooterCompanyList() {
-  const [companyLength, setCompanyLength]=useState(100)
+  const [companyLength, setCompanyLength]=useState(25)
+  const [pages, setPages]=useState([])
+  const [active, setActive]=useState()
+    useEffect(()=>{
+        const countPage=companyLength/5
+        let arr = [];
+        for (let i = 1; i < countPage; i++) {
+            arr.push(i)
+        }
+        setPages(arr)
   
-  const pagination=()=>{
-    const countPage=companyLength/5
-    for (let page = 0; index < array.length; index++) {
-        const element = array[index];
-        
-    }
+    }),[pages]
 
-  }
+
+  console.log(pages)
+  
+
+
     return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div className="flex-1 flex justify-between sm:hidden">
@@ -38,6 +46,7 @@ export default function FooterCompanyList() {
         </div>
         <div>
           <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+            
             <a
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
@@ -46,46 +55,20 @@ export default function FooterCompanyList() {
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </a>
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
-            <a
-              href="#"
-              aria-current="page"
-              className="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              1
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              2
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              3
-            </a>
-            <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-              ...
-            </span>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium"
-            >
-              8
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              9
-            </a>
-            <a
-              href="#"
-              className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-            >
-              10
-            </a>
+              
+              {pages.map(page=>(
+                  <a
+              
+                  aria-current="page"
+                  className={active === page ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer" : "cursor-pointer bg-white border-gray-300 text-gray-500 hover:bg-gray-200 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium}"}
+                  onClick={()=>setActive(page)}
+
+                  >
+                  {page}
+                </a>
+                ))}
+          
+            
             <a
               href="#"
               className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
