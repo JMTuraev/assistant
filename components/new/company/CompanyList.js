@@ -33,17 +33,29 @@ const people = [
                 <table className="min-w-full divide-y divide-gray-300">
                   <thead className="bg-gray-50">
                     <tr className="divide-x divide-gray-200">
-                      <th scope="col" className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6">
-                        Name
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                      >
+                        Названия
                       </th>
-                      <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
-                        Title
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Категория
                       </th>
-                      <th scope="col" className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900">
-                        Email
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        Расположение
                       </th>
-                      <th scope="col" className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6">
-                        Role
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold text-gray-900 sm:pr-6"
+                      >
+                        ИНН
                       </th>
                     </tr>
                   </thead>
@@ -65,6 +77,6 @@ const people = [
           </div>
         </div>
       </div>
-    )
+    );
   }
   
