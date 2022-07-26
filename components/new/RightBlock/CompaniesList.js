@@ -33,36 +33,34 @@ async function getCom(params) {
 // console.log(companies);
 
   return (
-    
-        
     <div className="bg-white rounded-lg shadow">
-    
-            <div className="p-6">
-            
-          
-    
-              <h2
-                id="who-to-follow-heading"
-                className="text-base font-medium text-gray-900"
+      <div className="p-6">
+        <h2
+          id="who-to-follow-heading"
+          className="text-base font-medium text-gray-900"
+        >
+          Ваши организации
+        </h2>
+        <div className="mt-2 flow-root">
+          <ul role="list" className="divide-y divide-gray-100">
+            {companys.map((company) => (
+              <li
+                key={company.location}
+                className="py-4 flex hover:bg-slate-200 hover:rounded-lg"
               >
-                Ваши организации
-              </h2>
-              <div className="mt-2 flow-root">
-              <ul role="list" className="divide-y divide-gray-100">
-      {companys.map((company) => (
-        <li key={company.location} className="py-4 flex hover:bg-slate-200 hover:rounded-lg">
-          <div className="ml-3 cursor-pointer ">
-            <p className="text-sm font-medium text-gray-900">{company.name}</p>
-            <p className="text-sm text-gray-500">{company.category}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
-              </div>
-      
-            </div>
-          </div>
-
-  )
+                <div className="ml-3 cursor-pointer ">
+                  <p className="text-sm font-medium text-gray-900">
+                    {company.name}
+                  </p>
+                  <p className="text-sm text-gray-500">{company.category}</p>
+                  <p className="text-sm text-gray-500">Количество директоров : {company._count.companyRelation }</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 }
 

@@ -17,7 +17,17 @@ export default async function handler(req, res) {
                 id : session.user.id 
             },
             include: {
-                company : true
+                company : {
+                    select: {
+                        name: true,
+                        location: true,
+                        category: true,
+                        
+                        _count: {
+                              select: { companyRelation: true },
+                            }
+                      },
+                }
               },
         }) 
 

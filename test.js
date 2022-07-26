@@ -7,13 +7,12 @@ const md5 = require('md5');
 
 let user ;
 
-async function create(data){
+async function create(table, data){
 
-	user = await prisma.user.create({
-    data: {
-      ...data,
-    },
-  });
+	user = await prisma[table].create(data);
+
+    const disconnect = await prisma.$disconnect()
+
 }
 
 function test() {
@@ -22,7 +21,7 @@ function test() {
 		
 		console.log('------------1');
 	
-		create({
+		create('user', {data:{
       id_u: uniqid("user-"),
       login: faker.internet.userName(),
       // password : md5(faker.internet.password()),
@@ -37,7 +36,7 @@ function test() {
         connect: { id: 1 },
       },
       location: faker.address.streetAddress(),
-    });
+    }});
 	
 	}
 }
@@ -54,6 +53,8 @@ async function create_company() {
 		  },
 	  });
 
+	  
+
 	  let element;
 
 		console.log('------------2');
@@ -61,7 +62,7 @@ async function create_company() {
 	  for (let user of users) {
 
 		for (let index = 0; index < 10; index++) {
-			element = await prisma.company.create({
+			create('company',{
 				data : {
 
 					id_u: uniqid("company-"),
@@ -81,44 +82,67 @@ async function create_company() {
 		}
 
 
-			for (let index = 0; index < 2; index++) {
-        user = await prisma.user.create({
-          data: {
-            id_u: uniqid("user-"),
-            login: faker.internet.userName(),
-            // password : md5(faker.internet.password()),
-            password: md5("102030"),
-            firstName: faker.name.firstName(),
-            surName: faker.name.lastName(),
-            fatherName: faker.name.firstName(),
-            email: faker.internet.email(),
-            phone: faker.phone.phoneNumber(),
-            userLevelRelation: {
-              connect: { id: 2 },
-            },
-            childRelation: {
-              create: [
-                {
-                  id_u: uniqid("userRelation-"),
-                  parrentRelation: {
-                    // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
-                    connect: { id_u: user["id_u"] },
-                  },
-                },
-              ],
-            },
-            location: faker.address.streetAddress(),
-          },
-          include: {
-            childRelation: true, // Include all posts in the returned object
-          },
-        });
-      }
-
-
-		
+			
 
 	  }
+	  const disconnect = await prisma.$disconnect()
+
+}
+
+async function create_director() {
+
+	const users = await prisma.user.findMany({
+		where: {
+		  userLevel: 'role-hcvd7ol5qnpscw'
+		},
+		select: {
+			id_u : true
+		  },
+	  });
+
+	  let element;
+
+		console.log('------------3');
+
+	  for (let user of users) {
+		for (let index = 0; index < 100; index++) {
+
+			create('user',{
+				data: {
+				  id_u: uniqid("user-"),
+				  login: faker.internet.userName(),
+				  // password : md5(faker.internet.password()),
+				  password: md5("102030"),
+				  firstName: faker.name.firstName(),
+				  surName: faker.name.lastName(),
+				  fatherName: faker.name.firstName(),
+				  email: faker.internet.email(),
+				  phone: faker.phone.phoneNumber(),
+				  userLevelRelation: {
+					connect: { id: 2 },
+				  },
+				  childRelation: {
+					create: [
+					  {
+						id_u: uniqid("userRelation-"),
+						parrentRelation: {
+						  // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+						  connect: { id_u: user["id_u"] },
+						},
+					  },
+					],
+				  },
+				  location: faker.address.streetAddress(),
+				},
+				include: {
+				  childRelation: true, // Include all posts in the returned object
+				},
+			  });
+
+		  }
+	  }
+
+	  const disconnect = await prisma.$disconnect()
 
 }
 
@@ -140,14 +164,14 @@ async function create_relation_user_company() {
 		  },
 	  });
 
-		console.log('------------3');
+		console.log('------------4');
 	  
-	  for(a of users){
-		  
-		  for(b of a.childRelation[0].parrentRelation.company){
+		
+		for(a of users){
 			
+			for(b of a.childRelation[0].parrentRelation.company){
 
-				const users = await prisma.companyRelation.create({
+				create('companyRelation',{
 					data : {
 						id_u: uniqid("companyRelation-"),
 						userRelation : {
@@ -168,6 +192,7 @@ async function create_relation_user_company() {
 		  }
 
 	  }
+	  const disconnect = await prisma.$disconnect()
 
 }
 
@@ -185,11 +210,11 @@ async function tes() {
 				}
 			},
 	  });
+	  const disconnect = await prisma.$disconnect()
 
 }
 
 test()
 create_company()
+create_director()
 create_relation_user_company()
-
-// tes()
