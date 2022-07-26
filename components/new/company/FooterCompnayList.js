@@ -2,24 +2,53 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 
-export default function FooterCompanyList() {
+export default function FooterCompanyList({setCompanies, companies}) {
   const [companyLength, setCompanyLength]=useState(25)
-  const [pages, setPages]=useState([])
-  const [active, setActive]=useState()
-    useEffect(()=>{
-        const countPage=companyLength/5
+  const [companys, setCompanys]=useState(companies)
+  const [pages, setPages]=useState([1,2,3,4,5])
+  const [active, setActive]=useState(1)
+  
+  const getCompanies=async(page)=>{
+    const apiUrl = `http://localhost:3000/api/company/${page}`;
+    try {
+      await fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // setCompany(data.company);
+        setCompanies(data.company)
+        setActive(page)
+        
+      })
+      .then((err) => {});
+    
+    } catch (error) {
+     
+    } 
+  }
+
+  const getCount=async(page)=>{
+    const apiUrl = `http://localhost:3000/api/company/1`;
+      try {
+        await fetch(apiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          // setCompany(data.company);
+          setCompanyLength(data.count)
+          const countPage=companyLength/5
         let arr = [];
         for (let i = 1; i < countPage; i++) {
             arr.push(i)
         }
-        setPages(arr)
-  
-    }),[pages]
+        setPages(arr);
+        })
+        .then((err) => {});
+      
+      } catch (error) {
+       
+      }
+  }
 
-
-  console.log(pages)
-  
-
+  getCount()
 
     return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
@@ -61,7 +90,7 @@ export default function FooterCompanyList() {
               
                   aria-current="page"
                   className={active === page ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer" : "cursor-pointer bg-white border-gray-300 text-gray-500 hover:bg-gray-200 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium}"}
-                  onClick={()=>setActive(page)}
+                  onClick={()=> getCompanies(page) }
 
                   >
                   {page}

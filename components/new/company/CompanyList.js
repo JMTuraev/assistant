@@ -1,6 +1,6 @@
 import FooterCompanyList from "./FooterCompnayList";
 
-  export default function CompnayList({companies}) {
+  export default function CompnayList({companies, setCompanies}) {
     return (
       <div className=" ">
         <div className="sm:flex sm:items-center">
@@ -80,7 +80,7 @@ import FooterCompanyList from "./FooterCompnayList";
                     )}
                   </tbody>
                 </table>
-                <FooterCompanyList/>
+                <FooterCompanyList companies={companies} setCompanies={setCompanies}/>
               </div>
             </div>
           </div>

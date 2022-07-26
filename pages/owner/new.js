@@ -109,27 +109,18 @@ export default function Example({post, company}) {
     setShowCompany(companyId);
   };
 
-  const getCompanies=async()=>{
-  const apiUrl = "http://localhost:3000/api/company/1";
-  try {
-    await fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      // setCompany(data.company);
-      setCompanies(data.company)
-   
-    })
-    .then((err) => {});
+  const [isLoading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    fetch('http://localhost:3000/api/company/1')
+      .then((res) => res.json())
+      .then((data) => {
+        setCompanies(data.company)
+        setLoading(false)
+      })
+  }, [])
   
-  } catch (error) {
-   
-  } 
-}
-  
-
-useEffect(()=>{getCompanies()}),[companies]
-
-
   return (
     <>
       <div className="min-h-full">
@@ -163,6 +154,7 @@ useEffect(()=>{getCompanies()}),[companies]
             setShowCreateCompany={setShowCreateCompany}
             showCompany={showCompany}
             companies={companies}
+            setCompanies={setCompanies}
           />
           <RightBlock
             whoToFollow={whoToFollow}
