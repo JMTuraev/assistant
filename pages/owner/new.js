@@ -111,6 +111,7 @@ export default function Example({post, company}) {
   };
 
   const apiUrl = "http://localhost:3000/api/company";
+ 
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
