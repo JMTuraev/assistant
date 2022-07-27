@@ -27,7 +27,7 @@ export default function FooterCompanyList({setCompanies, companies}) {
   }
 
   const getCount=async(page)=>{
-    const apiUrl = `http://localhost:3000/api/company/1`;
+    const apiUrl = `http://localhost:3000/api/company/0`;
       try {
         await fetch(apiUrl)
         .then((response) => response.json())
@@ -36,7 +36,7 @@ export default function FooterCompanyList({setCompanies, companies}) {
           setCompanyLength(data.count)
           const countPage=companyLength/5
         let arr = [];
-        for (let i = 1; i < countPage; i++) {
+        for (let i = 0; i < countPage; i++) {
             arr.push(i)
         }
         setPages(arr);
@@ -93,7 +93,7 @@ export default function FooterCompanyList({setCompanies, companies}) {
                   onClick={()=> getCompanies(page) }
 
                   >
-                  {page}
+                  {page+1}
                 </a>
                 ))}
           

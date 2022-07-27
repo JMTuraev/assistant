@@ -21,7 +21,7 @@ export default async function handler(req, res) {
             include: {
                 company : {
                     take: 5,
-                    skip: Number(page),
+                    skip: Number(page) * 5,
                     select: {
                         
                         id: true,
