@@ -96,7 +96,7 @@ export default function CreateCompany({
                 id="name"
                 autoComplete="name"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={company.name ? company.name : ""}
+                defaultValue={company.name ? company.name : ""}
               />
             </div>
 
@@ -112,7 +112,7 @@ export default function CreateCompany({
                 id="category"
                 name="category"
                 autoComplete="category"
-                value={company.category ? company.category : ""}
+                defaultValue={company.category ? company.category : ""}
                 className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
                 <option value={"clothes"}>Одежды</option>
@@ -136,7 +136,7 @@ export default function CreateCompany({
                 {...register("location")}
                 id="location"
                 name="location"
-                value={company.location ? company.location : ""}
+                defaultValue={company.location ? company.location : ""}
                 autoComplete="location"
                 className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
@@ -170,7 +170,7 @@ export default function CreateCompany({
                 type="text"
                 name="lawAddress"
                 id="lawAddress"
-                value={company.lawAddress ? company.lawAddress : ""}
+                defaultValue={company.lawAddress ? company.lawAddress : ""}
                 autoComplete="lawAddress"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
@@ -188,7 +188,7 @@ export default function CreateCompany({
                 type="text"
                 name="inn"
                 id="inn"
-                value={company.inn ? company.inn : ""}
+                defaultValue={company.inn ? company.inn : ""}
                 autoComplete="inn"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
@@ -206,7 +206,7 @@ export default function CreateCompany({
                 type="text"
                 name="bankAccount"
                 id="bankAccount"
-                value={company.bankAccount ? company.bankAccount : ""}
+                defaultValue={company.bankAccount ? company.bankAccount : ""}
                 autoComplete="bankAccount"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
@@ -224,14 +224,14 @@ export default function CreateCompany({
                 type="text"
                 name="mfo"
                 id="mfo"
-                value={company.mfo ? company.mfo : ""}
+                defaultValue={company.mfo ? company.mfo : ""}
                 autoComplete="mfo"
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
             </div>
             <input
               type="submit"
-              onClick={() => setShowCreateCompany(true)}
+              // onClick={() => setShowCreateCompany(true)}
               className=" col-end-6   text-indigo-500 text-base font-bold  bg-white p-2 w-44 rounded-lg  hover: text-indigo-700 hover:bg-gray-100"
               value={"Сохранить"}
             />
