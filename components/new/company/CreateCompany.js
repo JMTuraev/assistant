@@ -9,6 +9,8 @@ import { PlusIcon } from "@heroicons/react/solid";
 export default function CreateCompany({
   setShowCreateCompany,
   companyId,
+  setCompanies,
+  active,
   company = {
     name: "",
     category: "",
@@ -27,6 +29,23 @@ export default function CreateCompany({
     formState: { errors },
   } = useForm();
 
+  const getCompanies=async(page)=>{
+    const apiUrl = `http://localhost:3000/api/company/${page}`;
+    try {
+      await fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // setCompany(data.company);
+        setCompanies(data.company)
+        setActive(page)
+        
+      })
+      .then((err) => {});
+    
+    } catch (error) {
+     
+    } 
+  }
   
 
   const onSubmit = async (data) => {
@@ -52,15 +71,14 @@ export default function CreateCompany({
     }else{
       const res = await fetch(`http://localhost:3000/api/company/update`, {
         method: "POST",
-        body: JSON.stringify(data),
+      body: JSON.stringify({...data, id : companyId}),
         headers: { "Content-Type": "application/json" },
       })
         .then((res) => res.json())
         .then(
           (result) => {
-            if (result.ok) {
-              alert("Компания обновлена");
-            }
+            alert("Компания обновлена");
+            getCompanies(active)
             return null;
           },
           (err) => {
@@ -68,15 +86,13 @@ export default function CreateCompany({
           }
         );
 
-        console.log(companyId);
-
-  console.log('--==23');
     }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
+        
         <div className="bg-white px-2 pb-2 shadow sm:pb-2 ">
           <div className="grid grid-cols-6 gap-x-4 gap-y-2 px-2">
             <h3 className="text-lg col-start-2 col-span-4  font-medium text-slate-900 text-center">

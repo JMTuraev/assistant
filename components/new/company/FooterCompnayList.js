@@ -2,12 +2,9 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { useEffect, useState } from 'react'
 
-export default function FooterCompanyList({setCompanies, companies}) {
+export default function FooterCompanyList({setCompanies, companies, pages, setPages, active, setActive}) {
   const [companyLength, setCompanyLength]=useState(25)
-  const [companys, setCompanys]=useState(companies)
-  const [pages, setPages]=useState([1,2,3,4,5])
-  const [active, setActive]=useState(1)
-  
+  const [companys, setCompanys]=useState(companies)  
   const getCompanies=async(page)=>{
     const apiUrl = `http://localhost:3000/api/company/${page}`;
     try {

@@ -11,9 +11,9 @@ const people = [
   
   export default function CompnayList({companies, setCompanies}) {
     const [active, setActive]=useState()
-    const onActive=(id, )=>{
-
-    }
+  const [pages, setPages]=useState([1,2,3,4,5])
+  const [activePage, setActivePage]=useState(1)
+  
     return (
       <div className=" ">
         <div className="sm:flex sm:items-center">
@@ -101,14 +101,26 @@ const people = [
                               
                             </td>
                           </tr>
-                          {active===company.id && <DropList companyId={company.id} company={company} />}
+                          {active===company.id && <DropList 
+                          setCompanies={setCompanies} 
+                          setActive={setActivePage}
+                          active={activePage}
+                          companyId={company.id} 
+                          company={company} />}
                           </>
                         ))}
                       </>
                     )}
                   </tbody>
                 </table>
-                <FooterCompanyList companies={companies} setCompanies={setCompanies}/>
+                <FooterCompanyList
+                 companies={companies} 
+                 setCompanies={setCompanies} 
+                 pages={pages} 
+                 setPages={setPages}
+                 active={activePage}
+                 setActive={setActivePage}
+                 />
               </div>
             </div>
           </div>
@@ -118,14 +130,25 @@ const people = [
   }
   
 
-  export const DropList=({companyId, company})=>{
-    return(
-        <td colSpan={5} className="m-4 p-4 h-24 bg-gray-200 border-none" >
-            <div className="border border-yellow-300 ">
-            <CreateCompany companyId={companyId} company={company}/>
-            <Personal/>
-            </div>
-        </td>
-    )
-   
-  }
+  export const DropList = ({
+    companyId,
+    company,
+    setCompanies,
+    setActive,
+    active,
+  }) => {
+    return (
+      <td colSpan={5} className="m-4 p-4 h-24 bg-gray-200 border-none">
+        <div className="border border-yellow-300 ">
+          <CreateCompany
+            setCompanies={setCompanies}
+            setActive={setActive}
+            active={active}
+            companyId={companyId}
+            company={company}
+          />
+          <Personal />
+        </div>
+      </td>
+    );
+  };
