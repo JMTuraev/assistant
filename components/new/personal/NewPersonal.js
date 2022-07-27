@@ -1,59 +1,144 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import { MailIcon, PhoneIcon } from "@heroicons/react/solid";
+import React from "react";
+import SearchPersonal from "./SearchPersonal";
 
 export default function NewPersonal() {
-  const [open, setOpen] = useState(true)
-
+  const people = [
+    {
+      name: "Jane Cooper",
+      title: "Regional Paradigm Technician",
+      role: "Admin",
+      email: "janecooper@example.com",
+      telephone: "+1-202-555-0170",
+      imageUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
+    },
+    // More people...
+  ];
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-1" onClose={setOpen}>
-        <div className="fixed inset-0" />
+    <div>
+      {/* <SearchPersonal /> */}
+      <button
+        type="button"
+        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Новый Персонал
+      </button>
+      <ul role="list" className="grid grid-cols-1 gap-6 mt-6 ">
+        {people.map((person) => (
+          <li
+            key={person.email}
+            className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200"
+          >
+            <div className="w-full flex flex-col  p-6 space-y-6">
+              <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label
+                  htmlFor="name"
+                  className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+                >
+                  Имя
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                  placeholder="Jane Smith"
+                />
+              </div>
+              <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label
+                  htmlFor="name"
+                  className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+                >
+                  Фамилия
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                  placeholder="Jane Smith"
+                />
+              </div>
 
-        <div className="fixed inset-0 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <Transition.Child
-                as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
-                enterFrom="translate-x-full"
-                enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
-                leaveFrom="translate-x-0"
-                leaveTo="translate-x-full"
-              >
-                <Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-                  <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                    <div className="px-4 sm:px-6">
-                      <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900"> Panel title </Dialog.Title>
-                        <div className="ml-3 flex h-7 items-center">
-                          <button
-                            type="button"
-                            className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            onClick={() => setOpen(false)}
-                          >
-                            <span className="sr-only">Close panel</span>
-                            <XIcon className="h-6 w-6" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      {/* Replace with your content */}
-                      <div className="absolute inset-0 px-4 sm:px-6">
-                        <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true" />
-                      </div>
-                      {/* /End replace */}
-                    </div>
+              <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                <label
+                  htmlFor="name"
+                  className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
+                >
+                  Отчество
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                  placeholder="Jane Smith"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <MailIcon
+                      className="h-5 w-5 text-gray-400"
+                      aria-hidden="true"
+                    />
                   </div>
-                </Dialog.Panel>
-              </Transition.Child>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
+                    placeholder="you@example.com"
+                  />
+                </div>
+              </div>
+
+              <img
+                className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+                src={person.imageUrl}
+                alt=""
+              />
             </div>
-          </div>
-        </div>
-      </Dialog>
-    </Transition.Root>
-  )
+            <div>
+              <div className="-mt-px flex divide-x divide-gray-200">
+                <div className="w-0 flex-1 flex">
+                  <a
+                    href={`mailto:${person.email}`}
+                    className="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
+                  >
+                    <MailIcon
+                      className="w-5 h-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    <span className="ml-3">Email</span>
+                  </a>
+                </div>
+                <div className="-ml-px w-0 flex-1 flex">
+                  <a
+                    href={`tel:${person.telephone}`}
+                    className="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
+                  >
+                    <PhoneIcon
+                      className="w-5 h-5 text-gray-400"
+                      aria-hidden="true"
+                    />
+                    <span className="ml-3">Call</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
