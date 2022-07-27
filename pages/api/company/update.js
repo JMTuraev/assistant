@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     const data = req.body
 
-    if (req.method === 'GET') {
+    if (req.method === 'POST') {
 
 
         const company = await prisma.user.update({
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
             company: {
               update: {
                 where: {
-                  id: Number(5),
+                  id: data.id,
                 },
                 data: {
                   name: "Renner, Erdman and Ferry",
