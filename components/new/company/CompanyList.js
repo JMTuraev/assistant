@@ -101,7 +101,7 @@ const people = [
                               
                             </td>
                           </tr>
-                          {active===company.id && <DropList companyId={company.id}  />}
+                          {active===company.id && <DropList companyId={company.id} company={company} />}
                           </>
                         ))}
                       </>
@@ -118,11 +118,11 @@ const people = [
   }
   
 
-  export const DropList=({companyId})=>{
+  export const DropList=({companyId, company})=>{
     return(
         <td colSpan={5} className="m-4 p-4 h-24 bg-gray-200 border-none" >
             <div className="border border-yellow-300 ">
-            <CreateCompany/>
+            <CreateCompany companyId={companyId} company={company}/>
             <Personal/>
             </div>
         </td>
