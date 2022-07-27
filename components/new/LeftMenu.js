@@ -9,7 +9,7 @@ function classNames(...classes) {
 export default function LeftMenu({navigation, communities, onActive, show }) {
   
   return (
-    <div className="hidden lg:block lg:col-span-2 xl:col-span-1">
+    <div className="hidden lg:block lg:col-span-3 xl:col-span-1">
     <nav aria-label="Sidebar" className="sticky top-4 divide-y divide-gray-300">
       <div className="pb-8 space-y-1">
         {navigation.map((item) => (
