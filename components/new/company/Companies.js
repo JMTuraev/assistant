@@ -11,7 +11,7 @@ function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  comp
     <div className='space-y-4 '>
     
       <div className={showCreateCompany ? 'hidden' : 'visible' + 'bg-white shadow  '}>
-        <CreateCompany setShowCreateCompany={setShowCreateCompany}/>
+        <CreateCompany setShowCreateCompany={setShowCreateCompany} create={true}/>
       </div>
       <div >
       <Company showCompany={showCompany} companies={companies}/>

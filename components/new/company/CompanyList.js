@@ -45,7 +45,7 @@ const people = [
                         scope="col"
                         className="py-3.5 pl-4 pr-4 text-left text-sm font-semibold  sm:pl-6"
                       >
-                        Название 
+                        Название
                       </th>
                       <th
                         scope="col"
@@ -77,36 +77,41 @@ const people = [
                     {companies && (
                       <>
                         {companies.map((company) => (
-                            <>
-                          <tr
-                            key={company.id}
-                            className={active===company.id ? " bg-yellow-200 border-4 border-gray-200  " : "divide-x hover:bg-yellow-100 border-y-4 border-gray-200   "    }
-                          >
-                            <td 
-                              className={active===company.id ? "bg-yellow-400 whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-white sm:pl-6 cursor-pointer  " : "whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 cursor-pointer bg-white"   }
-                              onClick={()=>setActive(company.id)}
+                          <>
+                            <tr
+                              key={company.id}
+                              className={
+                                active === company.id
+                                  ? " bg-yellow-200 border-4 border-gray-200  "
+                                  : "divide-x hover:bg-yellow-100 border-y-4 border-gray-200   "
+                              }
                             >
-                              {company.name}
-                            </td>
-                            <td className="whitespace-nowrap p-4 text-sm text-gray-500 bg-white">
-                              asd
-                            </td>
-                            <td className="whitespace-nowrap p-4 text-sm text-gray-500 bg-white">
-                              
-                            </td>
-                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 bg-white">
-                              
-                            </td>
-                            <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 bg-white">
-                              
-                            </td>
-                          </tr>
-                          {active===company.id && <DropList 
-                          setCompanies={setCompanies} 
-                          setActive={setActivePage}
-                          active={activePage}
-                          companyId={company.id} 
-                          company={company} />}
+                              <td
+                                className={
+                                  active === company.id
+                                    ? "bg-yellow-400 whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-white sm:pl-6 cursor-pointer  "
+                                    : "whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 cursor-pointer bg-white"
+                                }
+                                onClick={() => setActive(company.id)}
+                              >
+                                {company.name}
+                              </td>
+                              <td className="whitespace-nowrap p-4 text-sm text-gray-500 bg-white">
+                                {company._count.companyRelation}
+                              </td>
+                              <td className="whitespace-nowrap p-4 text-sm text-gray-500 bg-white"></td>
+                              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 bg-white"></td>
+                              <td className="whitespace-nowrap py-4 pl-4 pr-4 text-sm text-gray-500 sm:pr-6 bg-white"></td>
+                            </tr>
+                            {active === company.id && (
+                              <DropList
+                                setCompanies={setCompanies}
+                                setActive={setActivePage}
+                                active={activePage}
+                                companyId={company.id}
+                                company={company}
+                              />
+                            )}
                           </>
                         ))}
                       </>
@@ -114,13 +119,13 @@ const people = [
                   </tbody>
                 </table>
                 <FooterCompanyList
-                 companies={companies} 
-                 setCompanies={setCompanies} 
-                 pages={pages} 
-                 setPages={setPages}
-                 active={activePage}
-                 setActive={setActivePage}
-                 />
+                  companies={companies}
+                  setCompanies={setCompanies}
+                  pages={pages}
+                  setPages={setPages}
+                  active={activePage}
+                  setActive={setActivePage}
+                />
               </div>
             </div>
           </div>
@@ -146,6 +151,7 @@ const people = [
             active={active}
             companyId={companyId}
             company={company}
+            create={false}
           />
           <Personal />
         </div>

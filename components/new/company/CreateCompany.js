@@ -11,6 +11,7 @@ export default function CreateCompany({
   companyId,
   setCompanies,
   active,
+  create,
   company = {
     name: "",
     category: "",
@@ -35,7 +36,7 @@ export default function CreateCompany({
       await fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        // setCompany(data.company);
+ 
         setCompanies(data.company)
         setActive(page)
         
@@ -49,7 +50,7 @@ export default function CreateCompany({
   
 
   const onSubmit = async (data) => {
-    if (!company) {
+    if (create) {
       const res = await fetch(`http://localhost:3000/api/company/create`, {
         method: "POST",
         body: JSON.stringify(data),
