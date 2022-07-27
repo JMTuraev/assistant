@@ -6,6 +6,7 @@ import CreateMarket from './CreateMarket'
 import RoadMap from './roadMap'
 import Static from './Static'
 import CompnayList from './company/CompanyList'
+import Personal from './personal/Personal'
 
 
 export default function CenterBlock({icons, tabs, questions, classNames, user, setUser, show, showCreateCompany, setShowCreateCompany, showCompany, selectCompany, companies, setCompanies }) {
@@ -29,6 +30,16 @@ export default function CenterBlock({icons, tabs, questions, classNames, user, s
 
            <div className={show === "Организация" ? "visible" : "hidden"}>
              <Companies
+               showCreateCompany={showCreateCompany}
+               showCompany={showCompany}
+               setShowCreateCompany={setShowCreateCompany}
+               companies={companies}
+               setCompanies={setCompanies}
+             />
+           </div>
+           
+           <div className={show === "Моя команда" ? "visible" : "hidden"}>
+             <Personal
                showCreateCompany={showCreateCompany}
                showCompany={showCompany}
                setShowCreateCompany={setShowCreateCompany}

@@ -1,6 +1,7 @@
 import FooterCompanyList from "./FooterCompnayList";
 import React, {useState} from 'react';
 import CreateCompany from "./CreateCompany";
+import Personal from "../personal/Personal";
 
 /* This example requires Tailwind CSS v2.0+ */
 const people = [
@@ -82,13 +83,13 @@ const people = [
                             className={active===company.id ? " bg-yellow-200 border-4 border-gray-200  " : "divide-x hover:bg-yellow-100 border-y-4 border-gray-200   "    }
                           >
                             <td 
-                              className={active===company.id ? "bg-yellow-500 whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-white sm:pl-6 cursor-pointer  " : "whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 cursor-pointer bg-white"   }
+                              className={active===company.id ? "bg-yellow-400 whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-white sm:pl-6 cursor-pointer  " : "whitespace-nowrap py-4 pl-4 pr-4 text-sm font-medium text-gray-900 sm:pl-6 cursor-pointer bg-white"   }
                               onClick={()=>setActive(company.id)}
                             >
                               {company.name}
                             </td>
                             <td className="whitespace-nowrap p-4 text-sm text-gray-500 bg-white">
-                              
+                              asd
                             </td>
                             <td className="whitespace-nowrap p-4 text-sm text-gray-500 bg-white">
                               
@@ -119,9 +120,10 @@ const people = [
 
   export const DropList=({companyId})=>{
     return(
-        <td colSpan={5} className="m-4 p-4 h-24 bg-gray-200 border-gray-200" >
+        <td colSpan={5} className="m-4 p-4 h-24 bg-gray-200 border-none" >
             <div className="border border-yellow-300 ">
             <CreateCompany/>
+            <Personal/>
             </div>
         </td>
     )

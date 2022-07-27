@@ -116,12 +116,7 @@ export default function Header({icons, navigation, userNavigation, user, classNa
                 </Transition>
               </Menu>
                                     
-              <a
-                href="#"
-                className="ml-6 inline-flex items-center mr-4 px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                New Post
-              </a>
+              
               <span className='text-gray-500 hover:text-gray-600 cursor-pointer mr-2' onClick={signOut}>Выход</span>
             </div>
           </div>
@@ -175,12 +170,7 @@ export default function Header({icons, navigation, userNavigation, user, classNa
 
           <div className="mt-6 max-w-3xl mx-auto px-4 sm:px-6">
             
-            <a
-              href="#"
-              className="w-full flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
-            >
-              New Post
-            </a>
+        
 
             <div className="mt-6 flex justify-center">
               <a href="#" className="text-base font-medium text-gray-900 hover:underline">
