@@ -196,6 +196,35 @@ async function create_relation_user_company() {
 
 }
 
+async function create_market() {
+	
+	const companys = await prisma.company.findMany();
+
+		console.log('------------5');
+
+	  for (let company of companys) {
+
+		for (let index = 0; index < 10; index++) {
+			create('market',{
+				data : {
+
+					id_u: uniqid("market-"),
+					name: faker.company.companyName(),
+					location: faker.address.streetAddress(),
+					lawAddress: faker.address.streetAddress(),
+					companyRelation: {
+						connect: { id_u: company['id_u'] },
+					},
+				}
+			})
+
+		}
+
+	  }
+	  const disconnect = await prisma.$disconnect()
+
+}
+
 async function tes() {
 	
 	const users = await prisma.user.findMany({
@@ -218,3 +247,4 @@ test()
 create_company()
 create_director()
 create_relation_user_company()
+create_market()

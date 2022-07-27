@@ -97,6 +97,7 @@ model Company {
   ownerRelation      User     @relation(fields: [owner], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   owner              String
   companyRelation    CompanyRelation[]
+  market             Market[]
 
 }
 
@@ -113,11 +114,12 @@ model CompanyRelation {
 
 model Market {
 
-  id                 Int    @id @unique @default(autoincrement())
-  id_u               String   @unique
+  id                 Int     @id @unique @default(autoincrement())
+  id_u               String  @unique
   name               String
   location           String
-  lawAddress         String @unique
+  lawAddress         String  @unique
+  companyRelation    Company @relation(fields: [company], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   company            String
 
 }

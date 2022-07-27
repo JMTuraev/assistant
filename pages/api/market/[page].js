@@ -17,25 +17,20 @@ export default async function handler(req, res) {
             },
             include: {
                 company : {
-                    take: 5,
-                    skip: Number(page) * 5,
-                    select: {
+                    // take: 5,
+                    // skip: Number(page) * 5,
+                    include : {
+                        market : {
+                            select: {
                         
-                        id: true,
-                        id_u: true ,
-                        name: true ,
-                        category: true ,
-                        location: true ,
-                        lawAddress: true ,
-                        inn: true ,
-                        bankAccount: true ,
-                        mfo: true ,
-                        owner: true ,
-                        
-                        _count: {
-                              select: { companyRelation: true },
-                            }
-                      },
+                                id: true,
+                                id_u: true ,
+                                name: true ,
+                                location: true ,
+                                lawAddress: true ,
+                              }
+                        }
+                    },
                 }
               },
         }) 
