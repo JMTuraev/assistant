@@ -8,8 +8,8 @@ export default function Personal() {
     return (
     <>
         
-            <SearchPersonal setShow={setShow} show={show}/>
-            {show &&<NewPesonal/>}
+          
+         
         <PersonalList/>
     </>
   )
