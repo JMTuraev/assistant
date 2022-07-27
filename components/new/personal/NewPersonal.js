@@ -1,6 +1,11 @@
-import { MailIcon, PhoneIcon } from "@heroicons/react/solid";
-import React from "react";
+import { CheckCircleIcon, MailIcon, PhoneIcon } from "@heroicons/react/solid";
+import React, { useState } from "react";
 import SearchPersonal from "./SearchPersonal";
+import { RadioGroup } from "@headlessui/react";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function NewPersonal() {
   const people = [
@@ -15,6 +20,13 @@ export default function NewPersonal() {
     },
     // More people...
   ];
+
+  const role = [
+    { id: 2, name: "director", value: "директор" },
+    { id: 3, name: "admin", value: "админстратор" },
+    { id: 4, name: "seller", value: "продавец" },
+  ];
+
   return (
     <div>
       {/* <SearchPersonal /> */}
@@ -24,16 +36,16 @@ export default function NewPersonal() {
       >
         Новый Персонал
       </button>
-      <ul role="list" className="grid grid-cols-1 gap-6 mt-6 ">
+      <ul role="list" className="grid grid-cols-1 gap-6 mt-6  ">
         {people.map((person) => (
           <li
             key={person.email}
-            className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200"
+            className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200 "
           >
             <div className="w-full flex flex-col  p-6 space-y-6">
               <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label
-                  htmlFor="name"
+                  htmlhtmlFor="name"
                   className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
                 >
                   Имя
@@ -48,7 +60,7 @@ export default function NewPersonal() {
               </div>
               <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label
-                  htmlFor="name"
+                  htmlhtmlFor="name"
                   className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
                 >
                   Фамилия
@@ -64,7 +76,7 @@ export default function NewPersonal() {
 
               <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label
-                  htmlFor="name"
+                  htmlhtmlFor="name"
                   className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
                 >
                   Отчество
@@ -80,7 +92,7 @@ export default function NewPersonal() {
 
               <div>
                 <label
-                  htmlFor="email"
+                  htmlhtmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Email
@@ -100,6 +112,39 @@ export default function NewPersonal() {
                     placeholder="you@example.com"
                   />
                 </div>
+                <div className="isolate -space-y-px rounded-md shadow-sm mt-4">
+                  <div className="relative border border-gray-300 rounded-md rounded-b-none px-3 py-1 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                    <label
+                      htmlhtmlFor="name"
+                      className="block text-xs font-medium text-gray-900"
+                    >
+                      пароль
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="********"
+                    />
+                  </div>
+                  <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-1 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
+                    <label
+                      htmlhtmlFor="job-title"
+                      className="block text-xs font-medium text-gray-900"
+                    >
+                      Повторите пароль
+                    </label>
+                    <input
+                      type="text"
+                      name="job-title"
+                      id="job-title"
+                      className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
+                      placeholder="********"
+                    />
+                  </div>
+                </div>
+                <RadioButtonRole role={role} />
               </div>
 
               <img
@@ -142,3 +187,62 @@ export default function NewPersonal() {
     </div>
   );
 }
+
+const RadioButtonRole = () => {
+   
+const plans = [
+    { name: 'Hobby',  },
+    { name: 'Startup' },
+    { name: 'Business', },
+    { name: 'Enterprise', },
+  ]
+    const [selected, setSelected] = useState(plans[0])
+
+  return (
+    <RadioGroup value={selected} onChange={setSelected}>
+      <RadioGroup.Label className="sr-only">Должность</RadioGroup.Label>
+      <div className="space-y-4">
+        {plans.map((plan) => (
+          <RadioGroup.Option
+            key={plan.name}
+            value={plan}
+            className={({ checked, active }) =>
+              classNames(
+                checked ? 'border-transparent' : 'border-gray-300',
+                active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+                'relative block bg-white border rounded-lg shadow-sm px-2 py-2 cursor-pointer sm:justify-between focus:outline-none'
+              )
+            }
+          >
+            {({ active, checked }) => (
+              <>
+                <span className="flex items-center">
+                  <span className="text-sm flex flex-row">
+                    <RadioGroup.Label as="span" className="font-medium text-gray-900">
+                      {plan.name}
+                    </RadioGroup.Label>
+                
+                  </span>
+                </span>
+                <RadioGroup.Description
+                  as="span"
+                  className="mt-2 flex text-sm sm:mt-0 sm:flex-col sm:ml-4 sm:text-right"
+                >
+                
+                </RadioGroup.Description>
+                <span
+                  className={classNames(
+                    active ? 'border' : 'border-2',
+                    checked ? 'border-indigo-500' : 'border-transparent',
+                    'absolute -inset-px rounded-lg pointer-events-none'
+                  )}
+                  aria-hidden="true"
+                />
+              </>
+            )}
+          </RadioGroup.Option>
+        ))}
+      </div>
+    </RadioGroup>
+  );
+};
