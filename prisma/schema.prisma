@@ -62,6 +62,7 @@ model User {
   email              String?  @unique
   phone              String?  @unique
   location           String?
+  img                String?
   accounts           Account[]
   sessions           Session[]
   company            Company[]
