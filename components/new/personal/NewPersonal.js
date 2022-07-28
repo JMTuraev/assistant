@@ -258,9 +258,8 @@ import { select } from "async";
      const [selects, setSelects]=useState([])
       
      const onSelect=(company)=>{
-      selects.filter(select=>select.id!==company.id(
-        setSelects([...selects, company])
-      ))
+      console.log(company);
+      const selectFilter=selects.filter(select=>select.id!==company.id)
       
      }
      
