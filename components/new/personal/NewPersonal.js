@@ -154,7 +154,7 @@ export default function NewPersonal() {
               />
             </div>
             <div>
-              <div className="-mt-px flex divide-x divide-gray-200">
+              {/* <div className="-mt-px flex divide-x divide-gray-200">
                 <div className="w-0 flex-1 flex">
                   <a
                     href={`mailto:${person.email}`}
@@ -179,7 +179,7 @@ export default function NewPersonal() {
                     <span className="ml-3">Call</span>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </li>
         ))}
@@ -251,12 +251,20 @@ import { select } from "async";
      
       const companies=[
         {id:1, name:'shoxona'},
-        {id:1, name:'tesnolike'},
-        {id:1, name:'goodzone'},
-        {id:1, name:'torrento'},
+        {id:2, name:'tesnolike'},
+        {id:3, name:'goodzone'},
+        {id:4, name:'torrento'},
       ]
      const [selects, setSelects]=useState([])
-      const onDelete=(id)=>{
+      
+     const onSelect=(company)=>{
+      selects.filter(select=>select.id!==company.id(
+        setSelects([...selects, company])
+      ))
+      
+     }
+     
+     const onDelete=(id)=>{
         const selectFilter=selects.filter(select=>select.id!==id)
         setSelects(selectFilter)
         console.log(id)
@@ -307,7 +315,7 @@ import { select } from "async";
                   <Menu.Item>
                   {({ active }) => (
                     <div
-                      onClick={()=>{setSelects([...selects, company])}}
+                      onClick={()=>onSelect(company)}
                       className={classNames(
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm'
