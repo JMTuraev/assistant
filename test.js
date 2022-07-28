@@ -31,6 +31,7 @@ function test() {
       fatherName: faker.name.firstName(),
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber(),
+      img: faker.image.people('640','480', true),
       userLevelRelation: {
         // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
         connect: { id: 1 },
@@ -117,6 +118,7 @@ async function create_director() {
 				  surName: faker.name.lastName(),
 				  fatherName: faker.name.firstName(),
 				  email: faker.internet.email(),
+				  img: faker.image.people('640','480', true),
 				  phone: faker.phone.phoneNumber(),
 				  userLevelRelation: {
 					connect: { id: 2 },
