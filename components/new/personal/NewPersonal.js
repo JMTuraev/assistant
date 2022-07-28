@@ -1,11 +1,9 @@
 import { CheckCircleIcon, MailIcon, PhoneIcon } from "@heroicons/react/solid";
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import SearchPersonal from "./SearchPersonal";
 import { RadioGroup } from "@headlessui/react";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 export default function NewPersonal() {
   const people = [
@@ -23,7 +21,7 @@ export default function NewPersonal() {
 
   const role = [
     { id: 2, name: "director", value: "директор" },
-    { id: 3, name: "admin", value: "админстратор" },
+    { id: 3, name: "admin", value: "админ" },
     { id: 4, name: "seller", value: "продавец" },
   ];
 
@@ -45,7 +43,7 @@ export default function NewPersonal() {
             <div className="w-full flex flex-col  p-6 space-y-6">
               <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label
-                  htmlhtmlFor="name"
+                  htmlhtmlhtmlhtmlFor="name"
                   className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
                 >
                   Имя
@@ -60,7 +58,7 @@ export default function NewPersonal() {
               </div>
               <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label
-                  htmlhtmlFor="name"
+                  htmlhtmlhtmlhtmlFor="name"
                   className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
                 >
                   Фамилия
@@ -76,7 +74,7 @@ export default function NewPersonal() {
 
               <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                 <label
-                  htmlhtmlFor="name"
+                  htmlhtmlhtmlhtmlFor="name"
                   className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
                 >
                   Отчество
@@ -92,7 +90,7 @@ export default function NewPersonal() {
 
               <div>
                 <label
-                  htmlhtmlFor="email"
+                  htmlhtmlhtmlhtmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Email
@@ -115,7 +113,7 @@ export default function NewPersonal() {
                 <div className="isolate -space-y-px rounded-md shadow-sm mt-4">
                   <div className="relative border border-gray-300 rounded-md rounded-b-none px-3 py-1 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                     <label
-                      htmlhtmlFor="name"
+                      htmlhtmlhtmlhtmlFor="name"
                       className="block text-xs font-medium text-gray-900"
                     >
                       пароль
@@ -130,7 +128,7 @@ export default function NewPersonal() {
                   </div>
                   <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-1 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                     <label
-                      htmlhtmlFor="job-title"
+                      htmlhtmlhtmlhtmlFor="job-title"
                       className="block text-xs font-medium text-gray-900"
                     >
                       Повторите пароль
@@ -143,8 +141,10 @@ export default function NewPersonal() {
                       placeholder="********"
                     />
                   </div>
+                
                 </div>
-                <RadioButtonRole role={role} />
+                <div className="mt-4"> <RadioButtonRole role={role} /> </div>
+                <div className="mt-4"> <CompanyNameDropDown role={role} /> </div>
               </div>
 
               <img
@@ -188,61 +188,143 @@ export default function NewPersonal() {
   );
 }
 
-const RadioButtonRole = () => {
-   
-const plans = [
-    { name: 'Hobby',  },
-    { name: 'Startup' },
-    { name: 'Business', },
-    { name: 'Enterprise', },
-  ]
-    const [selected, setSelected] = useState(plans[0])
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+    export  function RadioButtonRole({role}) {
+      const [selecteditems, setSelecteditems] = useState(role[0])
+    
+      return (
+        <RadioGroup value={selecteditems} onChange={setSelecteditems}>
+          <RadioGroup.Label className="text-base font-medium text-gray-900 ">Должность</RadioGroup.Label>
+    
+          <div className="mt-1 grid grid-cols-1 gap-y-2 sm:grid-cols-3 sm:gap-x-2">
+            {role.map((item) => (
+              <RadioGroup.Option
+                key={item.id}
+                value={item.name}
+                className={({ checked, active }) =>
+                  classNames(
+                    checked ? 'border-transparent' : 'border-gray-300',
+                    active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+                    'relative bg-white border rounded-lg shadow-sm p-2 flex cursor-pointer focus:outline-none'
+                  )
+                }
+              >
+                {({ checked, active }) => (
+                  <>
+                    <span className="flex-1 flex">
+                      <span className="flex flex-col">
+                        <RadioGroup.Label as="span" className="block text-sm font-medium text-gray-900">
+                          {item.value}
+                        </RadioGroup.Label>
+                        
+                      </span>
+                    </span>
+                    <CheckCircleIcon
+                      className={classNames(!checked ? 'invisible' : '', 'h-5 w-5 text-indigo-600')}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={classNames(
+                        active ? 'border' : 'border-2',
+                        checked ? 'border-indigo-500' : 'border-transparent',
+                        'absolute -inset-px rounded-lg pointer-events-none'
+                      )}
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
+              </RadioGroup.Option>
+            ))}
+          </div>
+        </RadioGroup>
+      )
+    }
 
-  return (
-    <RadioGroup value={selected} onChange={setSelected}>
-      <RadioGroup.Label className="sr-only">Должность</RadioGroup.Label>
-      <div className="space-y-4">
-        {plans.map((plan) => (
-          <RadioGroup.Option
-            key={plan.name}
-            value={plan}
-            className={({ checked, active }) =>
-              classNames(
-                checked ? 'border-transparent' : 'border-gray-300',
-                active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
-                'relative block bg-white border rounded-lg shadow-sm px-2 py-2 cursor-pointer sm:justify-between focus:outline-none'
-              )
-            }
+  
+    import { Menu, Transition } from '@headlessui/react'
+    import { ChevronDownIcon } from '@heroicons/react/solid'
+import { select } from "async";
+    
+    export  function CompanyNameDropDown({role}) {
+     
+      const companies=[
+        {id:1, name:'shoxona'},
+        {id:1, name:'tesnolike'},
+        {id:1, name:'goodzone'},
+        {id:1, name:'torrento'},
+      ]
+     const [selects, setSelects]=useState([])
+      const onDelete=(id)=>{
+        const selectFilter=selects.filter(select=>select.id!==id)
+        setSelects(selectFilter)
+        console.log(id)
+      }
+
+      return(
+        <>
+        
+        {selects.map(select=>(
+          // eslint-disable-next-line react/jsx-key
+          <span className="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
+          {select.name}
+          <button
+            type="button"
+            className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+            onClick={()=>{onDelete(select.id)}}
           >
-            {({ active, checked }) => (
-              <>
-                <span className="flex items-center">
-                  <span className="text-sm flex flex-row">
-                    <RadioGroup.Label as="span" className="font-medium text-gray-900">
-                      {plan.name}
-                    </RadioGroup.Label>
-                
-                  </span>
-                </span>
-                <RadioGroup.Description
-                  as="span"
-                  className="mt-2 flex text-sm sm:mt-0 sm:flex-col sm:ml-4 sm:text-right"
-                >
-                
-                </RadioGroup.Description>
-                <span
-                  className={classNames(
-                    active ? 'border' : 'border-2',
-                    checked ? 'border-indigo-500' : 'border-transparent',
-                    'absolute -inset-px rounded-lg pointer-events-none'
-                  )}
-                  aria-hidden="true"
-                />
-              </>
-            )}
-          </RadioGroup.Option>
+            <span className="sr-only">Remove large option</span>
+            <svg className="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+              <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
+            </svg>
+          </button>
+        </span>
         ))}
-      </div>
-    </RadioGroup>
-  );
-};
+   
+
+        <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+            Выберите организацию
+            <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+          </Menu.Button>
+        </div>
+  
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1">
+              {companies.map(company=>(
+                  // eslint-disable-next-line react/jsx-key
+                  <Menu.Item>
+                  {({ active }) => (
+                    <div
+                      onClick={()=>{setSelects([...selects, company])}}
+                      className={classNames(
+                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                        'block px-4 py-2 text-sm'
+                      )}
+                    >
+                      {company.name}
+                    </div>
+                  )}
+                </Menu.Item>
+              ))}
+            
+       
+
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+      </>
+      )
+    }
