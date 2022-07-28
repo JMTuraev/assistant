@@ -94,11 +94,7 @@ export default function PersonalList() {
       .then((data) => {
         // setCompany(data.company);
         setUser(data.user)
-        console.log(users);
 
-        users.map(function(val){
-          console.log(val.childRelation);
-        })
       })
       .then((err) => {});
     

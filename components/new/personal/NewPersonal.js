@@ -251,80 +251,94 @@ import { select } from "async";
      
       const companies=[
         {id:1, name:'shoxona'},
-        {id:1, name:'tesnolike'},
-        {id:1, name:'goodzone'},
-        {id:1, name:'torrento'},
+        {id:2, name:'tesnolike'},
+        {id:3, name:'goodzone'},
+        {id:4, name:'torrento'},
       ]
      const [selects, setSelects]=useState([])
       const onDelete=(id)=>{
         const selectFilter=selects.filter(select=>select.id!==id)
+
         setSelects(selectFilter)
-        console.log(id)
+
       }
 
-      return(
+      return (
         <>
-        
-        {selects.map(select=>(
-          // eslint-disable-next-line react/jsx-key
-          <span className="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
-          {select.name}
-          <button
-            type="button"
-            className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
-            onClick={()=>{onDelete(select.id)}}
-          >
-            <span className="sr-only">Remove large option</span>
-            <svg className="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-              <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
-            </svg>
-          </button>
-        </span>
-        ))}
-   
+          {selects.map((select) => (
+            // eslint-disable-next-line react/jsx-key
+            <span className="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
+              {select.name}
+              <button
+                type="button"
+                className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+                onClick={() => {
+                  onDelete(select.id);
+                }}
+              >
+                <span className="sr-only">Remove large option</span>
+                <svg
+                  className="h-2 w-2"
+                  stroke="currentColor"
+                  fill="none"
+                  viewBox="0 0 8 8"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeWidth="1.5"
+                    d="M1 1l6 6m0-6L1 7"
+                  />
+                </svg>
+              </button>
+            </span>
+          ))}
 
-        <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-            Выберите организацию
-            <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-          </Menu.Button>
-        </div>
-  
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="py-1">
-              {companies.map(company=>(
-                  // eslint-disable-next-line react/jsx-key
-                  <Menu.Item>
-                  {({ active }) => (
-                    <div
-                      onClick={()=>{setSelects([...selects, company])}}
-                      className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
-                      )}
-                    >
-                      {company.name}
-                    </div>
-                  )}
-                </Menu.Item>
-              ))}
-            
-       
-
+          <Menu as="div" className="relative inline-block text-left">
+            <div>
+              <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                Выберите организацию
+                <ChevronDownIcon
+                  className="-mr-1 ml-2 h-5 w-5"
+                  aria-hidden="true"
+                />
+              </Menu.Button>
             </div>
-          </Menu.Items>
-        </Transition>
-      </Menu>
-      </>
-      )
+
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="py-1">
+                  {companies.map((company) => (
+                    // eslint-disable-next-line react/jsx-key
+                    <Menu.Item>
+                      {({ active }) => (
+                        <div
+                          onClick={() => {
+                            setSelects([...selects, company]);
+                          }}
+                          className={classNames(
+                            active
+                              ? "bg-gray-100 text-gray-900"
+                              : "text-gray-700",
+                            "block px-4 py-2 text-sm"
+                          )}
+                        >
+                          {company.name}
+                        </div>
+                      )}
+                    </Menu.Item>
+                  ))}
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+        </>
+      );
     }
