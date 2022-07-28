@@ -3,9 +3,27 @@ import React, { useState, Fragment } from "react";
 import SearchPersonal from "./SearchPersonal";
 import { RadioGroup } from "@headlessui/react";
 
-
-
 export default function NewPersonal() {
+  
+  const companies = [
+    { id: 1, name: "shoxona", market:[{id:1, name:'minor'}, {id:2, name:'chinor'}, {id:3, name:'alfa'}] },
+    { id: 2, name: "tesnolike", market:[{id:4, name:'minor'}, {id:5, name:'chinor'}, {id:6, name:'alfa'}] },
+    { id: 3, name: "goodzone", market:[{id:9, name:'minor'}, {id:8, name:'chinor'}, {id:7, name:'alfa'}]},
+    { id: 4, name: "torrento", market:[{id:10, name:'minor'}, {id:11, name:'chinor'}, {id:12, name:'alfa'}] },
+  ];
+
+  
+  const markets = [
+    {id:1, name:'minor'},
+    {id:2, name:'chinor'}, 
+    {id:3, name:'alfa'},
+    {id:4, name:'minor'},
+     {id:5, name:'chinor'}, 
+     {id:6, name:'alfa'} ,
+    
+  ];
+  const [selects, setSelects] = useState([]);
+
   const people = [
     {
       name: "Jane Cooper",
@@ -141,10 +159,22 @@ export default function NewPersonal() {
                       placeholder="********"
                     />
                   </div>
-                
                 </div>
-                <div className="mt-4"> <RadioButtonRole role={role} /> </div>
-                <div className="mt-4"> <CompanyNameDropDown role={role} /> </div>
+                <div className="mt-4">
+                  {" "}
+                  <RadioButtonRole role={role} />{" "}
+                </div>
+                <div className="mt-4">
+                  {" "}
+                  <CompanyNameDropDown companies={companies} selects={selects} setSelects={setSelects} />
+                  {" "}
+                </div>
+                <div className="mt-4">
+                  {" "}
+                   {selects && <MarketNameDropDown markets={markets} />}
+                   {" "}
+                </div>
+                
               </div>
 
               <img
@@ -189,115 +219,125 @@ export default function NewPersonal() {
 }
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
-    export  function RadioButtonRole({role}) {
-      const [selecteditems, setSelecteditems] = useState(role[0])
-    
-      return (
-        <RadioGroup value={selecteditems} onChange={setSelecteditems}>
-          <RadioGroup.Label className="text-base font-medium text-gray-900 ">Должность</RadioGroup.Label>
-    
-          <div className="mt-1 grid grid-cols-1 gap-y-2 sm:grid-cols-3 sm:gap-x-2">
-            {role.map((item) => (
-              <RadioGroup.Option
-                key={item.id}
-                value={item.name}
-                className={({ checked, active }) =>
-                  classNames(
-                    checked ? 'border-transparent' : 'border-gray-300',
-                    active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
-                    'relative bg-white border rounded-lg shadow-sm p-2 flex cursor-pointer focus:outline-none'
-                  )
-                }
-              >
-                {({ checked, active }) => (
-                  <>
-                    <span className="flex-1 flex">
-                      <span className="flex flex-col">
-                        <RadioGroup.Label as="span" className="block text-sm font-medium text-gray-900">
-                          {item.value}
-                        </RadioGroup.Label>
-                        
-                      </span>
-                    </span>
-                    <CheckCircleIcon
-                      className={classNames(!checked ? 'invisible' : '', 'h-5 w-5 text-indigo-600')}
-                      aria-hidden="true"
-                    />
-                    <span
-                      className={classNames(
-                        active ? 'border' : 'border-2',
-                        checked ? 'border-indigo-500' : 'border-transparent',
-                        'absolute -inset-px rounded-lg pointer-events-none'
-                      )}
-                      aria-hidden="true"
-                    />
-                  </>
-                )}
-              </RadioGroup.Option>
-            ))}
-          </div>
-        </RadioGroup>
-      )
-    }
+export function RadioButtonRole({ role }) {
+  const [selecteditems, setSelecteditems] = useState(role[0]);
+
+  return (
+    <RadioGroup value={selecteditems} onChange={setSelecteditems}>
+      <RadioGroup.Label className="text-base font-medium text-gray-900 ">
+        Должность
+      </RadioGroup.Label>
+
+      <div className="mt-1 grid grid-cols-1 gap-y-2 sm:grid-cols-3 sm:gap-x-2">
+        {role.map((item) => (
+          <RadioGroup.Option
+            key={item.id}
+            value={item.name}
+            className={({ checked, active }) =>
+              classNames(
+                checked ? "border-transparent" : "border-gray-300",
+                active ? "border-indigo-500 ring-2 ring-indigo-500" : "",
+                "relative bg-white border rounded-lg shadow-sm p-2 flex cursor-pointer focus:outline-none"
+              )
+            }
+          >
+            {({ checked, active }) => (
+              <>
+                <span className="flex-1 flex">
+                  <span className="flex flex-col">
+                    <RadioGroup.Label
+                      as="span"
+                      className="block text-sm font-medium text-gray-900"
+                    >
+                      {item.value}
+                    </RadioGroup.Label>
+                  </span>
+                </span>
+                <CheckCircleIcon
+                  className={classNames(
+                    !checked ? "invisible" : "",
+                    "h-5 w-5 text-indigo-600"
+                  )}
+                  aria-hidden="true"
+                />
+                <span
+                  className={classNames(
+                    active ? "border" : "border-2",
+                    checked ? "border-indigo-500" : "border-transparent",
+                    "absolute -inset-px rounded-lg pointer-events-none"
+                  )}
+                  aria-hidden="true"
+                />
+              </>
+            )}
+          </RadioGroup.Option>
+        ))}
+      </div>
+    </RadioGroup>
+  );
+}
+
+import { Menu, Transition } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/solid";
+import { select } from "async";
+
+export function CompanyNameDropDown({ companies, selects, setSelects }) {
 
   
-    import { Menu, Transition } from '@headlessui/react'
-    import { ChevronDownIcon } from '@heroicons/react/solid'
-import { select } from "async";
-    
-    export  function CompanyNameDropDown({role}) {
-     
-      const companies=[
-        {id:1, name:'shoxona'},
-        {id:2, name:'tesnolike'},
-        {id:3, name:'goodzone'},
-        {id:4, name:'torrento'},
-      ]
-     const [selects, setSelects]=useState([])
-      
-     const onSelect=(company)=>{
-      console.log(company);
-      const selectFilter=selects.filter(select=>select.id!==company.id)
-      
-     }
-     
-     const onDelete=(id)=>{
-        const selectFilter=selects.filter(select=>select.id!==id)
-        setSelects(selectFilter)
-        console.log(id)
-      }
+  const onSelect = (company) => {
+    const selectFilter = selects.filter((select) => select.id !== company.id);
 
-      return(
-        <>
-        
-        {selects.map(select=>(
-          // eslint-disable-next-line react/jsx-key
-          <span className="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700">
+    setSelects([...selectFilter, company]);
+  };
+
+  const onDelete = (id) => {
+    const selectFilter = selects.filter((select) => select.id !== id);
+    setSelects(selectFilter);
+    
+  };
+
+  return (
+    <>
+      {selects.map((select) => (
+        // eslint-disable-next-line react/jsx-key
+        <span className="m-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700 truncate">
           {select.name}
           <button
             type="button"
-            className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
-            onClick={()=>{onDelete(select.id)}}
+            className=" flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+            onClick={() => {
+              onDelete(select.id);
+            }}
           >
-            <span className="sr-only">Remove large option</span>
-            <svg className="h-2 w-2" stroke="currentColor" fill="none" viewBox="0 0 8 8">
-              <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
+            <svg
+              className="h-2 w-2"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 8 8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeWidth="1.5"
+                d="M1 1l6 6m0-6L1 7"
+              />
             </svg>
           </button>
         </span>
-        ))}
-   
+      ))}
 
-        <Menu as="div" className="relative inline-block text-left">
+      <Menu as="div" className="relative inline-block text-left mt-2">
         <div>
           <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
             Выберите организацию
-            <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+            <ChevronDownIcon
+              className="-mr-1 ml-2 h-5 w-5"
+              aria-hidden="true"
+            />
           </Menu.Button>
         </div>
-  
+
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"
@@ -309,15 +349,15 @@ import { select } from "async";
         >
           <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
-              {companies.map(company=>(
-                  // eslint-disable-next-line react/jsx-key
-                  <Menu.Item>
+              {companies.map((company) => (
+                // eslint-disable-next-line react/jsx-key
+                <Menu.Item>
                   {({ active }) => (
                     <div
-                      onClick={()=>onSelect(company)}
+                      onClick={() => onSelect(company)}
                       className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-sm'
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
                       )}
                     >
                       {company.name}
@@ -325,13 +365,103 @@ import { select } from "async";
                   )}
                 </Menu.Item>
               ))}
-            
-       
-
             </div>
           </Menu.Items>
         </Transition>
       </Menu>
-      </>
-      )
-    }
+    </>
+  );
+}
+
+
+
+export function MarketNameDropDown({ markets  }) {
+  
+  const [selects, setSelects] = useState([]);
+
+  const onSelect = (market) => {
+    const selectFilter = selects.filter((select) => select.id !== market.id);
+
+    setSelects([...selectFilter, market]);
+  };
+
+  const onDelete = (id) => {
+    const selectFilter = selects.filter((select) => select.id !== id);
+    setSelects(selectFilter);
+    
+  };
+
+  return (
+    <>
+      {selects.map((select) => (
+        // eslint-disable-next-line react/jsx-key
+        <span className="m-1 inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700 truncate">
+          {select.name}
+          <button
+            type="button"
+            className=" flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+            onClick={() => {
+              onDelete(select.id);
+            }}
+          >
+            <svg
+              className="h-2 w-2"
+              stroke="currentColor"
+              fill="none"
+              viewBox="0 0 8 8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeWidth="1.5"
+                d="M1 1l6 6m0-6L1 7"
+              />
+            </svg>
+          </button>
+        </span>
+      ))}
+
+      <Menu as="div" className="relative inline-block text-left mt-2">
+        <div>
+          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+            Выберите магазин
+            <ChevronDownIcon
+              className="-mr-1 ml-2 h-5 w-5"
+              aria-hidden="true"
+            />
+          </Menu.Button>
+        </div>
+
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1">
+              {markets.map((market) => (
+                // eslint-disable-next-line react/jsx-key
+                <Menu.Item>
+                  {({ active }) => (
+                    <div
+                      onClick={() => onSelect(market)}
+                      className={classNames(
+                        active ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                        "block px-4 py-2 text-sm"
+                      )}
+                    >
+                      {market.name}
+                    </div>
+                  )}
+                </Menu.Item>
+              ))}
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </>
+  );
+}
