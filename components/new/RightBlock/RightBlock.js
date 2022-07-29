@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/solid";
 import React from "react";
-import NewPersonal from "../personal/NewPersonal";
+import NewPersonal from "../personal/NewPersonal/NewPersonal";
 import CompaniesList from "./CompaniesList";
 
 export default function RightBlock({  whoToFollow,  show, setShowCreateCompany, showCreateCompany, companies, onActive }) {

@@ -1,6 +1,6 @@
 import { SearchIcon } from "@heroicons/react/solid";
 import React, { useState } from "react";
-import NewPesonal from "./NewPersonal";
+import NewPesonal from "./NewPersonal/NewPersonal";
 
 export default function SearchPersonal({}) {
   return (

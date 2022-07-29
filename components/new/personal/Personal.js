@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import NewPesonal from './NewPersonal'
+import NewPesonal from './NewPersonal/NewPersonal'
 import PersonalList from './PersonalList'
 import SearchPersonal from './SearchPersonal'
 
