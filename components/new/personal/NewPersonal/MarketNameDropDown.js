@@ -2,8 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import React, {Fragment, useState} from 'react';
 
-export default function MarketNameDropDown({ markets }) {
-    const [selects, setSelects] = useState([]);
+export default function MarketNameDropDown({ markets, selects, setSelects }) {
   
     const onSelect = (market) => {
       const selectFilter = selects.filter((select) => select.id !== market.id);

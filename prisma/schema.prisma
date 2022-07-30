@@ -7,47 +7,6 @@ datasource db {
   url      = "mysql://root:102030@localhost:3306/main"
 }
 
-model Account {
-
-  id                 Int      @id @unique @default(autoincrement())
-  id_u               String   @unique
-  userId             Int
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-
-  id                 Int      @id @unique @default(autoincrement())
-  id_u               String   @unique
-  sessionToken       String   @unique
-  userId             Int
-  expires            DateTime
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-}
-
-model VerificationToken {
-
-  identifier         Int      @id @unique @default(autoincrement())
-  token              String   @unique
-  expires            DateTime
-
-  @@unique([identifier, token])
-
-}
-
 model User {
 
   id                 Int      @id @unique @default(autoincrement())
@@ -63,9 +22,10 @@ model User {
   phone              String?  @unique
   location           String?
   img                String?
-  accounts           Account[]
-  sessions           Session[]
+  salary             Int      @default(0)
+  currency           String   @default("NULL")
   company            Company[]
+  marketRelation     MarketRelation[]
   companyRelation    CompanyRelation[]
   parrentRelation    UserRelation[] @relation("parrentRelation")
   childRelation      UserRelation[] @relation("childRelation")
@@ -122,8 +82,22 @@ model Market {
   lawAddress         String  @unique
   companyRelation    Company @relation(fields: [company], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   company            String
+  marketRelation     MarketRelation[]
 
 }
+
+
+model MarketRelation {
+
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  userRelation       User     @relation(fields: [user], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  user               String
+  marketRelation     Market  @relation(fields: [market], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  market             String
+
+}
+
 
 model Warehouse {
 

@@ -2,15 +2,23 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import React, {Fragment} from 'react';
 
-export default function CompanyNameDropDown({ companies, selects, setSelects }) {
+export default function CompanyNameDropDown({ companies, selects, setSelects, markets, setMarkets, selectMarkets, setSelectMarkets }) {
     const onSelect = (company) => {
       const selectFilter = selects.filter((select) => select.id !== company.id);
   
       setSelects([...selectFilter, company]);
     };
+
+    const setMarket = (companies) => {
+      setMarkets([ ...markets, ...companies.market ])
+    }
   
-    const onDelete = (id) => {
-      const selectFilter = selects.filter((select) => select.id !== id);
+    const onDelete = (item) => {
+      const selectFilter = selects.filter((select) => select.id !== item.id);
+      const selectFilterMaret = markets.filter((select) => select.company !== item.id_u );
+      const selectFilterSelectMaret = selectMarkets.filter((select) => select.company !== item.id_u );
+      setMarkets([ ...selectFilterMaret ]) 
+      setSelectMarkets([ ...selectFilterSelectMaret ]) 
       setSelects(selectFilter);
     };
 
@@ -28,7 +36,7 @@ export default function CompanyNameDropDown({ companies, selects, setSelects }) 
               type="button"
               className=" flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
               onClick={() => {
-                onDelete(select.id);
+                onDelete(select);
               }}
             >
               <svg
@@ -74,7 +82,10 @@ export default function CompanyNameDropDown({ companies, selects, setSelects }) 
                   <Menu.Item>
                     {({ active }) => (
                       <div
-                        onClick={() => onSelect(company)}
+                        onClick={() => {
+                          onSelect(company)
+                          setMarket(company)
+                        }}
                         className={classNames(
                           active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                           "block px-4 py-2 text-sm"

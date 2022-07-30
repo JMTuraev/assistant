@@ -116,8 +116,8 @@ export default function PersonalList() {
             <div className="flex-1 truncate mb-2 space-y-1">
                 <div className='flex flex-col  font-medium truncate text-gray-900 text-sm  '>
                     <h2 className='text-lg'>{person.childRelation.firstName + ' ' + person.childRelation.surName}</h2>
-                    {/* <h2 className='items-end'> з/п: {person.childRelation.salary.amount} сўм;  </h2>
-                    <h2 className='items-end'> работаетс {person.childRelation.salary.date}; </h2> */}
+                    <h2 className='items-end'> з/п: {person.childRelation.salary + ' ' + person.childRelation.currency}  </h2>
+                    {/* <h2 className='items-end'> работаетс {person.childRelation.salary.date}; </h2> */}
                 </div>
                 
               <div className="flex items-center space-x-3 ">

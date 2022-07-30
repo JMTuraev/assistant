@@ -2,14 +2,19 @@ import { RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import React, {useState} from 'react';
 
-export default function RadioButtonRole({ role }) {
+export default function RadioButtonRole({ role, selects, setSelects }) {
     const [selecteditems, setSelecteditems] = useState(role[0]);
   
     function classNames(...classes) {
         return classes.filter(Boolean).join(" ");
     }
+
+    function setCha(va) {
+
+      setSelects(va)
+    }
     return (
-      <RadioGroup value={selecteditems} onChange={setSelecteditems}>
+      <RadioGroup value={selecteditems} onChange={setCha}>
         <RadioGroup.Label className="text-base font-medium text-gray-900 ">
           Должность
         </RadioGroup.Label>
@@ -17,8 +22,8 @@ export default function RadioButtonRole({ role }) {
         <div className="mt-1 grid grid-cols-1 gap-y-2 sm:grid-cols-3 sm:gap-x-2">
           {role.map((item) => (
             <RadioGroup.Option
-              key={item.id}
-              value={item.name}
+              key={item.id_u}
+              value={item.id_u }
               className={({ checked, active }) =>
                 classNames(
                   checked ? "border-transparent" : "border-gray-300",
@@ -35,7 +40,7 @@ export default function RadioButtonRole({ role }) {
                         as="span"
                         className="block text-sm font-medium text-gray-900"
                       >
-                        {item.value}
+                        {item.name}
                       </RadioGroup.Label>
                     </span>
                   </span>

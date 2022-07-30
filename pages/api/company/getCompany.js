@@ -35,15 +35,43 @@ export default async function handler(req, res) {
   }
 
   if (req.method === "GET") {
-    const role = await prisma.role.findMany({
-      where : {
-        id_u : {
-          not : 'role-hcvd7ol5qnpscw'
-        }
-      }
+    const user = await prisma.user.findFirst({
+      where: {
+        id: userid,
+      },
+      include: {
+        company: {
+          select: {
+            id: true,
+            id_u: true,
+            name: true,
+            category: true,
+            location: true,
+            lawAddress: true,
+            inn: true,
+            bankAccount: true,
+            mfo: true,
+            owner: true,
+
+            // select: {
+              market: {
+                select: {
+                  id: true,
+                  id_u: true,
+                  name: true,
+                  location: true,
+                  lawAddress: true,
+                  company : true
+
+                },
+              },
+            // },
+          },
+        },
+      },
     });
 
-    res.status(200).json({ ok: true, role: role });
+    res.status(200).json({ ok: true, company: user.company });
   }
 
   const disconnect = await prisma.$disconnect();
