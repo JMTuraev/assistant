@@ -27,7 +27,10 @@ export default async function handler(req, res) {
                             email : true,
                             location : true,
                             img : true,
-                            userLevelRelation : true
+                            userLevelRelation : true,
+                            salary : true,
+                            currency : true
+
                         }
                     },
                   },

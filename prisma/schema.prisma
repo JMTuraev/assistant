@@ -22,9 +22,10 @@ model User {
   phone              String?  @unique
   location           String?
   img                String?
-  salary             Int @default(0)
-  currency           String @default("NULL")
+  salary             Int      @default(0)
+  currency           String   @default("NULL")
   company            Company[]
+  marketRelation     MarketRelation[]
   companyRelation    CompanyRelation[]
   parrentRelation    UserRelation[] @relation("parrentRelation")
   childRelation      UserRelation[] @relation("childRelation")
@@ -81,8 +82,22 @@ model Market {
   lawAddress         String  @unique
   companyRelation    Company @relation(fields: [company], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   company            String
+  marketRelation     MarketRelation[]
 
 }
+
+
+model MarketRelation {
+
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  userRelation       User     @relation(fields: [user], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  user               String
+  marketRelation     Market  @relation(fields: [market], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  market             String
+
+}
+
 
 model Warehouse {
 

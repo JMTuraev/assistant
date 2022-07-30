@@ -17,6 +17,7 @@ const schema = yup
     currency: yup.string().required(),
     email: yup.string().required(),
     phone: yup.string().required(),
+    login: yup.string().required(),
     password: yup.string().required(),
     password_r: yup.string().required(),
   })
@@ -372,15 +373,19 @@ export default function NewPersonal() {
                       setSelectMarkets={setSelectMarkets}
                     />
                   </div>
-                  <div className="mt-4">
-                    {selects && (
-                      <MarketNameDropDown
-                        markets={markets}
-                        selects={selectMarkets}
-                        setSelects={setSelectMarkets}
-                      />
-                    )}
-                  </div>
+                  {selectRole != 'role-hcvd2swl5wiuit9' && (
+                    <>
+                      <div className="mt-4">
+                        {selects && (
+                          <MarketNameDropDown
+                            markets={markets}
+                            selects={selectMarkets}
+                            setSelects={setSelectMarkets}
+                          />
+                        )}
+                      </div>
+                    </>
+                  )}
                 </>
               )}
             </div>
