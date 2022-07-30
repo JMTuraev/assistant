@@ -56,7 +56,7 @@ export default async function handler(req, res) {
                 id_u: data.user.id_u,
               },
             },
-            companyRelation: {
+            marketRelation: {
               connect: {
                 id_u: val.id_u,
               },
