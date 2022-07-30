@@ -1,14 +1,21 @@
 import { PlusIcon } from "@heroicons/react/solid";
-import React from "react";
+import React, {useContext} from "react";
+import TemplateContext from "../../../context/TemplateContext";
+import CreateCompany from "../company/CreateCompany";
 import NewPersonal from "../personal/NewPersonal/NewPersonal";
-import CompaniesList from "./CompaniesList";
+import FilterPersonal from "./company/FilterPersonal";
+
+
 
 export default function RightBlock({  whoToFollow,  show, setShowCreateCompany, showCreateCompany, companies, onActive }) {
+  const {personalRole}=useContext(TemplateContext)
+  const {role, companyId}=personalRole
   return (
     <aside className="hidden xl:block xl:col-span-2">
       <div className="sticky top-4 ">
-      <div className={  show === 'Организация' ? 'visible' : 'hidden' }>
-          {/* code     */}
+
+      <div className={  personalRole && show === 'Организация' ? 'visible' : 'hidden' }>
+          <FilterPersonal role={role} companyId={companyId}/>
       </div>
 
       <div className={  show === 'Моя команда' ? 'visible' : 'hidden' }>

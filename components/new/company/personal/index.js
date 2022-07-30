@@ -1,3 +1,5 @@
+import AttachPerson from "./AttachPerson"
+
 /* This example requires Tailwind CSS v2.0+ */
 const people = [
     {
@@ -10,9 +12,11 @@ const people = [
     // More people...
   ]
   
-  export default function Personal({personal, color}) {
+  export default function Personal({personal, color, companyId}) {
+
     return (
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        <div >
+      <div className="grid grid-cols-4 gap-2 sm:grid-cols-4 min-w-max">
         {personal.map((person) => (
           <div
             key={person.id}
@@ -30,6 +34,11 @@ const people = [
             </div>
           </div>
         ))}
+      <div className="">
+      <AttachPerson personal={personal} companyId={companyId}/>
+      </div>
+      </div>
+      
       </div>
     )
   }

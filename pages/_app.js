@@ -37,7 +37,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   //       });
   //     setSessiona(false);
   //   })
-  
+
+// company page right block show role list
+  const [personalRole, setPersonalRole]=useState({})
+
   return (
     <SessionProvider session={session}>
       <TemplateContext.Provider
@@ -49,7 +52,9 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           companys,
           setSessiona,
           setUser,
-          setCompany
+          setCompany,
+          setPersonalRole,
+          personalRole
         }}
       >
         <Head>
