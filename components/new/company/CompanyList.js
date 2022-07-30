@@ -1,15 +1,17 @@
 import FooterCompanyList from "./FooterCompnayList";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CreateCompany from "./CreateCompany";
 import Personal from "../personal/Personal";
 import Image from "next/image";
 import DropList from "./DropList";
+import TemplateContext from "../../../context/TemplateContext";
 
 export default function CompnayList({ companies, setCompanies }) {
   const [active, setActive] = useState();
   const [pages, setPages] = useState([1, 2, 3, 4, 5]);
   const [activePage, setActivePage] = useState(1);
 
+  const {setPersonalRole}=useContext(TemplateContext)
   const personal = [
     {
       id: 1,
@@ -168,19 +170,20 @@ export default function CompnayList({ companies, setCompanies }) {
                               {/* AVATAR */}
                               <div className="space-x-3 ">
                                 <span
-                                  onClick={() => setRow(2.1)}
+                                  onClick={() => {setRow(2.1), setPersonalRole({role:null})}}
+                                  
                                   className="cursor-pointer inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-yellow-100 text-yellow-800"
                                 >
                                   Директор - 1
                                 </span>
                                 <span
-                                  onClick={() => setRow(2.2)}
+                                  onClick={() => {setRow(2.2), setPersonalRole({role:null})}}
                                   className="cursor-pointer inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-indigo-100 text-indigo-800"
                                 >
                                   Админ - 3
                                 </span>
                                 <span
-                                  onClick={() => setRow(2.3)}
+                                  onClick={() => {setRow(2.3), setPersonalRole({role:null})}}
                                   className="cursor-pointer inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-pink-100 text-pink-800"
                                 >
                                   Продавец - 27

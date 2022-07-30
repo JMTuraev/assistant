@@ -32,12 +32,12 @@ export default function DropList ({
           );
   
         case 2.1:
-          return <div className='p-2'><Personal personal={directors} color={'bg-yellow-100'}/></div>;
+          return <div className='p-2'><Personal personal={directors} companyId={companyId} color={'bg-yellow-100'}/></div>;
         case 2.2:
-          return <div className='p-2'><Personal personal={admins} color={'bg-indigo-100'}/></div>;
+          return <div className='p-2'><Personal personal={admins} companyId={companyId}  color={'bg-indigo-100'}/></div>;
   
         case 2.3:
-          return <div className='p-2'><Personal personal={sellers} color={'bg-pink-100'}/></div>;
+          return <div className='p-2'><Personal personal={sellers} companyId={companyId}  color={'bg-pink-100'}/></div>;
   
         default:
           break;
