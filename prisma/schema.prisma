@@ -63,6 +63,8 @@ model User {
   phone              String?  @unique
   location           String?
   img                String?
+  salary                Int @default(0)
+  currency              String @default("NULL")
   accounts           Account[]
   sessions           Session[]
   company            Company[]
