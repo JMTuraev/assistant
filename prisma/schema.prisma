@@ -24,12 +24,12 @@ model User {
   img                String?
   salary             Int      @default(0)
   currency           String   @default("NULL")
+  createDate         DateTime @default(now())
   company            Company[]
   marketRelation     MarketRelation[]
   companyRelation    CompanyRelation[]
   parrentRelation    UserRelation[] @relation("parrentRelation")
   childRelation      UserRelation[] @relation("childRelation")
-
 
 }
 
