@@ -102,7 +102,7 @@ export default function NewPersonal() {
             <div className="font-medium justify-center">Новый персонал</div>
             <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
               <label
-                htmlhtmlhtmlhtmlFor="firstName"
+                htmlFor="firstName"
                 className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
               >
                 Имя
@@ -122,7 +122,7 @@ export default function NewPersonal() {
             </div>
             <div className="relative border border-gray-300 rounded-md px-3 py-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
               <label
-                htmlhtmlhtmlhtmlFor="surName"
+                htmlFor="surName"
                 className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
               >
                 Фамилия
@@ -143,7 +143,7 @@ export default function NewPersonal() {
 
             <div className="relative border border-gray-300 rounded-md px-3 p-2 shadow-sm focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
               <label
-                htmlhtmlhtmlhtmlFor="fatherName"
+                htmlFor="fatherName"
                 className="absolute -top-2 left-2 -mt-px inline-block px-1 bg-white text-xs font-medium text-gray-900"
               >
                 Отчество
@@ -210,7 +210,7 @@ export default function NewPersonal() {
             <div>
               <div>
                 <label
-                  htmlhtmlhtmlhtmlFor="email"
+                  htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Email
@@ -238,7 +238,7 @@ export default function NewPersonal() {
 
               <div className="mt-3">
                 <label
-                  htmlhtmlhtmlhtmlFor="phone"
+                  htmlFor="phone"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Номер телефона
@@ -265,7 +265,7 @@ export default function NewPersonal() {
 
               <div className="mt-3">
                 <label
-                  htmlhtmlhtmlhtmlFor="login"
+                  htmlFor="login"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Логин
@@ -289,7 +289,7 @@ export default function NewPersonal() {
 
               <div className="mt-3">
                 <label
-                  htmlhtmlhtmlhtmlFor="img_file"
+                  htmlFor="img_file"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Изображение
@@ -314,7 +314,7 @@ export default function NewPersonal() {
               <div className="isolate -space-y-px rounded-md shadow-sm mt-4">
                 <div className="relative border border-gray-300 rounded-md rounded-b-none px-3 py-1 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   <label
-                    htmlhtmlhtmlhtmlFor="password"
+                    htmlFor="password"
                     className="block text-xs font-medium text-gray-900"
                   >
                     Пароль
@@ -334,7 +334,7 @@ export default function NewPersonal() {
                 </div>
                 <div className="relative border border-gray-300 rounded-md rounded-t-none px-3 py-1 focus-within:z-10 focus-within:ring-1 focus-within:ring-indigo-600 focus-within:border-indigo-600">
                   <label
-                    htmlhtmlhtmlhtmlFor="password_r"
+                    htmlFor="password_r"
                     className="block text-xs font-medium text-gray-900"
                   >
                     Повторите пароль

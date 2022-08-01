@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import { signOut } from 'next-auth/react'
+import { BellIcon, MenuIcon, SearchIcon, XIcon } from '@heroicons/react/solid'
 
 
-export default function Header({icons, navigation, userNavigation, user, classNames, onActive}) {
-    const {BellIcon, MenuIcon, XIcon, SearchIcon}=icons
-
+export default function Header({ navigation, userNavigation, user, classNames, onActive}) {
+    
 
   return (
     <Popover

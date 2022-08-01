@@ -4,7 +4,8 @@ import CreateCompany from "./CreateCompany";
 import Personal from "../personal/Personal";
 import Image from "next/image";
 import DropList from "./DropList";
-import TemplateContext from "../../../context/TemplateContext";
+import TemplateContext from "../../context/TemplateContext";
+
 
 export default function CompnayList({ companies, setCompanies }) {
   const [active, setActive] = useState();
@@ -82,7 +83,7 @@ export default function CompnayList({ companies, setCompanies }) {
   ];
 
   const [row, setRow] = useState();
-
+    
   return (
     <div className=" ">
       <div className="sm:flex sm:items-center">

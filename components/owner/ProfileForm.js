@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {useForm} from 'react-hook-form'
+import {set, useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
-
 import * as yup from 'yup';
+import { useRouter } from "next/router";
 
 yup.setLocale({
   string:{
@@ -20,14 +20,19 @@ const schema=yup.object({
 }).required()
 
 export default function ProfileForm({user, setUser}) {
+  const router=useRouter()  
   const {register, handleSubmit, watch, formState:{errors}} =useForm({
     resolver:yupResolver(schema)
   })
   const [showPassBlock, setShowPassBlock] = useState(false);
   
+  const [success, setSuccess]=useState(false)
 
+   
+    
   const onSubmit= async (data)=>{
-
+    
+    console.log(data)
     const res = await fetch(`http://localhost:3000/api/user/updateInfo`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -37,8 +42,8 @@ export default function ProfileForm({user, setUser}) {
       .then(
         (result) => {
           if (result.ok) {
-            alert("Данные обновлены");
             setUser(result.user);
+            setSuccess(true)
           }
 
 
@@ -48,256 +53,174 @@ export default function ProfileForm({user, setUser}) {
           console.log(err);
         }
       );
-
+   
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="m-4 ">
-      <div className="shadow sm:rounded-md sm:overflow-hidden">
-        <div className="bg-white py-6 px-4 space-y-4 sm:p-6">
-          <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Информации владельца
-              <span className="inline-flex items-center ml-2 px-3 py-0.5 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                Владелец
-              </span>
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-6 gap-y-2 gap-x-6">
-            <div className="col-span-6  lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="firstName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Имя
-              </label>
-              <input
-                {...register("firstName", {
-                  required: true,
-                  maxLength: 20,
-                  pattern: /^[A-Za-z]+$/i,
-                })}
-                type="text"
-                name="firstName"
-                id="firstName"
-                autoComplete="name"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                defaultValue={user.firstName}
-              />
-              <p>{errors.firstName?.message}</p>
-            </div>
-
-            <div className="col-span-6 lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="surName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Фамилия
-              </label>
-              <input
-                {...register("surName", {
-                  required: true,
-                  maxLength: 20,
-                  pattern: /^[A-Za-z]+$/i,
-                })}
-                type="text"
-                name="surName"
-                id="surName"
-                autoComplete="surName"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                defaultValue={user.surName}
-              />
-            </div>
-
-            <div className="col-span-6  lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="fatherName"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Отчество
-              </label>
-              <input
-                {...register("fatherName", {
-                  required: true,
-                  maxLength: 20,
-                  pattern: /^[A-Za-z]+$/i,
-                })}
-                type="text"
-                name="fatherName"
-                id="fatherName"
-                autoComplete="fatherName"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                defaultValue={user.fatherName}
-              />
-            </div>
-
-            <div className="col-span-6 lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Почта
-              </label>
-              <input
-                {...register("email", {
-                  required: true,
-                  maxLength: 50,
-                  pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                })}
-                type="text"
-                name="email"
-                id="email"
-                autoComplete="email"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                defaultValue={user.email}
-              />
-            </div>
-
-            <div className="col-span-6 lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Номер телефона
-              </label>
-              <input
-                {...register("phone", {
-                  required: true,
-                  maxLength: 15,
-                  pattern: [0 - 9],
-                })}
-                type="text"
-                name="phone"
-                id="phone"
-                autoComplete="phone"
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                defaultValue={user.phone}
-              />
-            </div>
-
-            <div className="col-span-6  lg:col-span-2 sm:col-span-3">
-              <label
-                htmlFor="location"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Регион
-              </label>
-              <select
-                {...register("location")}
-                id="location"
-                name="location"
-                autoComplete="location"
-                className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                <option value="Andijon">Андижон</option>
-                <option value="Buxoro">Бухоро</option>
-                <option value="Fargona">Фаргона</option>
-                <option value="Jizzax">Жиззах</option>
-                <option value="Xorazm">Хоразм</option>
-                <option value="Namangan">Наманган</option>
-                <option value="Navoiy">Навоий</option>
-                <option value="Qashqadaryo">Қашқадарё</option>
-                <option value="Samarqand">Самарқанд</option>
-                <option value="Sirdaryo">Сирдарё</option>
-                <option value="Surxandaryo">Сурхандарё</option>
-                <option value="Toshkent">Тошкент</option>
-                <option value="Qoraqolpogiston">
-                  Қорақалпоғистон Республикаси
-                </option>
-              </select>
-            </div>
-          </div>
-          {/*  Блок изминения пароля */}
-          <div className={showPassBlock ? "visible" : "hidden"}>
-            <div className="grid grid-cols-6 gap-x-6 gap-y-2 border items-end  rounded-lg border-indigo-600 py-6 px-3">
-              <div className="col-span-6 sm:col-span-2">
+    <>
+    <div className={success ? ' hidden'  : ''}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+           
+            <div className="grid grid-cols-6 gap-x-4 gap-y-2 px-2 ">
+            
+            <h3 className="text-lg col-start-2 col-span-4  font-medium text-slate-900 text-center">
+                Информации владельца
+              </h3>
+              <div className="col-span-6  lg:col-span-2 sm:col-span-3">
                 <label
-                  htmlFor="lastPassword"
-                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="firstName"
+                  className="block text-sm font-medium text-gray-700 ml-2"
                 >
-                  Старый пароль
+                  Имя
                 </label>
                 <input
+                  {...register("firstName", {
+                    required: true,
+                    maxLength: 20,
+                    pattern: /^[A-Za-z]+$/i,
+                  })}
                   type="text"
-                  name="lastPassword"
-                  id="lastPassword"
-                  autoComplete="lastPassword"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  name="firstName"
+                  id="firstName"
+                  autoComplete="name"
+                  className=" block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={user.firstName}
                 />
+                <p>{errors.firstName?.message}</p>
               </div>
-              <div className="col-span-6 sm:col-span-2">
+
+              <div className="col-span-6 lg:col-span-2 sm:col-span-3">
                 <label
-                  htmlFor="newPassword"
-                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="surName"
+                  className="block text-sm font-medium text-gray-700 ml-2"
                 >
-                  Новый пароль
+                  Фамилия
                 </label>
                 <input
+                  {...register("surName", {
+                    required: true,
+                    maxLength: 20,
+                    pattern: /^[A-Za-z]+$/i,
+                  })}
                   type="text"
-                  name="newPassword"
-                  id="newPassword"
-                  autoComplete="newPassword"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  name="surName"
+                  id="surName"
+                  autoComplete="surName"
+                  className=" block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={user.surName}
                 />
               </div>
 
-              <div className="col-span-6 sm:col-span-2 whitespace-nowrap">
+              <div className="col-span-6  lg:col-span-2 sm:col-span-3">
                 <label
-                  htmlFor="checkNewPassword"
-                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="fatherName"
+                  className="block text-sm font-medium text-gray-700 ml-2"
                 >
-                  Повтор пароля
+                  Отчество
                 </label>
                 <input
+                  {...register("fatherName", {
+                    required: true,
+                    maxLength: 20,
+                    pattern: /^[A-Za-z]+$/i,
+                  })}
                   type="text"
-                  name="checkNewPassword"
-                  id="checkNewPassword"
-                  autoComplete="checkNewPassword"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  name="fatherName"
+                  id="fatherName"
+                  autoComplete="fatherName"
+                  className="mt-1  block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={user.fatherName}
                 />
               </div>
 
-              <div className="col-span-6 sm:col-span-2 whitespace-nowrap">
+              <div className="col-span-6 lg:col-span-2 sm:col-span-3">
                 <label
-                  htmlFor="checkSMSCode"
-                  className="block text-sm font-medium text-gray-700"
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700 ml-2"
                 >
-                  СМС-пароль
+                  Почта
                 </label>
                 <input
+                  {...register("email", {
+                    required: true,
+                    maxLength: 50,
+                    pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  })}
                   type="text"
-                  name="checkSMSCode"
-                  id="checkSMSCode"
-                  autoComplete="checkSMSCode"
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  name="email"
+                  id="email"
+                  autoComplete="email"
+                  className="block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={user.email}
                 />
               </div>
 
-              <div className="col-span-6 sm:col-span-2 whitespace-nowrap">
-                <button
-                  type="submit"
-                  className="bg-indigo-600  border border-transparent rounded-md shadow-sm py-1.5 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              <div className="col-span-6 lg:col-span-2 sm:col-span-3">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-gray-700 ml-2"
                 >
-                  изменить
-                </button>
+                  Номер телефона
+                </label>
+                <input
+                  {...register("phone", {
+                    required: true,
+                    maxLength: 15,
+                    pattern: [0 - 9],
+                  })}
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  autoComplete="phone"
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  defaultValue={user.phone}
+                />
               </div>
+
+              <div className="col-span-6  lg:col-span-2 sm:col-span-3">
+                <label
+                  htmlFor="location"
+                  className="block text-sm font-medium text-gray-700 ml-2"
+                >
+                  Регион
+                </label>
+                <select
+                  {...register("location")}
+                  id="location"
+                  name="location"
+                  autoComplete="location"
+                  className="mt-1 block w-full bg-white border border-gray-300 rounded-md shadow-sm py-1.5 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  <option value="Andijon">Андижон</option>
+                  <option value="Buxoro">Бухоро</option>
+                  <option value="Fargona">Фаргона</option>
+                  <option value="Jizzax">Жиззах</option>
+                  <option value="Xorazm">Хоразм</option>
+                  <option value="Namangan">Наманган</option>
+                  <option value="Navoiy">Навоий</option>
+                  <option value="Qashqadaryo">Қашқадарё</option>
+                  <option value="Samarqand">Самарқанд</option>
+                  <option value="Sirdaryo">Сирдарё</option>
+                  <option value="Surxandaryo">Сурхандарё</option>
+                  <option value="Toshkent">Тошкент</option>
+                  <option value="Qoraqolpogiston">
+                    Қорақалпоғистон Республикаси
+                  </option>
+                </select>
+              </div>
+   
+                <input type='submit' className="col-end-6   text-indigo-500 text-base font-bold  bg-white p-2 w-44 rounded-lg  hover: text-indigo-700 hover:bg-gray-100" value={'Изменить'}/>
+   
             </div>
-          </div>
-        </div>
-        <div className="px-4 py-3  bg-gray-50 flex flex-row justify-end space-x-4 items-center text-sm  sm:px-6">
-          <div
-            onClick={() => setShowPassBlock(!showPassBlock)}
-            className="underline underline-offset-2 text-indigo-600 font-bold cursor-pointer hover:text-indigo-500"
-          >
-            изменить пароль
-          </div>
-          <input
-            type="submit"
-            className="bg-indigo-600 border border-transparent rounded-md shadow-sm py-1.5 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            value="сохранить"
-          />
-        </div>
-      </div>
+         
+     
     </form>
+    </div>
+    
+    <div className={success ? 'visible'  : 'hidden'}>
+        <span className="font-bold text-center justify-center   ">Ваш данных успешно обновлена</span>
+        <span className="font-bold cursor-pointer  justify-end">x</span>
+    </div>
+    
+    </>
   );
 }
