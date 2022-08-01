@@ -1,6 +1,6 @@
 import FooterCompanyList from "./FooterCompnayList";
 import React, { useState, useContext } from "react";
-import CreateCompany from "./CreateCompany";
+import CreateCompany from "./FormCompany";
 import Personal from "../personal/Personal";
 import Image from "next/image";
 import DropList from "./DropList";

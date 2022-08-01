@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateCompany from './CreateCompany';
+import CreateCompany from './FormCompany';
 import Personal from './personal';
 
 

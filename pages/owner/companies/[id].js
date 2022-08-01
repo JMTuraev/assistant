@@ -1,12 +1,54 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import FormCompany from '../../../components/company/FormCompany';
+import CreateCompany from '../../../components/company/FormCompany';
 
 function company() {
+  const [company, setCompanies] = useState({});
+  const [isLoading, setLoading] = useState(false);
+
   const router=useRouter()
-  console.log(router)
-  console.log(router.query)
+  const {id}=router.query
+
+  useEffect(() => {
+    getData()
+    setLoading(true);
+}, [company]);
+
+console.log(company)
+
+  const getData=async()=>{
+    const res=await fetch(`http://localhost:3000/api/company/get/${id}`)
+    const data=await res.json()
+    const {company}= data
+    setCompanies(company)
+  }
+
+  const pages=[
+    { name:'Организация', href:'http://localhost:3000/owner', current:false  },
+    { name:'Список организации', href:'http://localhost:3000/owner/companies', current:true  },
+    { name:'Организация', href:'#', current:true  }
+  ]
     return (
-    <div>id : asdasd</div>
+      <>
+   
+<div className="grid grid-cols-12 lg:grid lg:grid-cols-12 xl:grid xl:grid-cols-10 xl:gap-4 ">
+      <main className="col-span-10 lg:col-span-8 xl:col-span-8">
+      <div>
+          <Breadcrumbs pages={pages}/>
+    </div>
+    
+      <FormCompany companyId={id} company={company} header='Изменить данние организации' buttonValue='изменить'/>   
+      </main>
+      <aside className="hidden col-span-2  lg:col-span-4 xl:block xl:col-span-2">
+        <div className="sticky top-4 ">Right Menu</div>
+      </aside>
+    </div>
+
+
+      </>
   )
 }
 
