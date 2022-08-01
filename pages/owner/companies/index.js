@@ -30,14 +30,15 @@ function companies({data}) {
 
 export default companies;
 
-export async function getStaticProps() {
+export async function getServerSideProps() { 
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const data = await fetch("http://localhost:3000/api/company/1")
   .then((res) => res.json())
   .then((data) => {
+    console.log(data);
     return data.company
-  });
+  }).catch(error => console.log(error));
 
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
