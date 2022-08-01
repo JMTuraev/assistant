@@ -4,7 +4,7 @@
 import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs";
 
-export default function CompanyListNEW({ companies, header, addNew, addButtonValue, setShow, show }) {
+export default function List({ companies, header, addNew, addButtonValue, setShow, show }) {
 
 
   return (

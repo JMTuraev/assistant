@@ -4,22 +4,30 @@ import React, { useEffect, useState } from 'react'
 import Breadcrumbs from '../../../components/Breadcrumbs';
 import FormCompany from '../../../components/company/FormCompany';
 import CreateCompany from '../../../components/company/FormCompany';
+import List from '../../../components/company/List';
 
 function company() {
   const [company, setCompanies] = useState({});
+  const [markets, setMarkets]=useState([])
   const [isLoading, setLoading] = useState(false);
 
   const router=useRouter()
   const {id}=router.query
 
   useEffect(() => {
-    getData()
+    getCompany()
     setLoading(true);
 }, [company]);
 
-console.log(company)
 
-  const getData=async()=>{
+  const getCompany=async()=>{
+    const res=await fetch(`http://localhost:3000/api/company/get/${id}`)
+    const data=await res.json()
+    const {company}= data
+    setCompanies(company)
+  }
+
+  const getMarket=async()=>{
     const res=await fetch(`http://localhost:3000/api/company/get/${id}`)
     const data=await res.json()
     const {company}= data
@@ -41,6 +49,7 @@ console.log(company)
     </div>
     
       <FormCompany companyId={id} company={company} header='Изменить данние организации' buttonValue='изменить'/>   
+      <List/>
       </main>
       <aside className="hidden col-span-2  lg:col-span-4 xl:block xl:col-span-2">
         <div className="sticky top-4 ">Right Menu</div>
