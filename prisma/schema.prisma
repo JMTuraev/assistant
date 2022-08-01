@@ -23,7 +23,8 @@ model User {
   location           String?
   img                String?
   salary             Int      @default(0)
-  currency           String   @default("NULL")
+  currencyRelation   Currency @relation(fields: [currency], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  currency           String   
   createDate         DateTime @default(now())
   company            Company[]
   marketRelation     MarketRelation[]
@@ -55,6 +56,7 @@ model Company {
   inn                String
   bankAccount        String // рассчетный счет
   mfo                String   @unique
+  img                String?
   ownerRelation      User     @relation(fields: [owner], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   owner              String
   companyRelation    CompanyRelation[]
@@ -80,9 +82,12 @@ model Market {
   name               String
   location           String
   lawAddress         String  @unique
+  img                String?
   companyRelation    Company @relation(fields: [company], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   company            String
   marketRelation     MarketRelation[]
+  warehouseRelation  WarehouseRelation[]
+
 
 }
 
@@ -98,7 +103,6 @@ model MarketRelation {
 
 }
 
-
 model Warehouse {
 
   id                 Int    @id @unique @default(autoincrement())
@@ -107,7 +111,21 @@ model Warehouse {
   location           String
   quantity           Int
   editPrice          Int
-  product            String 
+  warehouseRelation  WarehouseRelation[]
+  comingWaherhouse   ComingWarehouse[]
+  product            Product[]
+  saleProduct               SaleProduct[]
+
+}
+
+model WarehouseRelation {
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String @unique
+  waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  waherhouse         String
+  marketRelation     Market @relation(fields: [market], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  market             String
 
 }
 
@@ -115,12 +133,70 @@ model ComingWarehouse{
 
   id                 Int    @id @unique @default(autoincrement())
   id_u               String   @unique
+  waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  waherhouse         String
   quantity           Int
   price              Int
+  currencyRelation   Currency @relation(fields: [currency], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  currency           String   @default("NULL")
   supplier           String
   unit               String // Ед. измерения
   date               DateTime
-  product            String 
+  
+}
+
+model Currency { // Валюта
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  user               User[]
+  comingWarehouse    ComingWarehouse[]
+
+}
+
+model Sale { // поставщик
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String @unique
+  retail             String
+  check              Int    @unique
+  tariffRelation     Tariff @relation(fields: [tariff], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  tariff             String
+  sum                Int
+  cash               Int
+  credit             Int
+  clientRelation     Client @relation(fields: [client], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  client             String
+  description        String
+  discount           String?
+  date               DateTime @default(now())
+  saleProduct        SaleProduct[]
+
+}
+
+model SaleProduct {
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  saleRelation       Sale @relation(fields: [sale], references: [check], onDelete: Cascade, onUpdate: Cascade)
+  sale               Int
+  waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  waherhouse         String
+  qty                Int
+  price              Int
+  priceProduct       Int
+
+}
+
+model Tariff { // поставщик
+
+  id                 Int    @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  term               Int
+  percent            Int
+  date               DateTime @default(now())
+  sale               Sale[]
 
 }
 
@@ -141,6 +217,8 @@ model Product {
   name               String
   model              String
   category           String
+  waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  waherhouse         String
 
 }
 
@@ -170,7 +248,7 @@ model Client {
   comment            String
   email              String @unique
   location           String
-  
+  sale               Sale[]
 }
 
 model Money { // Истончик от магазина
