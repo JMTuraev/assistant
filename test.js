@@ -33,6 +33,10 @@ function test() {
           // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
           connect: { id: 1 },
         },
+        currencyRelation: {
+          // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+          connect: { id: 1 },
+        },
         location: faker.address.streetAddress(),
       },
     });
@@ -65,6 +69,7 @@ async function create_company() {
           inn: faker.finance.account(),
           bankAccount: faker.finance.account(),
           mfo: faker.finance.account(),
+          img: faker.image.people("640", "480", true),
           ownerRelation: {
             connect: { id_u: user["id_u"] },
           },
@@ -105,6 +110,10 @@ async function create_director() {
           phone: faker.phone.phoneNumber(),
           userLevelRelation: {
             connect: { id: 2 },
+          },
+          currencyRelation: {
+            // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+            connect: { id: 1 },
           },
           childRelation: {
             create: [
@@ -184,6 +193,7 @@ async function create_market() {
           name: faker.company.companyName(),
           location: faker.address.streetAddress(),
           lawAddress: faker.address.streetAddress(),
+          img: faker.image.people("640", "480", true),
           companyRelation: {
             connect: { id_u: company["id_u"] },
           },
