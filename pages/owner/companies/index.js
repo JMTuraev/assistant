@@ -2,19 +2,23 @@
 import React, { useEffect, useState } from "react";
 import Companies from "../../../components/company/Companies";
 
-function companies({data}) {
-  const [companies, setCompanies] = useState(data);
+function companies() {
+  const [companies, setCompanies] = useState();
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    getData()
     setLoading(true);
-    fetch("http://localhost:3000/api/company/1")
-      .then((res) => res.json())
-      .then((data) => {
-        setCompanies(data.company);
-        setLoading(false);
-      });
-  }, []);
+}, [companies]);
+
+  const getData=async()=>{
+    await fetch("http://localhost:3000/api/company/1")
+    .then((res) => res.json())
+    .then((data) => {
+      setCompanies(data.company);
+      setLoading(false);
+    });
+  }
 
   return (
     <div className="grid grid-cols-12 lg:grid lg:grid-cols-12 xl:grid xl:grid-cols-10 xl:gap-4 ">
@@ -29,23 +33,4 @@ function companies({data}) {
 }
 
 export default companies;
-
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const data = await fetch("http://localhost:3000/api/company/1")
-  .then((res) => res.json())
-  .then((data) => {
-    return data.company
-  });
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      data,
-    },
-  }
-}
-
 
