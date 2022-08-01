@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 import { PlusIcon } from "@heroicons/react/solid";
 
-export default function CreateCompany({
+export default function FormCompany({
   setShowCreateCompany,
   companyId,
   setCompanies,
@@ -22,6 +22,8 @@ export default function CreateCompany({
     mfo: "",
     owner: "",
   },
+  header,
+  buttonValue
 }) {
   const {
     register,
@@ -70,7 +72,7 @@ export default function CreateCompany({
         );
       
     }else{
-      const res = await fetch(`http://localhost:3000/api/company/update`, {
+      const res = await fetch(`http://localhost:3000/api/company/update/${companyId}`, {
         method: "POST",
       body: JSON.stringify({...data, id : companyId}),
         headers: { "Content-Type": "application/json" },
@@ -94,10 +96,10 @@ export default function CreateCompany({
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         
-        <div className="bg-white px-2 pb-2 shadow sm:pb-2 ">
+        <div className="bg-white px-2 pb-2 shadow sm:pb-2 border border-indigo-400 ">
           <div className="grid grid-cols-6 gap-x-4 gap-y-2 px-2">
-            <h3 className="text-lg col-start-2 col-span-4  font-medium text-slate-900 text-center">
-              Новая организация
+            <h3 className="pt-4 col-start-2 col-span-4  font-medium text-slate-900 text-center">
+              {header}
             </h3>
             <div className="col-span-6  lg:col-span-2 sm:col-span-3">
               <label
@@ -117,7 +119,7 @@ export default function CreateCompany({
               />
             </div>
 
-            <div className="col-span-6  lg:col-span-2 sm:col-span-3">
+            <div className="col-span-6  lg:col-span-2 sm:col-span-2">
               <label
                 htmlFor="category"
                 className="block text-sm font-medium text-gray-700"
@@ -250,7 +252,7 @@ export default function CreateCompany({
               type="submit"
               // onClick={() => setShowCreateCompany(true)}
               className=" col-end-6   text-indigo-500 text-base font-bold  bg-white p-2 w-44 rounded-lg  hover: text-indigo-700 hover:bg-gray-100"
-              value={"Сохранить"}
+              value={buttonValue}
             />
           </div>
         </div>
