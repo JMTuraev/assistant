@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 
 import * as yup from 'yup';
-import TemplateContext from "../../../context/TemplateContext";
+
 import { PlusIcon } from "@heroicons/react/solid";
 
 export default function CreateCompany({

@@ -1,4 +1,4 @@
-import AttachPerson from "./AttachPerson"
+
 
 /* This example requires Tailwind CSS v2.0+ */
 const people = [
@@ -34,9 +34,7 @@ const people = [
             </div>
           </div>
         ))}
-      <div className="">
-      <AttachPerson personal={personal} companyId={companyId}/>
-      </div>
+ 
       </div>
       
       </div>

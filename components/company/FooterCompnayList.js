@@ -83,15 +83,15 @@ export default function FooterCompanyList({setCompanies, companies, pages, setPa
             {/* Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" */}
               
               {pages.map(page=>(
-                  <a
-              
+                  // eslint-disable-next-line react/jsx-key
+                  <div
+                  key={page}
                   aria-current="page"
                   className={active === page ? "z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium cursor-pointer" : "cursor-pointer bg-white border-gray-300 text-gray-500 hover:bg-gray-200 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium}"}
                   onClick={()=> getCompanies(page) }
-
                   >
                   {page+1}
-                </a>
+                </div>
                 ))}
           
             

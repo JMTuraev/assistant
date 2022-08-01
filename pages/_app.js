@@ -3,6 +3,8 @@ import React, { useState, useEffect  } from "react";
 import TemplateContext from "../context/TemplateContext";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import Layout from "../components/Layout";
+import {  navigation, userNavigation, classNames, communities } from "../data/TemplateData";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const [sidebarOpen, setSidebarOpen] = useState(false); // for template. не работает openSideBar
@@ -17,26 +19,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   const {laoadins, SetLoading} = useState(true)
 
-  
-
-  // useEffect(() => {
-    
-  //   let apiUrl = "http://localhost:3000/api/user";
-  //   fetch(apiUrl)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setUser(data.user);
-  //     });
-    
-  //     apiUrl = "http://localhost:3000/api/company";
-  //     fetch(apiUrl)
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setCompany(data.company);
-  //       }).then((err) => {
-  //       });
-  //     setSessiona(false);
-  //   })
+  const [role, setRole]=useState('owner')
+  // cerez session uznat kto on
+    const WhichRole=()=>{
+      // setRole('')
+}
 
 // company page right block show role list
   const [personalRole, setPersonalRole]=useState({})
@@ -54,13 +41,20 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           setUser,
           setCompany,
           setPersonalRole,
-          personalRole
+          personalRole, 
+          navigation, 
+          userNavigation,
+          classNames,
+          communities,
+          role
         }}
       >
+     <Layout>
         <Head>
           <title> Assistant </title>
         </Head>
         <Component {...pageProps} />
+        </Layout>
       </TemplateContext.Provider>
     </SessionProvider>
   );
