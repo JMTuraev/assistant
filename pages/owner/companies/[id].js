@@ -58,7 +58,7 @@ function company() {
     { id:6, name: 'Hired', href: '#', current: false },
   ]
   const [showSettings, setShowSettings]=useState()
-  const [active, setActive]=useState(1)
+  const [select, setSelect]=useState(1)
     return (
       <>
    
@@ -66,21 +66,21 @@ function company() {
       <main className="col-span-10 lg:col-span-8 xl:col-span-8">
       <div>
           <Breadcrumbs pages={pages}/>
-          <SectionHeadings tabs={tabs} header={name} settings={true} setShow={setShowSettings} show={showSettings} setActive={setActive} active={active}/>
+          <SectionHeadings tabs={tabs} header={name}  setShow={setShowSettings} show={showSettings} setSelect={setSelect} select={select}/>
   
     </div>
     
       {showSettings && <FormCompany companyId={id} company={company} header='Изменить данние организации' buttonValue='изменить'/>}   
       <div className='py-3 '>
-      { markets && active===2 && <List data={markets} header='Список Магазины' addNew={true} addButtonValue={'Новый магазин'} setShow={setShow} show={show}  href={'ss'} />}
+      { markets && select===2 && <List data={markets} header='Список Магазины' addNew={true} addButtonValue={'Новый магазин'} setShow={setShow} show={show}  href={'ss'} />}
       </div>
       <div className="py-6 my-6">
-          {active===3 && <Tariff/>}
+          {select===3 && <Tariff/>}
           </div>
       </main>
       <aside className="hidden col-span-2  lg:col-span-4 xl:block xl:col-span-2">
         <div className="sticky top-4 ">
-        {active===3 && 'Noviy tarif'}
+        {select===3 && 'Noviy tarif'}
 
         </div>
       </aside>

@@ -54,7 +54,7 @@ function classNames(...classes) {
 function Tariff() {
   return (
 
-     <section className="relative" aria-labelledby="pricing-heading ">
+     <section className="relative mt-4" aria-labelledby="pricing-heading ">
      <h2 id="pricing-heading" className="sr-only">
        Pricing
      </h2>

@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import Companies from "../../../components/company/Companies";
 import ProfileFormNEW from "../../../components/owner/ProfileFormNEW";
+import SectionHeadings from "../../../components/SectionHeadings";
+import Tariff from "../../../components/Tariff/Tariff";
 function companies() {
   const [companies, setCompanies] = useState();
   const [isLoading, setLoading] = useState(false);
@@ -44,37 +46,27 @@ function companies() {
     { name: "Список организации", href: "#", current: true },
   ];
 
-  const [show, setShow]=useState(0)
-  const [active, setActive]=useState(false)
+  const [show, setShow]=useState(false)
 
-  const onShow=(item)=>{
-  setShow(item)
-  setActive(!active)
+const tabs = [
+  { id:1, name: 'Тарифы', href: '#', current: false },
+  { id:2, name: 'Персонал', href: '#', current: true },
+  { id:3, name: 'Offer', href: '#', current: false },
+  { id:4, name: 'Hired', href: '#', current: false },
+]
+const [select, setSelect]=useState(1)
 
-  
-}
   return (
     <div className=" grid grid-cols-12 lg:grid lg:grid-cols-12 xl:grid xl:grid-cols-10 xl:gap-4 ">
       <main className="col-span-10 lg:col-span-8 xl:col-span-8">
         <Breadcrumbs pages={pages} />
-        <button
-        type="button"
-        className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-yellow-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        onClick={()=>onShow(1)}
-      >
-        Список организации
-      </button>
-      <button
-        type="button"
-        className="ml-5 inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-blue-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        onClick={()=>onShow(2)}
-      >
-        Общая правила для всех организации
-      </button>
-      
-        {show===1 && active && <Companies companies={companies} setCompanies={setCompanies} />}
-        {show===2 && active && 'asdasdasd' }
-      
+  
+      <div className="">
+        <SectionHeadings tabs={tabs} select={select} setSelect={setSelect} buttonValue={'Список организации'} setShow={setShow} show={show} />
+        {show && <Companies companies={companies} setCompanies={setCompanies} />}
+        {select===1 && <Tariff />}
+        </div>
+       
       </main>
       <aside className="hidden col-span-2  lg:col-span-4 xl:block xl:col-span-2">
         <div className="sticky top-4 ">
