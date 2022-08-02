@@ -27,7 +27,7 @@ export default function Header({ navigation, userNavigation, user, classNames, o
                   <img
                     className="block h-8 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
-                    alt="jafar"
+                    alt="tailwindui"
                   />
                 </a>
               </div>
@@ -81,7 +81,7 @@ export default function Header({ navigation, userNavigation, user, classNames, o
                 <div>
                   <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     <span className="sr-only">Open user menu</span>
-                    <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                    <img className="h-8 w-8 rounded-full" src="http://placeimg.com/640/480/people?6992" alt="" />
                   </Menu.Button>
                 </div>
                 <Transition
@@ -141,7 +141,7 @@ export default function Header({ navigation, userNavigation, user, classNames, o
           <div className="border-t border-gray-200 pt-4">
             <div className="max-w-3xl mx-auto px-4 flex items-center sm:px-6">
               <div className="flex-shrink-0">
-                <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="jafar" />
+                <img className="h-10 w-10 rounded-full" src="http://placeimg.com/640/480/people?6992" alt="jafar" />
               </div>
               <div className="ml-3">
                 <div className="text-base font-medium text-gray-800">{user.name}</div>

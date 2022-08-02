@@ -30,7 +30,9 @@ console.log(data)
               key={item.id}
               className="py-4 flex hover:bg-gray-200 bg-white"
             >
-              {/* <img className="h-10 w-10 rounded-full" src={item.img} alt="" /> */}
+              <div className="ml-3">
+                <img className="h-10 w-10 rounded-full" src={item.img} alt="" />
+              </div>
               <div className="ml-3 ">
                 <p className="text-sm font-medium text-gray-900">
                   {item.name}
