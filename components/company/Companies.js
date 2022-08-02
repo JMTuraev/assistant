@@ -4,10 +4,10 @@ import CreateCompany from './FormCompany'
 import CompnayList from './CompanyList'
 import TableForm from './TableForm'
 import { company } from 'faker/lib/locales/az'
-import CompanyListNEW from './CompanyListNEW'
+import CompanyListNEW from './List'
 import FormCompany from './FormCompany'
-import ProfileForm from '../owner/ProfileForm'
-import ProfileFormNEW from '../owner/ProfileFormNEW'
+import List from './List'
+
 
 function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  companies, setCompanies}) {
 const [show, setShow] = useState(false)
@@ -18,8 +18,9 @@ const [show, setShow] = useState(false)
         <FormCompany header={'Новая организация'} buttonValue={'сохранить'} />
       </div>
       <div>
-        {<CompanyListNEW companies={companies} header='Список Организации' addNew={true} addButtonValue={'новаая организация'} setShow={setShow} show={show}/>}
+        {companies && <List data={companies} header='Список Организации' addNew={true} addButtonValue={'новаая организация'} setShow={setShow} show={show}/>}
       </div>
+   
   </div>
   )
 }
