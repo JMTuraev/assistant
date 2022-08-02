@@ -9,7 +9,7 @@ console.log(data)
 
   return (
     <>
-        <div className="grid grid-cols-2 items-end font-medium  text-lg mb-4 ">
+        <div className="grid grid-cols-2 items-end font-medium  text-lg mb-4 overflow-y-hidden ">
         <h3 className=" pl-6">{header}</h3>
           <div className="flex justify-end ">{addNew && 
              <button
