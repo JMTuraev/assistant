@@ -83,17 +83,6 @@ function Tariff() {
  
            </div>
 
-           <a
-             href="#"
-             className={classNames(
-               tier.mostPopular
-                 ? 'bg-rose-500 text-white hover:bg-rose-600'
-                 : 'bg-rose-50 text-rose-700 hover:bg-rose-100',
-               'mt-8 block w-full py-3 px-6 border border-transparent rounded-md text-center font-medium'
-             )}
-           >
-             {tier.cta}
-           </a>
          </div>
        ))}
      </div>

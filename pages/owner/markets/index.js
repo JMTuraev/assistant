@@ -14,7 +14,7 @@ export default function market() {
 }, [markets]);
 
   const getMarket=async()=>{
-    const res=await fetch(`http://localhost:3000/api/company/getMarket/${id}`)
+    const res=await fetch(`http://localhost:3000/api/company/getMarket/${'id'}`)
     const data=await res.json()
     const {company}=data
     const {market}= company

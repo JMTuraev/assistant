@@ -12,7 +12,7 @@ export default function Layout({ children }) {
 
     return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full ">
         <Header
           navigation={navigation}
           user={user}
