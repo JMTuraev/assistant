@@ -8,6 +8,7 @@ import CompanyListNEW from './List'
 import FormCompany from './FormCompany'
 import List from './List'
 
+
 function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  companies, setCompanies}) {
 const [show, setShow] = useState(false)
   return (
@@ -17,8 +18,9 @@ const [show, setShow] = useState(false)
         <FormCompany header={'Новая организация'} buttonValue={'сохранить'} />
       </div>
       <div>
-        {<List companies={companies} header='Список Организации' addNew={true} addButtonValue={'новаая организация'} setShow={setShow} show={show}/>}
+        {companies && <List data={companies} header='Список Организации' addNew={true} addButtonValue={'новаая организация'} setShow={setShow} show={show}/>}
       </div>
+   
   </div>
   )
 }

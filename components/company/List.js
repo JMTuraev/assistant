@@ -4,8 +4,8 @@
 import Link from "next/link";
 import Breadcrumbs from "../Breadcrumbs";
 
-export default function List({ companies, header, addNew, addButtonValue, setShow, show }) {
-
+export default function List({ data, header, addNew, addButtonValue, setShow, show, href }) {
+console.log(data)
 
   return (
     <>
@@ -22,20 +22,20 @@ export default function List({ companies, header, addNew, addButtonValue, setSho
           }</div>
         </div>
     <ul role="list" className="divide-y divide-gray-200 cursor-pointer ">
-      {companies && (
+      {data && (
         <>
-          {companies.map((company) => (
-            <Link href={`/owner/companies/${company.id}`}>
+          {data.map((item) => (
+            <Link href={`/owner/companies/${item.id}?name=${item.name}`}>
             <li
-              key={company.id}
+              key={item.id}
               className="py-4 flex hover:bg-gray-200 bg-white"
             >
-              {/* <img className="h-10 w-10 rounded-full" src={company.img} alt="" /> */}
+              {/* <img className="h-10 w-10 rounded-full" src={item.img} alt="" /> */}
               <div className="ml-3 ">
                 <p className="text-sm font-medium text-gray-900">
-                  {company.name}
+                  {item.name}
                 </p>
-                <p className="text-sm text-gray-500">{company.location}</p>
+                <p className="text-sm text-gray-500">{item.location}</p>
               </div>
             </li>
             </Link>
