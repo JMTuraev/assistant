@@ -26,29 +26,43 @@ async function main() {
     },
   ];
 
-  const res = await prisma.role.createMany({
+  const role = await prisma.role.createMany({
     data: mas,
   });
 
   mas = [
     {
       id_u: "currency-hcvd8j0l6apm0lk",
-      name: "USD"
+      name: "USD",
     },
     {
       id_u: "currency-hcvd8j0l6aprk4g",
-      name: "EURO"
+      name: "EURO",
     },
     {
       id_u: "currency-hcvd8j0l6aprw4l",
-      name: "RUB"
+      name: "RUB",
     },
     {
       id_u: "currency-hcvd8j0l6apsawv",
-      name: "SUM"
+      name: "SUM",
     },
   ];
+
   const currency = await prisma.currency.createMany({
+    data: mas,
+  });
+
+  mas = [
+    {
+      id_u: "currency-hcvd8j0l6apm0lk",
+      name: "Tarif",
+      period : 1,
+      summa : 30
+    }
+  ];
+  
+  const tariffBilng = await prisma.tariffBilng.createMany({
     data: mas,
   });
 }

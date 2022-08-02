@@ -222,10 +222,10 @@ async function tes() {
 
 async function main() {
 	
-	test();
-	await create_company();
-	await create_director();
-	await create_relation_user_company();
+	// test();
+	// await create_company();
+	// await create_director();
+	// await create_relation_user_company();
 	await create_market();
 }
 
