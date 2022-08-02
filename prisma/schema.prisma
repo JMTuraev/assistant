@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:102030@localhost:3306/main"
+  url      = "mysql://root:102030@localhost:3306/main1"
 }
 
 model User {
@@ -214,7 +214,7 @@ model Credit {
 
 }
 
-model Tariff { // поставщик
+model Tariff {
 
   id                 Int    @id @unique @default(autoincrement())
   id_u               String   @unique
@@ -226,9 +226,20 @@ model Tariff { // поставщик
 
 }
 
+model TariffBilng {
+
+  id                 Int      @id @unique @default(autoincrement())
+  id_u               String   @unique
+  name               String
+  period             Int
+  summa              Int
+  date               DateTime @default(now())
+
+}
+
 model Supplier { // поставщик
 
-  id                 Int    @id @unique @default(autoincrement())
+  id                 Int      @id @unique @default(autoincrement())
   id_u               String   @unique
   name               String
   agentName          String?
