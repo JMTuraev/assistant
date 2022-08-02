@@ -105,16 +105,26 @@ model MarketRelation {
 
 model Warehouse {
 
+  id                                 Int    @id @unique @default(autoincrement())
+  id_u                               String   @unique
+  warehouseDepartamentRelation       WarehouseDepartament     @relation(fields: [warehouseDepartament], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  warehouseDepartament               String
+  quantity                           Int
+  editPrice                          Int
+  comingWaherhouse                   ComingWarehouse[]
+  product                            Product[]
+  saleProduct                        SaleProduct[]
+
+}
+
+model WarehouseDepartament {
+
   id                 Int    @id @unique @default(autoincrement())
   id_u               String   @unique
   name               String
   location           String
-  quantity           Int
-  editPrice          Int
+  warehouse          Warehouse[]
   warehouseRelation  WarehouseRelation[]
-  comingWaherhouse   ComingWarehouse[]
-  product            Product[]
-  saleProduct               SaleProduct[]
 
 }
 
@@ -122,23 +132,25 @@ model WarehouseRelation {
 
   id                 Int    @id @unique @default(autoincrement())
   id_u               String @unique
-  waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
-  waherhouse         String
-  marketRelation     Market @relation(fields: [market], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
-  market             String
+  // waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  // waherhouse         String
+  warehouseDepartamentRelation WarehouseDepartament @relation(fields: [warehouseDepartament], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  warehouseDepartament         String
+  marketRelation               Market @relation(fields: [market], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  market                       String
 
 }
 
 model ComingWarehouse{
 
-  id                 Int    @id @unique @default(autoincrement())
-  id_u               String   @unique
+  id                 Int       @id @unique @default(autoincrement())
+  id_u               String    @unique
   waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   waherhouse         String
   quantity           Int
   price              Int
-  currencyRelation   Currency @relation(fields: [currency], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
-  currency           String   @default("NULL")
+  currencyRelation   Currency  @relation(fields: [currency], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  currency           String    @default("NULL")
   supplier           String
   unit               String // Ед. измерения
   date               DateTime
@@ -176,15 +188,29 @@ model Sale { // поставщик
 }
 
 model SaleProduct {
-  id                 Int    @id @unique @default(autoincrement())
-  id_u               String   @unique
-  saleRelation       Sale @relation(fields: [sale], references: [check], onDelete: Cascade, onUpdate: Cascade)
+
+  id                 Int       @id @unique @default(autoincrement())
+  id_u               String    @unique
+  saleRelation       Sale      @relation(fields: [sale], references: [check], onDelete: Cascade, onUpdate: Cascade)
   sale               Int
   waherhouseRelation Warehouse @relation(fields: [waherhouse], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
   waherhouse         String
   qty                Int
   price              Int
   priceProduct       Int
+  credit             Credit[]
+
+}
+
+model Credit {
+
+  id                        Int              @id @unique @default(autoincrement())
+  id_u                      String           @unique
+  saleProductRelation       SaleProduct      @relation(fields: [saleProduct], references: [id_u], onDelete: Cascade, onUpdate: Cascade)
+  saleProduct               String
+  startDate                 DateTime         @default(now())
+  endDate                   DateTime
+  sum                       Int
 
 }
 
@@ -193,7 +219,7 @@ model Tariff { // поставщик
   id                 Int    @id @unique @default(autoincrement())
   id_u               String   @unique
   name               String
-  term               Int
+  period             Int
   percent            Int
   date               DateTime @default(now())
   sale               Sale[]
