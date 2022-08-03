@@ -20,12 +20,12 @@ export default function Layout({ children }) {
           classNames={classNames}
         />
         <div className="py-5">
-          <div className="max-w-3xl mx-auto sm:px-6 xl:grid xl:col-span-10 lg:max-w-full lg:px-8 lg:grid lg:grid-cols-10 lg:gap-8">
-            <div className="hidden lg:block lg:col-span-3 xl:col-span-1">
+          <div className="max-w-3xl mx-auto sm:px-6 xl:grid xl:grid-cols-9 lg:max-w-full lg:px-8 lg:grid lg:grid-cols-10 lg:gap-8">
+            <div className="hidden lg:block lg:col-span-2 xl:col-span-1">
               <LeftMenu navigation={navigation} communities={communities} role={role}  />
             </div>
 
-            <div className="lg:col-span-8 xl:col-span-9">
+            <div className="lg:col-span-6 xl:col-span-8">
               <main>{children}</main>
             </div>
           </div>

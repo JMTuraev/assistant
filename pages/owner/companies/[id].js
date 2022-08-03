@@ -6,7 +6,7 @@ import FormCompany from '../../../components/company/FormCompany';
 import CreateCompany from '../../../components/company/FormCompany';
 import List from '../../../components/company/List';
 import SectionHeadings from '../../../components/SectionHeadings';
-import Tariff from '../../../components/Tariff/Tariff';
+import Tariffs from '../../../components/Tariff/Tariffs';
 
 
 function company() {
@@ -75,7 +75,7 @@ function company() {
       { markets && select===2 && <List data={markets} header='Список Магазины' addNew={true} addButtonValue={'Новый магазин'} setShow={setShow} show={show}  href={'ss'} />}
       </div>
       <div className="py-6 my-6">
-          {select===3 && <Tariff/>}
+          {select===3 && <Tariffs/>}
           </div>
       </main>
       <aside className="hidden col-span-2  lg:col-span-4 xl:block xl:col-span-2">

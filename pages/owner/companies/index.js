@@ -4,7 +4,7 @@ import Breadcrumbs from "../../../components/Breadcrumbs";
 import Companies from "../../../components/company/Companies";
 import ProfileFormNEW from "../../../components/owner/ProfileFormNEW";
 import SectionHeadings from "../../../components/SectionHeadings";
-import Tariff from "../../../components/Tariff/Tariff";
+import Tariffs from "../../../components/Tariff/Tariffs";
 function companies() {
   const [companies, setCompanies] = useState();
   const [isLoading, setLoading] = useState(false);
@@ -15,13 +15,13 @@ function companies() {
   }, [companies]);
 
   const getCompany = async () => {
-    await fetch("http://localhost:3000/api/company/1")
-      .then((res) => res.json())
-      .then((data) => {
-        setCompanies(data.company);
+    const res=await fetch("http://localhost:3000/api/company/1")
+      const data=await  res.json()
+      const {company}=data
+      setCompanies(company);
         setLoading(false);
-      });
-  };
+      };
+  
 
   useEffect(() => {
     getUser();
@@ -64,7 +64,7 @@ const [select, setSelect]=useState(1)
       <div className="">
         <SectionHeadings tabs={tabs} select={select} setSelect={setSelect} buttonValue={'Список организации'} setShow={setShow} show={show} />
         {show && <Companies companies={companies} setCompanies={setCompanies} />}
-        {select===1 && <Tariff />}
+        {select===1 && <Tariffs />}
         </div>
        
       </main>
