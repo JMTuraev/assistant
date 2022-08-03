@@ -6,25 +6,6 @@ const uniqid = require("uniqid");
 const md5 = require("md5");
 
 let user;
-function imageUrl(width, height, category, randomize, https) {
-
-  var width = width || 640;
-  var height = height || 480;
-  var protocol = 'http://';
-  if (typeof https !== 'undefined' && https === true) {
-    protocol = 'https://';
-  }
-  var url = protocol + 'placeimg.com/' + width + '/' + height;
-  if (typeof category !== 'undefined') {
-    url += '/' + category;
-  }
-
-  if (randomize) {
-    url += '?' + faker.datatype.number()
-  }
-
-  return url;
-};
 
 async function create(table, data) {
   user = await prisma[table].create(data);
@@ -223,6 +204,112 @@ async function create_market() {
   const disconnect = await prisma.$disconnect();
 }
 
+async function create_admin() {
+  const directors = await prisma.user.findMany({
+    where : {
+      userLevel: "role-hcvd2swl5wiuit9",
+    }
+  });
+
+  console.log("------------6");
+
+  for (let director of directors) {
+
+    for (let index = 0; index < 2; index++) {
+      create("user", {
+        data: {
+          id_u: uniqid("user-"),
+          login: faker.internet.userName(),
+          // password : md5(faker.internet.password()),
+          password: md5("102030"),
+          firstName: faker.name.firstName(),
+          surName: faker.name.lastName(),
+          fatherName: faker.name.firstName(),
+          email: faker.internet.email(),
+          img: faker.image.people("640", "480", true),
+          phone: faker.phone.phoneNumber(),
+          userLevelRelation: {
+            connect: { id: 3 },
+          },
+          currencyRelation: {
+            // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+            connect: { id: 1 },
+          },
+          childRelation: {
+            create: [
+              {
+                id_u: uniqid("userRelation-"),
+                parrentRelation: {
+                  // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+                  connect: { id_u: director["id_u"] },
+                },
+              },
+            ],
+          },
+          location: faker.address.streetAddress(),
+        },
+        include: {
+          childRelation: true, // Include all posts in the returned object
+        },
+      });
+    }
+  }
+
+}
+
+async function create_saler() {
+  const admins = await prisma.user.findMany({
+    where : {
+      userLevel: "role-hcvd2swl5wiuxkd",
+    }
+  });
+
+  console.log("------------7");
+
+  for (let admin of admins) {
+
+    for (let index = 0; index < 2; index++) {
+      create("user", {
+        data: {
+          id_u: uniqid("user-"),
+          login: faker.internet.userName(),
+          // password : md5(faker.internet.password()),
+          password: md5("102030"),
+          firstName: faker.name.firstName(),
+          surName: faker.name.lastName(),
+          fatherName: faker.name.firstName(),
+          email: faker.internet.email(),
+          img: faker.image.people("640", "480", true),
+          phone: faker.phone.phoneNumber(),
+          userLevelRelation: {
+            connect: { id: 4 },
+          },
+          currencyRelation: {
+            // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+            connect: { id: 1 },
+          },
+          childRelation: {
+            create: [
+              {
+                id_u: uniqid("userRelation-"),
+                parrentRelation: {
+                  // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+                  connect: { id_u: admin["id_u"] },
+                },
+              },
+            ],
+          },
+          location: faker.address.streetAddress(),
+        },
+        include: {
+          childRelation: true, // Include all posts in the returned object
+        },
+      });
+    }
+  }
+
+}
+
 // async function tes() {
 //   const users = await prisma.user.findMany({
 //     where: {
@@ -245,7 +332,10 @@ async function main() {
 	// await create_company();
 	// await create_director();
 	// await create_relation_user_company();
-	await create_market();
+	// await create_market();
+  // await create_admin()
 }
 
 main()
+
+create_saler()
