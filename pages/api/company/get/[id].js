@@ -29,6 +29,7 @@ export default async function handler(req, res) {
                         location: true ,
                         lawAddress: true ,
                         inn: true ,
+                        img : true,
                         bankAccount: true ,
                         mfo: true ,
                         owner: true

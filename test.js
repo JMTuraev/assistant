@@ -6,6 +6,25 @@ const uniqid = require("uniqid");
 const md5 = require("md5");
 
 let user;
+function imageUrl(width, height, category, randomize, https) {
+
+  var width = width || 640;
+  var height = height || 480;
+  var protocol = 'http://';
+  if (typeof https !== 'undefined' && https === true) {
+    protocol = 'https://';
+  }
+  var url = protocol + 'placeimg.com/' + width + '/' + height;
+  if (typeof category !== 'undefined') {
+    url += '/' + category;
+  }
+
+  if (randomize) {
+    url += '?' + faker.datatype.number()
+  }
+
+  return url;
+};
 
 async function create(table, data) {
   user = await prisma[table].create(data);
@@ -69,7 +88,7 @@ async function create_company() {
           inn: faker.finance.account(),
           bankAccount: faker.finance.account(),
           mfo: faker.finance.account(),
-          img: faker.image.people("640", "480", true),
+          img: faker.image.imageUrl(640, 480, 'tech'),
           ownerRelation: {
             connect: { id_u: user["id_u"] },
           },
@@ -193,7 +212,7 @@ async function create_market() {
           name: faker.company.companyName(),
           location: faker.address.streetAddress(),
           lawAddress: faker.address.streetAddress(),
-          img: faker.image.people("640", "480", true),
+          img: faker.image.imageUrl(640, 480, 'tech'),
           companyRelation: {
             connect: { id_u: company["id_u"] },
           },
@@ -204,21 +223,21 @@ async function create_market() {
   const disconnect = await prisma.$disconnect();
 }
 
-async function tes() {
-  const users = await prisma.user.findMany({
-    where: {
-      userLevel: "role-hcvd2swl5wiuit9",
-    },
-    include: {
-      companyRelation: {
-        include: {
-          companyRelation: true,
-        },
-      },
-    },
-  });
-  const disconnect = await prisma.$disconnect();
-}
+// async function tes() {
+//   const users = await prisma.user.findMany({
+//     where: {
+//       userLevel: "role-hcvd2swl5wiuit9",
+//     },
+//     include: {
+//       companyRelation: {
+//         include: {
+//           companyRelation: true,
+//         },
+//       },
+//     },
+//   });
+//   const disconnect = await prisma.$disconnect();
+// }
 
 async function main() {
 	
