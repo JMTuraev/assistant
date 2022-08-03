@@ -54,6 +54,8 @@ export default function LeftMenu({ navigation, communities, show, role }) {
           ))}
         </div>
       </div>
+      
     </nav>
+    
   );
 }
