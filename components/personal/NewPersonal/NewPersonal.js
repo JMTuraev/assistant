@@ -18,6 +18,7 @@ const schema = yup
     email: yup.string().required(),
     phone: yup.string().required(),
     login: yup.string().required(),
+    img_file: yup.object().required(),
     password: yup.string().required(),
     password_r: yup.string().required(),
   })
@@ -41,8 +42,12 @@ export default function NewPersonal() {
         market: selectMarkets,
         company: selectCompanies,
         role: selectRole,
+        file : data.img_file
       }),
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        'content-type': 'multipart/form-data'
+      },
     })
       .then((res) => res.json())
       .then(
@@ -301,11 +306,7 @@ export default function NewPersonal() {
                   type="file"
                   name="img_file"
                   id="img_file"
-                  {...register("img_file", {
-                    required: true,
-                    maxLength: 20,
-                    pattern: /^[A-Za-z]+$/i,
-                  })}
+                  {...register("img_file")}
                   className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 focus:ring-0 sm:text-sm"
                   placeholder="Jane Smith"
                 />

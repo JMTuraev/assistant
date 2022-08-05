@@ -1,94 +1,125 @@
 import { PrismaClient } from "@prisma/client";
 import { getToken } from "next-auth/jwt";
 
+import nextConnect from 'next-connect';
+import multer from 'multer';
+
 const md5 = require("md5");
 
 const prisma = new PrismaClient();
 
 const uniqid = require("uniqid");
 
-export default async function handler(req, res) {
-  const session = await getToken({ req, secret: process.env.SECRET });
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: './public/file/',
+    filename: async (req, file, cb) => {
+        console.log(file);
 
-  let data = req.body;
+        
+        const session = await getToken({ req, secret: process.env.SECRET });
 
-  data.user.password = md5(data.user.password);
+        console.log(session);
 
-  data.user.id_u = uniqid("user-");
+        let data = req.body;
 
-  delete data.user.password_r;
+        data.user.password = md5(data.user.password);
 
-  delete data.user.img_file;
+        data.user.id_u = uniqid("user-");
 
-  console.log( session.user.id_u );
+        delete data.user.password_r;
 
-  if (req.method === "POST") {
-    const user = await prisma.user.create({
-      data: {
-        ...data.user,
-        userLevelRelation: {
-          connect: { id_u: data.role },
-        },
-        childRelation: {
-          create: [
-            {
-              id_u: uniqid("userRelation-"),
-              parrentRelation: {
-                // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
-                connect: { id_u: session.user.id_u },
+        delete data.user.img_file;
+
+          const user = await prisma.user.create({
+            data: {
+              ...data.user,
+              userLevelRelation: {
+                connect: { id_u: data.role },
+              },
+              childRelation: {
+                create: [
+                  {
+                    id_u: uniqid("userRelation-"),
+                    parrentRelation: {
+                      // connect: { id: faker.datatype.number({ min: 1, max: 4 }) },
+                      connect: { id_u: session.user.id_u },
+                    },
+                  },
+                ],
               },
             },
-          ],
-        },
-      },
-    });
+          });
 
-    let companyRelation;
+          let companyRelation;
 
-    if (data.role == 'role-hcvd2swl5wiuit9') {
-      
-      data.company.map(async function name(val) {
-        companyRelation = await prisma.companyRelation.create({
-          data: {
-            id_u: uniqid("companyRelation-"),
-            userRelation: {
-              connect: {
-                id_u: data.user.id_u,
-              },
-            },
-            companyRelation: {
-              connect: {
-                id_u: val.id_u,
-              },
-            },
-          },
-        });
-      });
+          if (data.role == 'role-hcvd2swl5wiuit9') {
+            
+            data.company.map(async function name(val) {
+              companyRelation = await prisma.companyRelation.create({
+                data: {
+                  id_u: uniqid("companyRelation-"),
+                  userRelation: {
+                    connect: {
+                      id_u: data.user.id_u,
+                    },
+                  },
+                  companyRelation: {
+                    connect: {
+                      id_u: val.id_u,
+                    },
+                  },
+                },
+              });
+            });
 
-    }else{
+          }else{
 
-      data.market.map(async function name(val) {
-        marketRelation = await prisma.marketRelation.create({
-          data: {
-            id_u: uniqid("marketRelation-"),
-            userRelation: {
-              connect: {
-                id_u: data.user.id_u,
-              },
-            },
-            marketRelation: {
-              connect: {
-                id_u: val.id_u,
-              },
-            },
-          },
-        });
-      });
+            data.market.map(async function name(val) {
+              marketRelation = await prisma.marketRelation.create({
+                data: {
+                  id_u: uniqid("marketRelation-"),
+                  userRelation: {
+                    connect: {
+                      id_u: data.user.id_u,
+                    },
+                  },
+                  marketRelation: {
+                    connect: {
+                      id_u: val.id_u,
+                    },
+                  },
+                },
+              });
+            });
 
-    }
+          }
 
-    res.status(200).json({ ok: true, data: data });
-  }
+        let x = cb(null, file.originalname)
+        console.log(x);
+    },
+  }),
+});
 
-  res.end();
-}
+const apiRoute = nextConnect({
+  onError(error, req, res) {
+    res.status(501).json({ error: `Sorry something Happened! ${error.message}` });
+  },
+  onNoMatch(req, res) {
+    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
+  },
+});
+
+apiRoute.use(upload.array('file'));
+
+apiRoute.post((req, res) => {
+  res.status(200).json({ data: 'success', req : req.body });
+});
+
+export default apiRoute;
+
+export const config = {
+  api: {
+    bodyParser: true, // Disallow body parsing, consume as stream
+  },
+};
