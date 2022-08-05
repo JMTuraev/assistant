@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function Breadcrumbs({pages}) {
   return (
-    <nav className="flex bg-white p-4 shadow-md cursor-pointer" aria-label="Breadcrumb">
+    <nav className="flex bg-white p-4 shadow-md cursor-pointer whitespace-nowrap" aria-label="Breadcrumb">
     <ol role="list" className="flex items-center space-x-4">
       <li>
         <div>

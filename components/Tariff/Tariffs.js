@@ -6,22 +6,6 @@ function Tariffs() {
     const tariffs = [
 
         {
-          title: 'start',
-          percent: 30,
-          period: 3,
-          mostPopular: false,
-          date:'10.02.2021',
-          author:'jafar turaev'
-        },
-        {
-          title: 'paltinuim',
-          percent: 50 ,
-          period: 6,
-          mostPopular: false,
-          date:'18.03.2022',
-          author:'Vladimir Putin'
-        },
-        {
           title: 'Gold',
           percent: 70,
           period: 12,
@@ -95,9 +79,12 @@ function Tariffs() {
 
       
     return (
-    <div>
+    <div className='space-y-2'>
+        <div className='mt-4'>
         <Tariff tariffs={tariffs}/>
-        <NewTariff/>
+        </div>
+       
+        
     </div>
   )
 }

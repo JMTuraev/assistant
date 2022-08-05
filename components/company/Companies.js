@@ -10,7 +10,8 @@ import List from './List'
 
 
 function Companies({ showCreateCompany, setShowCreateCompany, showCompany,  companies, setCompanies}) {
-const [show, setShow] = useState(false)
+debugger
+  const [show, setShow] = useState(false)
   return (
     <div className='space-y-4 '>
       
