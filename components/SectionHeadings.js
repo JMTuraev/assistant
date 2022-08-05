@@ -6,12 +6,12 @@ import { CogIcon } from "@heroicons/react/outline"
   }
   
   export default function SectionHeadings({tabs, header, buttonValue, setShow, show, setSelect, select }) {
-   debugger
+   
     return (
       <div className="relative  border-b  sm:pb-0 ">
         <div className="md:flex md:items-center md:justify-between pb-2">
           <h3 className="text-lg leading-6 font-medium text-gray-900 pb-2 ml-6">{header}</h3>
-          <div className="mr-4 flex md:mt-0 md:absolute md:top-3 md:right-0">
+          <div className=" hidden xmr-4 md:flex lg:flex xl:flex  md:mt-0 md:absolute md:top-3 md:right-0">
          
            <button
               type="button"
@@ -23,7 +23,7 @@ import { CogIcon } from "@heroicons/react/outline"
             
             {buttonValue && <button
               type="button"
-              className="inline-flex items-center px-4 py-2 border border-yellow-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-yellow-300 hover:bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              className="  lg:inline-flex items-center px-4 py-2 border border-yellow-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-yellow-300 hover:bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
               onClick={()=>setShow(!show)}
               >
               {buttonValue}

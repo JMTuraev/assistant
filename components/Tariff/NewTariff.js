@@ -23,13 +23,18 @@ const colors = [
 function NewTariff() {
   const [selectedColor, setSelectedColor] = useState(colors[2]);
   return (
-    <section className="relative mt-4" aria-labelledby="pricing-heading ">
+    <>
+
+
+
+<main>
+    <section className="relative " aria-labelledby="pricing-heading ">
       <h2 id="pricing-heading" className="sr-only">
         Новый Тариф
       </h2>
 
       {/* tariffs */}
-      <div className="flex items-end max-w-2xl mx-auto px-4 space-y-12 sm:px-6 lg:max-w-7xl lg:space-y-0 lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
+      <div className="">
         <form>
           <div
             className={`${selectedColor.bgColor}  relative px-4 py-6   border border-gray-200 rounded-2xl shadow-sm flex flex-col`}
@@ -68,10 +73,16 @@ function NewTariff() {
               {/* Feature list */}
             </div>
           </div>
-          <div className="bg-white w-auto mx-4 rounded-b p-4">
+          <div className="absolute bg-white  mx-3 rounded-b py-2 px-4 w-80     ">
             <RadioGroup value={selectedColor} onChange={setSelectedColor}>
               <RadioGroup.Label className="block text-sm font-medium text-gray-700">
                 Цвет тарифа
+                <button
+                type="submit"
+                        className="ml-2  inline-flex  px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                создать тариф
+              </button>
               </RadioGroup.Label>
               <div className="mt-4 flex items-center space-x-3">
                 {colors.map((color) => (
@@ -101,18 +112,15 @@ function NewTariff() {
                 ))}
               </div>
             </RadioGroup>
-            <div className="">
-              <button
-                type="submit"
-                className="mt-4 mb-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                создать тариф
-              </button>
-            </div>
+        
+              
+        
           </div>
         </form>
       </div>
     </section>
+    </main>
+    </>
   );
 }
 
