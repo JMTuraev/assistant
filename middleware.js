@@ -13,7 +13,11 @@ import { getToken } from "next-auth/jwt"
 
 export async  function middleware(req) {
   if (req.nextUrl.pathname.startsWith('/owner')) {
-    const session = await getToken({ req, secret: process.env.SECRET })
+    const session = await getToken({ req })
+
+    console.log(session);
+
+    console.log('-------11')
 
     if (!session ) {
       const url = req.nextUrl.clone()
@@ -59,7 +63,7 @@ export async  function middleware(req) {
 
   if (req.nextUrl.pathname.startsWith('/auth')) {
 
-    const session = await getToken({ req, secret: process.env.SECRET })
+    const session = await getToken({ req })
 
     
     if (session) {
